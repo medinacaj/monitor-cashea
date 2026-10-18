@@ -191,8 +191,10 @@ function pintarEstado(data) {
     const evaluables = ult24.filter(x => !['restricted','unknown'].includes(x.state) && x.code !== 0).length;
     const pct = evaluables ? (100 * exitos / evaluables).toFixed(1) + ' %' : 'Sin muestra';
     const c = t.current || h.at(-1) || {};
-    const estado = desactualizado ? 'stale' : c.state === 'restricted' ? 'restricted' : (c.state === 'unknown' || c.code === 0) ? 'unknown' : c.up ? 'up' : 'down';
-    const titulo = ({stale:'Información desactualizada',restricted:'Acceso del monitor restringido',unknown:'No se pudo comprobar',up:'El sitio web responde',down:'Respuesta no satisfactoria'})[estado];
+    // Una observación HTTP no equivale a un diagnóstico independiente.
+    const decision = t.corroboration?.verdict === 'responding' ? 'up' : t.corroboration?.verdict === 'unresponsive' ? 'down' : 'unknown';
+    const estado = desactualizado ? 'stale' : decision;
+    const titulo = ({stale:'Información desactualizada',unknown:'Sin corroboración independiente',up:'Dos redes confirman respuesta',down:'Dos redes no obtienen respuesta'})[estado];
     const fecha = Date.parse(c.t || data.updated);
     const ultima = Number.isFinite(fecha) ? new Date(fecha).toLocaleString('es-VE') : 'sin fecha válida';
     const barras = ult24.slice(-48).map(x =>
@@ -201,7 +203,7 @@ function pintarEstado(data) {
     ).join('');
     return '<article class="estado-card ' + estado + '"><div class="estado-card-top"><div><p class="estado-label">MONITOREO EXTERNO</p><h3>' + esc(t.name) + '</h3></div><span class="estado-indicador"><i></i>' + titulo + '</span></div>' +
       '<div class="estado-metricas"><div><span>Respuestas satisfactorias en 24 h*</span><strong>' + pct + '</strong></div><div><span>Muestras evaluables</span><strong>' + evaluables + '</strong></div><div><span>Última comprobación</span><strong class="dato-hora">' + esc(ultima) + '</strong></div></div>' +
-      '<div class="historial" aria-label="Últimos chequeos">' + (barras || '<span class="historial-vacio">Aún sin historial de las últimas 24 horas</span>') + '</div><p class="estado-detalle">HTTP ' + esc(c.code ?? '—') + ' · ' + esc(c.ms ?? '—') + ' ms · Solo observación externa del sitio. *Porcentaje sobre muestras evaluables.</p></article>';
+      '<div class="historial" aria-label="Últimos chequeos">' + (barras || '<span class="historial-vacio">Aún sin historial de las últimas 24 horas</span>') + '</div><p class="estado-detalle">HTTP ' + esc(c.code ?? '—') + ' · ' + esc(c.ms ?? '—') + ' ms · Señal HTTP del monitor, no disponibilidad de app ni pagos. *Porcentaje de muestras HTTP; no es disponibilidad global.</p></article>';
   }).join('');
 }
 async function actualizarEstado() {
