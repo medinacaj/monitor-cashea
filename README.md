@@ -88,3 +88,11 @@ Las tres secciones aparecen en el orden **Monitoreo → Calculadora → Comercio
 Los controles **Tipo de simulación**, **Nivel orientativo**, **Ciudad** y **Categoría** usan ahora una envoltura y una única flecha vectorial CSS. El elemento nativo conserva su semántica y apertura accesible, pero su apariencia gráfica (incluyendo indicadores superpuestos de iOS) se desactiva explícitamente con `-webkit-appearance: none`; el fondo claro y texto oscuro se fuerzan incluso en Safari/WebView. La página también revisa foco, tamaños táctiles y anchos de filtros. Se invalida caché del CSS y JS con versión 2.6.0.
 
 La suite responsive automatizada incorpora verificaciones en Chromium y WebKit con 320 a 1280 px. En dispositivos iOS físicos puede haber diferencias de versión del motor, por lo que una inspección de Safari en el teléfono sigue siendo la última comprobación visual.
+
+## Validación desde redes independientes (P1)
+
+Desde el 18-10-2026, un único chequeo de GitHub Actions solo aporta **una observación HTTP**, no autoriza declarar disponibilidad general. `corroborarSitio` exige al menos **dos proveedores de red independientes, explícitamente autorizados**, señales de menos de 15 minutos y acuerdo unánime para publicar un veredicto sobre el sitio. Un 403, timeout o señales contradictorias produce **sin corroboración**.
+
+El proyecto **aún no dispone de dos proveedores autorizados**: por seguridad no publica incidentes confirmados ni métricas de disponibilidad global. Es incorrecto contar dos URLs, dos máquinas virtuales del mismo proveedor o dos intentos desde Actions como fuentes independientes. La prueba está en `tests/corroboration.test.mjs`.
+
+**Pendiente operativo**: conectar un segundo proveedor legítimo que mida exactamente la misma web desde otra red (con permisos y fuente auditada) y registrar origen, frecuencia y salud. Las compras, pagos y app siguen fuera de alcance. El Issue #6 continúa abierto hasta corroboración real.
