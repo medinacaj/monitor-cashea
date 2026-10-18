@@ -19,7 +19,7 @@ async function probe(url) {
     const state = clasificarHttp(response.status);
     return {t:new Date().toISOString(),state,up:state==='up',code:response.status,ms:Date.now()-t0};
   } catch (e) {
-    return {t:new Date().toISOString(),state:'down',up:false,code:0,ms:Date.now()-t0,err:e.name === 'TimeoutError' ? 'timeout' : 'network'};
+    return {t:new Date().toISOString(),state:'unknown',up:false,code:0,ms:Date.now()-t0,err:e.name === 'TimeoutError' ? 'timeout' : 'network'};
   }
 }
 const targets = await readJson(TARGETS_FILE, []);

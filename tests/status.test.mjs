@@ -8,6 +8,7 @@ test('las respuestas 403/429 son restringidas, no caídas', () => {
   assert.equal(clasificarHttp(429),'restricted');
   assert.equal(clasificarHttp(404),'down');
   assert.equal(clasificarHttp(503),'down');
+  assert.equal(clasificarHttp(0),'unknown');
 });
 test('la disponibilidad ignora muestras bloqueadas y antiguas', () => {
   const now = Date.parse('2026-10-18T12:00:00Z');
