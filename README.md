@@ -96,3 +96,7 @@ Desde el 18-10-2026, un único chequeo de GitHub Actions solo aporta **una obser
 El proyecto **aún no dispone de dos proveedores autorizados**: por seguridad no publica incidentes confirmados ni métricas de disponibilidad global. Es incorrecto contar dos URLs, dos máquinas virtuales del mismo proveedor o dos intentos desde Actions como fuentes independientes. La prueba está en `tests/corroboration.test.mjs`.
 
 **Pendiente operativo**: conectar un segundo proveedor legítimo que mida exactamente la misma web desde otra red (con permisos y fuente auditada) y registrar origen, frecuencia y salud. Las compras, pagos y app siguen fuera de alcance. El Issue #6 continúa abierto hasta corroboración real.
+
+## Contraste P1 de observaciones del sitio web
+
+Se implementó un consenso que exige dos redes externas independientes y autorizadas, con resultados recientes coincidentes. Por ahora solo existe una comprobación desde GitHub Actions; en consecuencia la interfaz informa que no hay corroboración independiente. El estado de compras y pagos no se comprueba. El Issue #6 sigue abierto hasta disponer de la segunda señal real.
