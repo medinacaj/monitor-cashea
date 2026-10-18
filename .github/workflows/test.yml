@@ -34,7 +34,7 @@ jobs:
 
   responsive:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -43,7 +43,7 @@ jobs:
       - name: Preparar navegador de prueba
         run: |
           npm install --no-save playwright
-          npx playwright install --with-deps chromium
+          npx playwright install --with-deps chromium webkit
       - name: Levantar web estática
         run: |
           python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/monitor-cashea-web.log 2>&1 &
