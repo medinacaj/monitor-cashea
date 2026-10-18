@@ -36,13 +36,22 @@ for (const profile of profiles) {
         shell:rect('.calculadora-shell'),form:rect('.panel-controles'),
         result:rect('.calc-resultados'),stepper:rect('.calc-stepper'),
         table:rect('.tabla-wrap'),status:rect('#estado'),directory:rect('#directorio'),
+        unified:rect('.monitor-unificado'),
+        hasStatusInsidePanel:!!document.querySelector('.monitor-unificado #estado-lista .estado-card'),
+        hasChartInsidePanel:!!document.querySelector('.monitor-unificado #estado-grafica'),
+        statusCardBorder:getComputedStyle(document.querySelector('.monitor-unificado .estado-card')).borderTopWidth,
+        chartCardBorder:getComputedStyle(document.querySelector('.monitor-unificado .grafica-estado-card')).borderLeftWidth,
         selectors,
       };
     });
     assert.equal(details.width,width,'viewport');
     assert.deepEqual(details.sectionIds,['estado','simulador','directorio'],'orden de secciones');
+    assert.ok(details.hasStatusInsidePanel,'estado no integrado');
+    assert.ok(details.hasChartInsidePanel,'gráfico no integrado');
+    assert.equal(details.statusCardBorder,'0px','la tarjeta del estado tiene un borde duplicado');
+    assert.equal(details.chartCardBorder,'0px','la gráfica tiene un borde duplicado');
     assert.ok(details.doc<=width+1,'scroll horizontal no deseado: '+JSON.stringify(details));
-    for (const name of ['shell','form','result','stepper','table','status','directory']) {
+    for (const name of ['shell','form','result','stepper','table','status','directory','unified']) {
       const b=details[name];
       assert.ok(b.left>=-1&&b.right<=width+1,name+' desborda a '+width+': '+JSON.stringify(b));
     }

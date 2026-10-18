@@ -12,9 +12,9 @@
   <meta property="og:url" content="https://medinacaj.github.io/monitor-cashea/">
   <meta name="robots" content="index,follow">
   <title>Monitor Cashea — Tu guía independiente</title>
-  <link rel="stylesheet" href="styles.css?v=2.7.0">
+  <link rel="stylesheet" href="styles.css?v=2.8.0">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Monitor Cashea (no oficial)","url":"https://medinacaj.github.io/monitor-cashea/","inLanguage":"es"}</script>
-  <script type="module" src="app.js?v=2.7.0"></script>
+  <script type="module" src="app.js?v=2.8.0"></script>
 </head>
 <body>
   <a class="saltar" href="#simulador">Ir a la calculadora</a>
@@ -37,30 +37,34 @@
       <section id="estado" class="seccion" aria-labelledby="estado-titulo">
         <div class="titulo-seccion"><div><p class="eyebrow">01 / SEÑAL DEL SITIO</p><h2 id="estado-titulo">¿La web <span>responde?</span></h2></div><span class="seccion-indice">WEB STATUS / 24H</span></div>
         <p class="intro">Realizamos solicitudes automáticas al sitio público. <strong>No comprobamos la aplicación, las compras ni los pagos.</strong> Un bloqueo al monitor tampoco significa que Cashea esté caído.</p>
-        <div class="grafica-estado-card" aria-labelledby="grafica-titulo">
-          <div class="grafica-estado-head">
-            <div>
-              <p class="eyebrow">HISTORIAL DE VERIFICACIONES</p>
-              <h3 id="grafica-titulo">Estabilidad del sitio web</h3>
-            </div>
-            <div class="grafica-periodos" role="group" aria-label="Período del historial">
-              <button type="button" data-periodo="24" aria-pressed="true">24 h</button>
-              <button type="button" data-periodo="72" aria-pressed="false">72 h</button>
-            </div>
+        <div class="monitor-unificado" aria-label="Monitoreo del sitio web público de Cashea">
+          <div id="estado-lista" class="estado-lista" aria-live="polite">
+            <div class="estado-espera">Consultando los últimos datos…</div>
           </div>
-          <p id="grafica-resumen" class="grafica-resumen" aria-live="polite">Cargando historial…</p>
-          <div id="estado-grafica" class="estado-grafica" role="img" aria-label="Historial de respuestas del sitio web: cargando datos"></div>
-          <div class="grafica-leyenda" aria-label="Leyenda de colores">
-            <span><i class="grafica-punto up" aria-hidden="true"></i> Respondió</span>
-            <span><i class="grafica-punto down" aria-hidden="true"></i> Respuesta no satisfactoria</span>
-            <span><i class="grafica-punto restricted" aria-hidden="true"></i> Acceso restringido</span>
-            <span><i class="grafica-punto unknown" aria-hidden="true"></i> No comprobado</span>
-            <span><i class="grafica-punto empty" aria-hidden="true"></i> Sin muestras</span>
+          <div class="grafica-estado-card" aria-labelledby="grafica-titulo">
+            <div class="grafica-estado-head">
+              <h3 id="grafica-titulo">Historial de verificaciones</h3>
+              <div class="grafica-periodos" role="group" aria-label="Período del historial">
+                <button type="button" data-periodo="24" aria-pressed="true">24 h</button>
+                <button type="button" data-periodo="72" aria-pressed="false">72 h</button>
+              </div>
+            </div>
+            <p id="grafica-resumen" class="grafica-resumen" aria-live="polite">Cargando historial…</p>
+            <div id="estado-grafica" class="estado-grafica" role="img" aria-label="Historial de respuestas del sitio web: cargando datos"></div>
+            <div class="grafica-leyenda" aria-label="Leyenda del historial">
+              <span><i class="grafica-punto up" aria-hidden="true"></i> Respondió</span>
+              <span><i class="grafica-punto down" aria-hidden="true"></i> Respuesta no satisfactoria</span>
+              <span><i class="grafica-punto restricted" aria-hidden="true"></i> Acceso restringido</span>
+              <span><i class="grafica-punto unknown" aria-hidden="true"></i> No comprobado</span>
+              <span><i class="grafica-punto empty" aria-hidden="true"></i> Sin muestras</span>
+            </div>
+            <p id="grafica-nota" class="grafica-nota">Las verificaciones corresponden al sitio web, no a la aplicación ni a los pagos. HTTP 403 es acceso restringido, no una caída confirmada.</p>
           </div>
-          <p id="grafica-nota" class="grafica-nota">Se representa el resultado de solicitudes automáticas al sitio web público, no la disponibilidad de la aplicación ni de los pagos. Una respuesta bloqueada (HTTP 403) no demuestra una caída.</p>
+          <div class="estado-pie">
+            <span>Comprobaciones previstas cada 15 minutos; GitHub Actions puede retrasarse.</span>
+            <button id="refrescar" type="button" class="enlace-boton">Actualizar datos ↻</button>
+          </div>
         </div>
-        <div id="estado-lista" class="estado-lista" aria-live="polite"><div class="estado-espera">Consultando los últimos datos…</div></div>
-        <div class="estado-pie"><span>Actualización programada cada 15 minutos (puede haber retrasos de GitHub Actions).</span><button id="refrescar" type="button" class="enlace-boton">Actualizar datos ↻</button></div>
       </section>
 
       <section id="simulador" class="seccion calc-section" aria-labelledby="sim-titulo">
