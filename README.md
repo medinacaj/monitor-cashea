@@ -94,3 +94,7 @@ La suite responsive automatizada incorpora verificaciones en Chromium y WebKit c
 La primera sección presenta un gráfico de barras por hora para las **últimas 24 o 72 horas**, construido exclusivamente desde `status.json`. Verde: respuesta satisfactoria; rojo: respuesta HTTP no satisfactoria del monitor (no confirma una caída global); amarillo: acceso restringido (por ejemplo 403); azul gris: no comprobado; gris claro: sin muestras. La tasa publicada utiliza únicamente muestras evaluables; si no existen, se informa «Sin datos evaluables». No se extrapola uptime ni se inventan caídas, y se advierte cuando los datos están desactualizados. Como el monitor almacena un máximo aproximado de 72h y GitHub Actions puede retrasarse, pueden verse intervalos sin datos.
 
 El campo «Nivel orientativo» se eliminó junto con las reglas automáticas de inicial atribuidas al nivel. **El porcentaje de inicial es 40 % a modo de ejemplo editable**, no una predicción de elegibilidad ni de oferta. Los límites reales se verifican en la app de Cashea.
+
+## V2.8 — Estado e historial en una sola tarjeta
+
+Se integraron «Sitio web público de Cashea» e «Historial de verificaciones» en un **único panel**. Primero se presenta el estado observado y las métricas, seguido de la gráfica horaria con selector 24/72h, su leyenda y el botón de actualización. Se eliminó la tira pequeña de barras duplicadas. El porcentaje de respuestas satisfactorias se mantiene únicamente en las métricas; el pie de gráfica muestra cuántas verificaciones y horas sin muestras contiene el período elegido.

@@ -643,3 +643,64 @@ html body .calc-section .campo input[type="date"]:not(:focus){background-clip:pa
   .grafica-leyenda{gap:9px 12px}
   .grafica-leyenda span{font-size:10px}
 }
+
+/* V2.8 · Monitoreo y gráfico integrados, sin tarjetas ni timelines duplicadas */
+#estado .monitor-unificado{
+  background:#fff;border:1px solid var(--line);border-radius:24px;
+  box-shadow:var(--shadow);padding:24px 28px 17px;min-width:0;width:100%;max-width:100%;
+}
+#estado .monitor-unificado .estado-lista{
+  display:block;min-width:0;margin:0;padding:0;
+}
+#estado .monitor-unificado .estado-card{
+  background:transparent;border:0;border-radius:0;box-shadow:none;
+  padding:0;margin:0;min-width:0;
+}
+#estado .monitor-unificado .estado-espera{
+  border:0;border-radius:0;box-shadow:none;padding:10px 0 24px;
+}
+#estado .monitor-unificado .estado-card-top{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+}
+#estado .monitor-unificado .estado-card h3{font-size:clamp(1.2rem,2.4vw,1.65rem)}
+#estado .monitor-unificado .estado-metricas{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  border-top:1px solid #e9f0ed;border-bottom:0;
+  padding:19px 0 14px;margin:18px 0 0;gap:16px;
+}
+#estado .monitor-unificado .estado-detalle{
+  margin:0 0 18px;color:#668176;font-size:11px;line-height:1.6;
+}
+#estado .monitor-unificado .grafica-estado-card{
+  border:0;border-top:1px solid #e5eee8;border-radius:0;background:transparent;
+  box-shadow:none;padding:21px 0 18px;margin:0;min-width:0;
+}
+#estado .monitor-unificado .grafica-estado-head h3{
+  font:700 clamp(1.16rem,2.6vw,1.5rem)/1.25 'Space Grotesk',sans-serif;
+  color:#173d30;letter-spacing:-.04em;margin:0;
+}
+#estado .monitor-unificado .grafica-resumen{margin:13px 0 9px;font-size:12px}
+#estado .monitor-unificado .grafica-nota{margin-bottom:0}
+#estado .monitor-unificado .estado-pie{
+  border-top:1px solid #e5eee8;padding-top:12px;margin:0;
+  display:flex;align-items:center;flex-wrap:wrap;gap:10px 16px;
+}
+#estado .monitor-unificado .estado-pie>span{flex:1 1 260px}
+#estado .monitor-unificado .enlace-boton{min-height:42px}
+@media(max-width:720px){
+  #estado .monitor-unificado{padding:19px 15px 12px;border-radius:18px}
+  #estado .monitor-unificado .estado-card-top{align-items:flex-start}
+  #estado .monitor-unificado .estado-metricas{
+    grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px;padding-top:16px
+  }
+  #estado .monitor-unificado .estado-metricas div:last-child{grid-column:1/-1}
+  #estado .monitor-unificado .grafica-estado-card{padding:18px 0 13px}
+  #estado .monitor-unificado .grafica-estado-head{align-items:flex-start;gap:10px}
+  #estado .monitor-unificado .grafica-estado-head h3{font-size:20px}
+}
+@media(max-width:370px){
+  #estado .monitor-unificado{padding:15px 12px 10px}
+  #estado .monitor-unificado .estado-metricas{grid-template-columns:minmax(0,1fr)}
+  #estado .monitor-unificado .estado-metricas div:last-child{grid-column:auto}
+  #estado .monitor-unificado .estado-card-top{flex-direction:column}
+}

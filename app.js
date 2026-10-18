@@ -176,9 +176,9 @@ function pintarGraficaEstado(data) {
   const datosVencidos = !Number.isFinite(actualizado) ||
     Date.now() - actualizado > 3_600_000 || actualizado > Date.now() + 300_000;
   const total = serie.muestras;
-  const respuesta = serie.evaluables ? serie.porcentaje.toFixed(1) + ' %' : 'Sin datos evaluables';
   $('grafica-resumen').textContent = total
-    ? respuesta + ' de respuestas satisfactorias evaluables · ' + total + ' verificaciones'
+    ? total + ' verificaciones registradas · ' + serie.vacios + ' horas sin muestras' +
+      (serie.evaluables ? '' : ' · Sin datos evaluables')
     : 'Sin verificaciones en las últimas ' + periodoHistorial + ' horas';
   $('estado-grafica').innerHTML = svgHistorial(serie);
   $('estado-grafica').setAttribute('aria-label',
@@ -225,13 +225,9 @@ function pintarEstado(data) {
     const titulo = ({stale:'Información desactualizada',unknown:'Sin corroboración independiente',up:'Dos redes confirman respuesta',down:'Dos redes no obtienen respuesta'})[estado];
     const fecha = Date.parse(c.t || data.updated);
     const ultima = Number.isFinite(fecha) ? new Date(fecha).toLocaleString('es-VE') : 'sin fecha válida';
-    const barras = ult24.slice(-48).map(x =>
-      '<span title="' + esc(new Date(x.t).toLocaleString('es-VE')) +
-      '" class="barra ' + (x.state === 'restricted' ? 'restricted' : (x.state === 'unknown' || x.code === 0) ? 'unknown' : x.up ? 'up' : 'down') + '"></span>'
-    ).join('');
     return '<article class="estado-card ' + estado + '"><div class="estado-card-top"><div><p class="estado-label">MONITOREO EXTERNO</p><h3>' + esc(t.name) + '</h3></div><span class="estado-indicador"><i></i>' + titulo + '</span></div>' +
       '<div class="estado-metricas"><div><span>Respuestas satisfactorias en 24 h*</span><strong>' + pct + '</strong></div><div><span>Muestras evaluables</span><strong>' + evaluables + '</strong></div><div><span>Última comprobación</span><strong class="dato-hora">' + esc(ultima) + '</strong></div></div>' +
-      '<div class="historial" aria-label="Últimos chequeos">' + (barras || '<span class="historial-vacio">Aún sin historial de las últimas 24 horas</span>') + '</div><p class="estado-detalle">HTTP ' + esc(c.code ?? '—') + ' · ' + esc(c.ms ?? '—') + ' ms · Solo observación HTTP; no verifica app o pagos. *Porcentaje de muestras del monitor, no disponibilidad global.</p></article>';
+      '<p class="estado-detalle">HTTP ' + esc(c.code ?? '—') + ' · ' + esc(c.ms ?? '—') + ' ms · Solo observación HTTP; no verifica app o pagos. *Porcentaje de muestras del monitor, no disponibilidad global.</p></article>';
   }).join('');
 }
 async function actualizarEstado() {

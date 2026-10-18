@@ -59,3 +59,7 @@ El usuario reportó flechas triangulares grandes y barras superpuestas sobre dos
 - Gráfica horaria de muestras reales de `status.json`, distingue satisfactoria/no satisfactoria/restringida/desconocida/vacía. Si 403, NO inferir caída.
 - Sin nivel orientativo ni inicial automatizada por nivel; 40 % solo valor editable de ejemplo. Se conserva el modo de cuotas libre, referencia de plazos y calendario.
 - Pendiente: ampliar corroboración del estado desde puntos diferentes antes de lanzar alertas de caída verificadas (issue #6).
+
+## V2.8 — Monitoreo unificado
+
+Una sola tarjeta muestra resultado actual, métricas y el gráfico de 24/72 horas. Eliminado el historial en mini-barras de las tarjetas dinámicas. La presentación no equipara 403 con caída, ni ausencia de corroboración con disponibilidad; conserva el estado del monitor sin atribuir fiabilidad global.
