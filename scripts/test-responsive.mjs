@@ -28,13 +28,15 @@ try{
         shell:rect('.calculadora-shell'),
         shellBackground:getComputedStyle(document.querySelector('.calculadora-shell')).backgroundImage,
         firstSection:document.querySelector('main .contenedor > section')?.id,
+        secondSection:document.querySelector('main .contenedor > section:nth-of-type(2)')?.id,
         hasFakeHero:!!document.querySelector('.hero'),
 
       };
     });
     try {
       assert.equal(medidas.viewport,ancho,'viewport incorrecto');
-      assert.equal(medidas.firstSection,'simulador','la calculadora debe ser la sección principal');
+      assert.equal(medidas.firstSection,'estado','monitoreo debe ser primero');
+      assert.equal(medidas.secondSection,'simulador','calculadora debe ser segunda');
       assert.equal(medidas.hasFakeHero,false,'no debe haber hero ornamental');
       assert.match(medidas.shellBackground,/gradient/,'calculadora real sin fondo verde');
       assert.ok(medidas.shell.left>=-1 && medidas.shell.right<=ancho+1,'el contenedor verde se sale del viewport');

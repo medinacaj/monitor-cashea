@@ -5,7 +5,9 @@ test('monitoreo primero, calculadora funcional integrada y comercios al final',a
  const html=await readFile(new URL('../index.html',import.meta.url),'utf8');
  assert.ok(html.indexOf('id="estado"') < html.indexOf('id="simulador"'));
  assert.ok(html.indexOf('id="simulador"') < html.indexOf('id="directorio"'));
- assert.ok(html.indexOf('href="#estado"') < html.indexOf('href="#simulador"'));
+ const nav=html.split('<nav aria-label="Navegación principal">')[1].split('</nav>')[0];
+ assert.ok(nav.indexOf('href="#estado"') < nav.indexOf('href="#simulador"'));
+ assert.ok(nav.indexOf('href="#simulador"') < nav.indexOf('href="#directorio"'));
  assert.ok(!html.includes('class="hero"'));
  assert.ok(!html.includes('calc-arte-tarjeta'));
  const start=html.indexOf('class="calculadora-shell"');
