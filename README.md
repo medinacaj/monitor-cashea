@@ -88,3 +88,9 @@ Las tres secciones aparecen en el orden **Monitoreo → Calculadora → Comercio
 Los controles **Tipo de simulación**, **Nivel orientativo**, **Ciudad** y **Categoría** usan ahora una envoltura y una única flecha vectorial CSS. El elemento nativo conserva su semántica y apertura accesible, pero su apariencia gráfica (incluyendo indicadores superpuestos de iOS) se desactiva explícitamente con `-webkit-appearance: none`; el fondo claro y texto oscuro se fuerzan incluso en Safari/WebView. La página también revisa foco, tamaños táctiles y anchos de filtros. Se invalida caché del CSS y JS con versión 2.6.0.
 
 La suite responsive automatizada incorpora verificaciones en Chromium y WebKit con 320 a 1280 px. En dispositivos iOS físicos puede haber diferencias de versión del motor, por lo que una inspección de Safari en el teléfono sigue siendo la última comprobación visual.
+
+## V2.7 — Gráfica del monitor y cálculo sin niveles asumidos
+
+La primera sección presenta un gráfico de barras por hora para las **últimas 24 o 72 horas**, construido exclusivamente desde `status.json`. Verde: respuesta satisfactoria; rojo: respuesta HTTP no satisfactoria del monitor (no confirma una caída global); amarillo: acceso restringido (por ejemplo 403); azul gris: no comprobado; gris claro: sin muestras. La tasa publicada utiliza únicamente muestras evaluables; si no existen, se informa «Sin datos evaluables». No se extrapola uptime ni se inventan caídas, y se advierte cuando los datos están desactualizados. Como el monitor almacena un máximo aproximado de 72h y GitHub Actions puede retrasarse, pueden verse intervalos sin datos.
+
+El campo «Nivel orientativo» se eliminó junto con las reglas automáticas de inicial atribuidas al nivel. **El porcentaje de inicial es 40 % a modo de ejemplo editable**, no una predicción de elegibilidad ni de oferta. Los límites reales se verifican en la app de Cashea.

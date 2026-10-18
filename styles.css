@@ -612,3 +612,34 @@ html body .calc-section .campo input[type="date"]:not(:focus){background-clip:pa
   .estado-metricas{grid-template-columns:minmax(0,1fr)}
   .estado-metricas div:last-child{grid-column:auto}
 }
+
+/* V2.7 — historial de estabilidad con datos reales y sin inferir caídas de 403. */
+.grafica-estado-card{background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:23px 26px;margin:0 0 17px;min-width:0;max-width:100%}
+.grafica-estado-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:13px}
+.grafica-estado-head .eyebrow{margin:0 0 4px;font-size:10px}
+.grafica-estado-head h3{font:700 clamp(1.25rem,2.8vw,1.65rem)/1.22 'Space Grotesk',sans-serif;letter-spacing:-.045em;color:#143f33;margin:0}
+.grafica-periodos{display:inline-flex;gap:4px;border-radius:12px;padding:4px;border:1px solid #d5e5dc;background:#edf6f0}
+.grafica-periodos button{background:transparent;color:#376c59;font:800 12px 'DM Sans',sans-serif;border:0;border-radius:8px;min-width:57px;min-height:37px}
+.grafica-periodos button[aria-pressed="true"]{color:white;background:#155b45;box-shadow:0 2px 5px rgba(14,74,43,.18)}
+.grafica-periodos button:focus-visible{outline:3px solid #1aa67d;outline-offset:2px}
+.grafica-resumen{margin:17px 0 10px;color:#1b644d;font-size:12px;font-weight:800;line-height:1.7}
+.estado-grafica{width:100%;max-width:100%;min-width:0;padding:12px 10px 2px;border-radius:12px;background:#f7faf8;border:1px solid #e1eee6;overflow:hidden}
+.estado-grafica svg{display:block;width:100%;height:auto;min-height:90px;max-height:190px}
+.grafica-leyenda{display:flex;flex-wrap:wrap;align-items:center;column-gap:17px;row-gap:9px;margin-top:14px}
+.grafica-leyenda span{display:inline-flex;align-items:center;gap:7px;color:#496a5d;font-size:11px;font-weight:700}
+.grafica-punto{display:inline-block;width:10px;height:10px;border-radius:3px;flex:none}
+.grafica-punto.up{background:#2abb83}.grafica-punto.down{background:#db736c}
+.grafica-punto.restricted{background:#eab852}.grafica-punto.unknown{background:#91a6b8}
+.grafica-punto.empty{background:#e5ece9;border:1px solid #cbd8d0}
+.grafica-nota{margin:13px 0 0;color:#617d70;font-size:11px;line-height:1.75}
+.input-ayuda{color:#c3ddcb;font-size:11px;line-height:1.5;display:block}
+@media(max-width:720px){
+  .grafica-estado-card{padding:17px 15px;border-radius:17px}
+  .grafica-estado-head{align-items:flex-start}
+  .grafica-estado-head h3{font-size:21px}
+  .grafica-periodos button{min-height:42px}
+  .estado-grafica{padding:8px 5px 0}
+  .estado-grafica svg{min-height:88px}
+  .grafica-leyenda{gap:9px 12px}
+  .grafica-leyenda span{font-size:10px}
+}
