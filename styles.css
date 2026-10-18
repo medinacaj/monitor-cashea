@@ -217,232 +217,236 @@ tbody tr:last-child td{border-bottom:0}
 }
 
 
-/* V2.2 — Calculadora protagonista. Mantener los avisos independientes del servicio. */
-.calc-heading{display:grid;grid-template-columns:1.3fr .7fr;gap:18px;align-items:center;position:relative;isolation:isolate;overflow:hidden;min-height:325px;border-radius:28px;background:radial-gradient(circle at 87% 9%,rgba(124,244,196,.18),transparent 39%),linear-gradient(126deg,#0b322c 0%,#104e41 59%,#16846b 100%);padding:40px 48px;color:#fff;box-shadow:0 25px 60px rgba(14,86,67,.16)}
-.calc-heading:before{content:"";position:absolute;z-index:-1;inset:0;opacity:.26;background-image:linear-gradient(to right,rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,.06) 1px,transparent 1px);background-size:44px 44px}
-.calc-heading .calc-eyebrow{display:flex;gap:9px;align-items:center;color:#b8f19c;margin:0 0 16px}
-.calc-destello{font-size:20px;line-height:1}
-.calc-heading h2{color:#fff;font-size:clamp(2.9rem,5vw,4.6rem)}
-.calc-heading h2 span{color:#d7fa73}
-.calc-heading-copia>p:not(.eyebrow){color:#d0e8e0;font-size:15px;line-height:1.8;max-width:470px;margin:19px 0 22px}
-.calc-heading-puntos{display:flex;gap:10px 18px;flex-wrap:wrap}
-.calc-heading-puntos span{color:#d7f6df;font-size:11px;font-weight:700;white-space:nowrap}
-.calc-heading-arte{min-height:225px;display:grid;place-items:center;position:relative}
-.calc-arte-circulo{position:absolute;border:1px solid rgba(205,255,202,.32);border-radius:50%}
-.calc-arte-circulo-uno{width:250px;height:250px}
-.calc-arte-circulo-dos{width:325px;height:325px;border-style:dashed;opacity:.5}
-.calc-arte-tarjeta{position:relative;transform:rotate(7deg);width:255px;padding:25px;border:1px solid rgba(255,255,255,.58);border-radius:19px;background:linear-gradient(145deg,#fbfff1,#d7fad5);color:#0a4538;box-shadow:0 25px 55px rgba(0,14,14,.31)}
-.calc-arte-tarjeta small{display:block;font-size:10px;font-weight:800;letter-spacing:.15em;color:#447f67}
-.calc-arte-tarjeta b{display:block;margin:14px 0;font:700 48px/1.05 'Space Grotesk',sans-serif;letter-spacing:-.075em}
-.calc-arte-tarjeta b span{font-size:26px;letter-spacing:-.04em}
-.calc-arte-barra{display:block;height:9px;background:#b1dcba;border-radius:99px;overflow:hidden}
-.calc-arte-barra i{display:block;height:100%;width:58%;background:#178c67;border-radius:99px}
-.calc-arte-pie{display:flex;justify-content:space-between;align-items:center;margin-top:20px;color:#4b8066;font-size:11px;font-weight:800}
-.calc-arte-pie em{font-style:normal;font-size:22px;color:#178c67}
-.calc-legal-banda{display:flex;gap:13px;align-items:center;background:#e3f6eb;border:1px solid #c7e8d2;border-radius:15px;padding:12px 18px;margin:18px 0;color:#275e4b}
-.calc-legal-icono{display:grid;place-items:center;flex:none;width:25px;height:25px;background:#156b50;color:#fff;border-radius:50%;font-family:Georgia,serif;font-size:17px;font-weight:700}
-.calc-legal-banda p{font-size:12px;line-height:1.75;margin:0}
-.calc-legal-banda strong{color:#0d583e}
-.sim-grid{grid-template-columns:1.07fr .93fr;gap:17px}
-.panel-controles{padding:25px;gap:15px;align-content:start;border-color:#d9ece1;box-shadow:0 14px 45px rgba(16,79,57,.08)}
-.calc-form-intro{display:flex;align-items:center;justify-content:space-between;gap:15px;padding-bottom:17px;border-bottom:1px solid #e5eee8;margin-bottom:4px}
-.calc-form-marca{display:flex;align-items:center;gap:12px}
-.calc-form-marca-icono{display:grid;place-items:center;background:#e5f9ea;color:#107b56;font-size:25px;width:45px;height:45px;border-radius:12px;font-weight:700}
-.calc-form-marca div span{font-size:10px;color:#7f998c;font-weight:800;letter-spacing:.1em}
-.calc-form-marca h3{font:700 19px 'Space Grotesk',sans-serif;letter-spacing:-.045em;margin:1px 0 0;color:#163b2e}
-.calc-form-version{font-size:11px;letter-spacing:.09em;color:#8faaa0;font-weight:800}
-.campo-destacado{border-radius:15px;padding:16px 17px;background:#f1faee;border:1px solid #d9edcb}
-.campo-destacado label{color:#306c46;font-size:12px}
-.campo-moneda-grande{border-color:#cee2ca;background:white;padding:2px 13px 2px 16px;box-shadow:0 7px 15px rgba(31,106,65,.04)}
-.campo-moneda-grande>span:first-child{font-size:27px;font-weight:700;color:#117448}
-.campo-moneda-grande input{height:62px;font:700 clamp(1.9rem,4vw,2.5rem) 'Space Grotesk',sans-serif;letter-spacing:-.045em;color:#124b38}
-.campo-moneda-grande .codigo-moneda{font:800 10px 'DM Sans',sans-serif;letter-spacing:.1em;color:#71978a}
-.campo-cuotas{padding:18px;background:linear-gradient(140deg,#e7f9f0,#f4f9f1);border:1px solid #cce8d6;border-radius:16px;box-shadow:inset 0 1px rgba(255,255,255,.9)}
-.calc-control-cabecera{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.calc-control-cabecera span{font-size:10px;font-weight:800;color:#258363;background:#d5f1de;border-radius:30px;padding:3px 9px;white-space:nowrap}
-.calc-control-cabecera label{font-size:13px;color:#135c40}
-.calc-stepper{display:flex;align-items:stretch;justify-content:space-between;gap:10px;margin:14px 0 7px}
-.stepper-boton{display:grid;place-items:center;flex:0 0 56px;width:56px;min-height:65px;border:1px solid #b7dbc4;border-radius:14px;background:#fff;color:#186448;font:700 30px 'Space Grotesk',sans-serif;transition:background .18s,transform .18s}
-.stepper-boton:hover:not(:disabled){background:#e5f5e9;transform:translateY(-2px)}
-.stepper-boton:active:not(:disabled){transform:scale(.97)}
-.stepper-boton-mas{background:#155c46;color:#fff;border-color:#155c46}
-.stepper-boton-mas:hover:not(:disabled){background:#177657}
-.stepper-boton:disabled{opacity:.36;cursor:not-allowed}
-.stepper-entrada{flex:1;display:flex;min-width:0;align-items:center;justify-content:center;gap:10px;padding:7px;background:white;border:1px solid #c6e3ce;border-radius:14px}
-.stepper-entrada input{width:76px;min-width:0;max-width:110px;appearance:textfield;-moz-appearance:textfield;border:none;background:transparent;padding:0;color:#0c523a;text-align:right;font:700 37px 'Space Grotesk',sans-serif;height:52px;box-shadow:none}
-.stepper-entrada input::-webkit-inner-spin-button,.stepper-entrada input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
-.stepper-entrada input:focus{outline:2px solid #68aa86;outline-offset:1px;border-radius:6px;box-shadow:none}
-.stepper-entrada span{font-size:12px;color:#6a967b;font-weight:800}
-.campo-cuotas>.micro{margin:7px 0 12px;font-size:11px;color:#5d8570}
-.cuotas-rapidas{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}
-.cuotas-rapidas button{min-height:37px;border:1px solid #c5e2cf;border-radius:9px;background:white;color:#286d4e;font-weight:800;font-size:12px;transition:background .15s,color .15s,border-color .15s}
-.cuotas-rapidas button:hover{border-color:#14966a}
-.cuotas-rapidas button.activo,.cuotas-rapidas button[aria-pressed="true"]{background:#165e46;color:#fff;border-color:#165e46;box-shadow:0 3px 8px rgba(20,93,67,.17)}
-.panel-resultado{background:radial-gradient(circle at 93% 6%,rgba(51,154,117,.31),transparent 37%),linear-gradient(165deg,#071e1b,#103b30 73%,#13513d);border-color:#2c5f47;box-shadow:0 23px 62px rgba(8,49,38,.16);padding:28px}
-.panel-resultado::after{width:340px;height:340px;background:radial-gradient(circle,rgba(99,196,145,.13),transparent 70%);top:-145px;right:-185px}
-.resultado-cabecera>span:first-child{display:flex;align-items:center;gap:9px}
-.resultado-pulso{width:8px;height:8px;display:inline-block;background:#adfa7d;border-radius:50%;box-shadow:0 0 0 4px rgba(173,250,125,.14)}
-.res-modo{display:inline-block;max-width:100%;margin:23px 0 17px;padding:7px 13px;background:rgba(202,252,205,.11);border:1px solid rgba(216,255,193,.2);border-radius:50px;color:#b4e8c4;font-size:11px;font-weight:800;line-height:1.5}
-.res-cuota-kicker{color:#b1d5bc;font-size:11px;letter-spacing:.14em;font-weight:800;margin:0 0 5px}
-.res-cuota-fila{display:flex;flex-wrap:wrap;gap:10px;align-items:baseline}
-.res-cuota-monto{font:700 clamp(2.9rem,5.5vw,4.3rem)/1.12 'Space Grotesk',sans-serif;color:#ddff8d;letter-spacing:-.08em;word-break:break-word}
-.res-cuota-fila>span{font-size:11px;color:#9bcdb2;font-weight:700}
-.res-fecha{color:#89b49e;font-size:12px;margin:8px 0 17px}
-.res-cinta{display:flex;flex-wrap:wrap;gap:7px}
-.res-cinta>span{border-radius:8px;padding:7px 9px;background:#214b3a;color:#ceefd2;font-size:10px;font-weight:700;line-height:1.4}
-.res-cinta i{font-style:normal;color:#d8ff87}
-.res-separador{margin:23px 0 20px;border-bottom:1px dashed #47705a}
-.res-total-bloque>span{color:#9bcab1;font-size:10px;letter-spacing:.14em;font-weight:800}
-.res-total-bloque .res-total{display:block;margin-top:5px;font-size:clamp(2rem,4vw,3rem);color:#fff}
-.res-tarjetas{margin:21px 0 15px}
-.res-tarjetas>div{background:rgba(232,255,240,.08);border-color:#3b6752}
-.res-tarjetas strong{font-size:clamp(1.1rem,2.1vw,1.5rem)}
-.res-reparto{display:flex;width:100%;height:10px;background:#3d725a;border-radius:30px;overflow:hidden}
-.res-reparto>span{display:block;height:100%;background:#d7fa73;border-radius:30px;transition:width .3s ease}
-.res-reparto-leyenda{display:flex;justify-content:space-between;gap:10px;margin:7px 0 24px;color:#9acbb0;font-size:10px}
-.res-detalle>div{border-bottom-color:#2c5746}
-.res-fuerte strong{color:#d7fa73}
-.calendario-panel{border-color:#d8ebdf;box-shadow:0 10px 28px rgba(35,77,55,.04)}
-.calendario-cabecera .eyebrow{margin:0 0 7px}
-.calendario-cabecera h3{font-size:23px}
-@media(max-width:980px){
-  .calc-heading{grid-template-columns:1fr .55fr;padding:34px}
-  .calc-heading-arte{transform:scale(.82)}
-}
-@media(max-width:720px){
-  .calc-heading{grid-template-columns:1fr;min-height:unset;padding:30px 24px;gap:10px}
-  .calc-heading h2{font-size:clamp(2.8rem,10vw,4.1rem)}
-  .calc-heading-arte{transform:none;min-height:185px}
-  .calc-arte-tarjeta{width:210px;padding:20px;transform:rotate(4deg)}
-  .calc-arte-tarjeta b{font-size:36px}
-  .calc-arte-circulo-uno{width:195px;height:195px}
-  .calc-arte-circulo-dos{width:250px;height:250px}
-  .calc-legal-banda{align-items:flex-start;padding:12px}
-  .panel-controles,.panel-resultado{padding:19px}
-  .res-cuota-monto{font-size:clamp(2.6rem,10vw,3.8rem)}
-  .stepper-boton{flex-basis:50px;width:50px;min-height:59px}
-}
-@media(max-width:400px){
-  .campo-cuotas .calc-control-cabecera{flex-wrap:wrap}
-  .calc-heading-puntos{gap:6px 13px}
-  .res-cuota-fila{align-items:flex-start;flex-direction:column;gap:4px}
-  .stepper-boton{width:45px;flex-basis:45px}
-  .stepper-entrada input{width:53px;font-size:32px}
-  .stepper-entrada span{font-size:10px}
-}
-@media(prefers-reduced-motion:reduce){.res-reparto>span{transition:none}}
 
-
-/* V2.3: overrides responsivos al FINAL del CSS.
-   La versión V2.2 declaraba .sim-grid después de sus media queries,
-   restableciendo accidentalmente las dos columnas en teléfonos. */
+/* V2.4 — experiencia principal: formulario y resultado en un solo bloque oscuro */
 .mobile-nav{display:none}
-.sim-grid,.panel-controles,.panel-resultado,.calc-heading,.calendario-panel,.tabla-wrap,
-.campo,.campo-moneda,.campo-moneda input,.stepper-entrada,.res-tarjetas>div{
+.calc-section{padding-top:28px}
+.calculadora-shell{
+  position:relative;isolation:isolate;overflow:hidden;
+  width:100%;max-width:100%;padding:30px 36px 18px;
+  background:radial-gradient(ellipse 58% 72% at 100% 0%,rgba(46,148,111,.25),transparent 74%),
+    linear-gradient(135deg,#071c1a,#0c3931 65%,#124c3e);
+  border:1px solid #205844;border-radius:26px;color:#f4fff8;
+  box-shadow:0 25px 60px rgba(6,52,35,.16);
+}
+.calculadora-shell::before{
+  content:"";position:absolute;inset:0;z-index:-1;opacity:.26;pointer-events:none;
+  background-image:linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px),
+    linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:46px 46px;
+}
+.calc-heading{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:20px;
+  padding:0 0 20px;margin-bottom:8px;border-bottom:1px solid rgba(191,250,215,.18);
   min-width:0;
 }
-.contenedor,.seccion,.calc-heading,.sim-grid,.calendario-panel,.panel-resultado{
-  max-width:100%;
+.calc-heading>div{min-width:0}
+.calc-kicker{margin:0 0 6px;color:#9becc1;font-size:11px;font-weight:800;letter-spacing:.17em}
+.calc-heading h1{margin:0;color:#fff;font:700 clamp(2.1rem,4vw,3.55rem)/1.07 'Space Grotesk',sans-serif;letter-spacing:-.065em}
+.calc-heading h1 span{color:#d7fa73}
+.calc-heading>div>p:last-child{margin:10px 0 0;color:#c0ddcc;font-size:13px;line-height:1.65}
+.calc-live{display:inline-flex;align-items:center;gap:9px;flex:none;color:#b8e6ce;background:rgba(196,255,206,.08);
+  border:1px solid rgba(189,244,197,.13);border-radius:99px;padding:7px 12px;font-size:11px;font-weight:800;white-space:nowrap}
+.calc-live i{display:block;width:8px;height:8px;border-radius:50%;background:#b5fa7c;box-shadow:0 0 0 4px rgba(194,250,115,.1)}
+.calc-section .sim-grid{
+  display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);
+  align-items:start;gap:0;min-width:0;margin:0;
 }
-.res-cuota-monto,.res-total,.res-tarjetas strong,.res-detalle b,.res-detalle strong,
-.res-modo,.res-cinta>span,.campo-cuotas>.micro,.formulario-nota{
-  overflow-wrap:anywhere;
+.calc-section .panel-controles{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-content:start;
+  padding:21px 30px 17px 0;gap:17px 14px;min-width:0;
+  border:0;border-radius:0;background:transparent;box-shadow:none;color:#f4fff8;
 }
-.res-detalle>div{min-width:0}
-.res-detalle b,.res-detalle strong{white-space:normal;text-align:right}
-.res-tarjetas strong{overflow-wrap:anywhere;word-break:break-word}
-.tabla-aviso{display:none}
-.tabla-wrap{width:100%;max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
-.tabla-wrap table{width:100%;min-width:560px}
+.calc-section .panel-controles>.campo-ancho{grid-column:1/-1}
+.calc-section .campo{min-width:0;gap:6px}
+.calc-section .campo label,.calc-control-cabecera label{color:#d2f2e0;font-size:12px;font-weight:800}
+.calc-section .campo input,.calc-section .campo select{
+  width:100%;max-width:100%;min-width:0;height:49px;background:#f7fcf8;color:#143f31;
+  border:1px solid #c6dbcd;border-radius:10px;font-size:16px;padding:0 12px;
+}
+.calc-section .campo input:focus,.calc-section .campo select:focus{border-color:#73deb0;outline:2px solid #88e6b7;outline-offset:1px;box-shadow:none}
+.calc-section .campo input[readonly]{background:#ebf2ee;color:#536d60}
+.calc-section .campo select{
+  padding-right:35px;background-image:linear-gradient(45deg,transparent 50%,#467464 50%),linear-gradient(135deg,#467464 50%,transparent 50%);
+  background-position:calc(100% - 18px) 22px,calc(100% - 12px) 22px;
+}
+.calc-section .campo-destacado{border:0;background:rgba(156,252,186,.065);padding:12px;border-radius:14px}
+.calc-section .campo-moneda{
+  min-width:0;width:100%;display:flex;align-items:center;gap:10px;
+  border:1px solid #cae5d1;border-radius:11px;background:#f7fcf8;padding:0 13px;
+}
+.calc-section .campo-moneda input{flex:1 1 auto;width:100%;min-width:0;border:0!important;background:transparent!important;
+  box-shadow:none!important;outline:none!important;padding:0}
+.calc-section .campo-moneda>span{color:#19795a;font:700 20px 'Space Grotesk',sans-serif;flex:none}
+.calc-section .campo-moneda-grande input{font:700 clamp(1.8rem,3.5vw,2.4rem) 'Space Grotesk',sans-serif;letter-spacing:-.05em;height:58px;color:#164a33}
+.calc-section .campo-moneda .codigo-moneda{font:800 11px 'DM Sans',sans-serif;letter-spacing:.11em;color:#53836b}
+.calc-section .campo-cuotas{background:rgba(194,250,202,.065);padding:14px;border:1px solid rgba(203,255,214,.14);border-radius:14px}
+.calc-control-cabecera{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.calc-control-cabecera span{font-size:11px;font-weight:800;color:#d0f6b6;border:1px solid rgba(202,253,159,.2);padding:3px 9px;border-radius:999px}
+.calc-stepper{display:flex;gap:10px;min-width:0;align-items:stretch;margin:12px 0 5px}
+.stepper-boton{
+  display:grid;place-items:center;flex:0 0 55px;min-width:0;min-height:56px;
+  border:1px solid rgba(228,250,237,.35);border-radius:10px;
+  color:#173e2a;background:#e9f7e7;font:700 26px 'Space Grotesk',sans-serif;
+}
+.stepper-boton:hover:not(:disabled){background:#d7fa73}
+.stepper-boton-mas{color:#0e3b2c;background:#d7fa73;border-color:#d7fa73}
+.stepper-boton:disabled{opacity:.35;cursor:not-allowed}
+.stepper-entrada{display:flex;align-items:center;justify-content:center;gap:7px;flex:1 1 auto;min-width:0;
+  padding:4px 6px;border:1px solid #bcd6c6;border-radius:10px;background:#f7fcf8}
+.calc-section .stepper-entrada input{
+  flex:0 1 76px;width:76px;min-width:0;height:47px;max-width:none;
+  padding:0;text-align:right;appearance:textfield;-moz-appearance:textfield;
+  border:0!important;background:transparent!important;box-shadow:none!important;
+  color:#10402d;font:700 33px 'Space Grotesk',sans-serif
+}
+.calc-section .stepper-entrada input::-webkit-inner-spin-button,.calc-section .stepper-entrada input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.stepper-entrada span{color:#4c8066;font-size:12px;font-weight:800}
+.calc-section .micro{font-size:11px;line-height:1.6;color:#b6dac5;margin:5px 0 0}
+.cuotas-rapidas{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin-top:12px}
+.cuotas-rapidas button{min-height:42px;min-width:0;background:rgba(218,249,226,.09);color:#ebfff0;
+  border:1px solid rgba(214,249,222,.28);border-radius:9px;font-size:13px;font-weight:800}
+.cuotas-rapidas button:hover{background:rgba(215,250,115,.24)}
+.cuotas-rapidas button[aria-pressed="true"],.cuotas-rapidas button.activo{
+  color:#143923;background:#d7fa73;border-color:#d7fa73;box-shadow:0 3px 11px rgba(13,27,14,.13)
+}
+.calc-section .atrasos{padding:13px;border:1px solid rgba(216,249,228,.22);border-radius:12px;background:rgba(200,240,214,.05);min-width:0}
+.calc-section .campo-cabecera strong{font-size:12px;color:#e1ffeb}
+.calc-section .campo-cabecera span{font-size:11px;color:#acd5bd}
+.calc-section .dos-campos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.calc-section .formulario-nota{
+  border:0;border-top:1px solid rgba(205,248,222,.17);
+  margin:0;padding:12px 0 0;color:#aacbb8;font-size:11px;line-height:1.65;
+}
+.calc-section .panel-resultado{
+  min-width:0;padding:20px 0 18px 29px;border-radius:0;border:0;border-left:1px solid rgba(202,245,218,.22);
+  background:transparent;box-shadow:none;display:flex;flex-direction:column;overflow:visible;
+}
+.calc-section .panel-resultado::after{display:none}
+.resultado-cabecera{display:flex;justify-content:space-between;align-items:center;gap:9px;color:#acd0bb;
+  font-size:10px;font-weight:800;letter-spacing:.12em}
+.indicador-resultado{border:1px solid #4e7560;border-radius:7px;color:#d7fa73;font-size:10px;padding:4px 8px}
+.resultado{min-width:0;flex:1}
+.res-modo{display:inline-block;max-width:100%;margin:20px 0 18px;color:#c9efd1;
+  background:rgba(194,250,194,.09);border-radius:8px;padding:7px 10px;font-size:11px;font-weight:700}
+.res-cuota-kicker,.res-total-bloque>span{color:#a9cbb7;font-size:11px;font-weight:800;letter-spacing:.1em}
+.res-cuota-kicker{margin:0 0 6px}
+.res-cuota-fila{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.res-cuota-monto{color:#d7fa73;font:700 clamp(2.7rem,4.9vw,4.1rem)/1.12 'Space Grotesk',sans-serif;letter-spacing:-.075em;overflow-wrap:anywhere}
+.res-cuota-fila>span{color:#a6c7b6;font-size:11px}
+.res-fecha{margin:7px 0 15px;color:#b7d9c6;font-size:12px}
+.res-cinta{display:flex;flex-wrap:wrap;gap:7px}
+.res-cinta>span{display:inline-block;font-size:10px;color:#d6edda;
+  background:rgba(220,253,218,.09);padding:7px 9px;border-radius:7px}
+.res-cinta i{color:#d7fa73;font-style:normal}
+.res-separador{border-top:1px dashed rgba(190,245,200,.25);margin:20px 0 17px}
+.res-total-bloque{min-width:0}
+.res-total{display:block;margin-top:3px;color:#fff;font:700 clamp(2rem,3.8vw,3rem)/1.2 'Space Grotesk',sans-serif;letter-spacing:-.065em;overflow-wrap:anywhere}
+.res-tarjetas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:19px 0 13px}
+.res-tarjetas>div{min-width:0;padding:13px;background:rgba(225,255,238,.07);border:1px solid rgba(225,255,231,.11);border-radius:11px}
+.res-tarjetas span,.res-detalle span{display:block;color:#bad9c6;font-size:11px}
+.res-tarjetas strong{display:block;margin-top:5px;font:700 clamp(1.03rem,2vw,1.35rem) 'Space Grotesk',sans-serif;overflow-wrap:anywhere}
+.res-reparto{height:9px;border-radius:999px;background:#3d725a;overflow:hidden}
+.res-reparto>span{display:block;height:100%;border-radius:inherit;background:#d7fa73}
+.res-reparto-leyenda{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px 12px;margin:7px 0 19px;color:#aacbb8;font-size:10px}
+.res-detalle{display:grid;gap:0}
+.res-detalle>div{display:flex;align-items:baseline;justify-content:space-between;gap:10px;
+  padding:11px 0;border-bottom:1px solid rgba(202,247,218,.13);min-width:0}
+.res-detalle b,.res-detalle strong{font-size:13px;font-weight:800;white-space:normal;text-align:right;overflow-wrap:anywhere}
+.res-detalle .res-fuerte{border:0}
+.res-detalle .sin-costo,.res-detalle .res-fuerte strong{color:#d7fa73}
+.res-detalle .costo-extra{color:#f6c984}
+.res-aclaracion{margin:14px 0;color:#bad9c6;font-size:11px;line-height:1.65}
+.advertencia{background:#493f28;border:1px solid #9b793d;color:#ffeda6;border-radius:10px;padding:12px;font-size:11px;line-height:1.65}
+.calc-legal{margin:0;padding:16px 0 0;border-top:1px solid rgba(200,252,215,.19);
+  color:#b6d3c0;font-size:11px;line-height:1.75}
+.calc-legal strong{color:#e9ffdc}
+.calc-section .calendario-panel{min-width:0;margin-top:16px;padding:22px 25px;border-radius:17px;box-shadow:0 10px 22px rgba(28,85,58,.045)}
+.calc-section .calendario-cabecera{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.calc-section .calendario-cabecera .eyebrow{margin:0 0 5px}
+.calc-section .calendario-cabecera h3{font:700 22px 'Space Grotesk',sans-serif;letter-spacing:-.04em}
+.calc-section .tabla-aviso{display:none}
+.calc-section .tabla-wrap{max-width:100%;width:100%;min-width:0;overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+.calc-section .tabla-wrap table{width:100%;min-width:545px}
+.calc-fuentes{padding:11px 4px 0;color:#6b8a7a;font-size:11px;line-height:1.8}
+.calc-fuentes summary{cursor:pointer;font-size:12px;font-weight:800;color:#2a7a5a}
+.calc-fuentes a{color:#167258;font-weight:800}
+.calc-fuentes p{margin:9px 0}
+.calc-section,.calc-section .sim-grid,.calc-section .panel-controles,.calc-section .panel-resultado,
+.calc-section .calculadora-shell,.calc-section .campo,.calc-section .campo-moneda,
+.calc-section .stepper-entrada,.calc-section .calendario-panel{min-width:0;max-width:100%}
+.mobile-nav{display:none}
 @media(max-width:1050px){
-  /* La regla queda deliberadamente después de .sim-grid V2.2. */
-  .sim-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
-  .panel-controles,.panel-resultado{width:100%;min-width:0}
-  .res-cuota-monto{font-size:clamp(2.7rem,6vw,4rem)}
+  .calc-section .sim-grid{grid-template-columns:minmax(0,1fr)}
+  .calc-section .panel-controles{padding:20px 0 23px}
+  .calc-section .panel-resultado{padding:22px 0 12px;border-left:0;border-top:1px solid rgba(202,245,218,.24)}
+  .calc-section .res-cuota-monto{font-size:clamp(2.7rem,5.8vw,4rem)}
 }
 @media(max-width:760px){
-  .navegacion{gap:10px;justify-content:space-between;padding:12px 18px}
+  .navegacion{gap:10px;justify-content:space-between;padding:12px 16px}
   .navegacion>nav{display:none}
   .navegacion .mobile-nav{display:block;position:relative;margin-left:auto;z-index:42}
-  .mobile-nav summary{cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;list-style:none;min-height:44px;padding:8px 13px;border:1px solid #d5e8dc;border-radius:11px;background:#f6faf6;color:#15573d;font-size:13px;font-weight:800;white-space:nowrap}
+  .mobile-nav summary{cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;list-style:none;
+    min-height:44px;padding:8px 13px;border:1px solid #d5e8dc;border-radius:10px;background:#f6faf6;
+    color:#15573d;font-size:13px;font-weight:800;white-space:nowrap}
   .mobile-nav summary::-webkit-details-marker{display:none}
   .mobile-nav summary>span{font-size:18px;line-height:1}
-  .mobile-nav[open] summary{background:#e6f6e9;border-color:#88c6a1}
-  .navegacion .mobile-nav nav{display:flex;flex-direction:column;gap:0;position:absolute;top:calc(100% + 10px);right:0;min-width:210px;padding:7px;border-radius:14px;background:#fff;border:1px solid #dceae1;box-shadow:0 17px 38px rgba(6,47,33,.17)}
+  .navegacion .mobile-nav nav{display:flex;flex-direction:column;gap:0;position:absolute;
+    top:calc(100% + 10px);right:0;min-width:210px;padding:7px;border-radius:14px;
+    background:#fff;border:1px solid #dceae1;box-shadow:0 17px 38px rgba(6,47,33,.17)}
   .navegacion .mobile-nav nav a{display:block;padding:13px 14px;font-size:14px;color:#1d503d;border-radius:8px}
   .navegacion .mobile-nav nav a:hover,.navegacion .mobile-nav nav a:focus-visible{background:#eff8f1}
-  .tabla-aviso{display:flex;gap:8px;align-items:center;color:#497d62;font-size:12px;font-weight:700;margin:8px 0 12px}
-  .tabla-aviso span{font-size:20px}
-  .calc-heading{grid-template-columns:minmax(0,1fr);padding:28px 22px}
-  .calc-heading-copia{min-width:0}
-  .calc-heading h2{font-size:clamp(2.6rem,9vw,4.1rem)}
-  .calc-heading-puntos span{white-space:normal}
-  .calendario-cabecera{flex-wrap:wrap}
-  .calendario-cabecera>span{white-space:normal}
-  .estado-card-top,.estado-pie{flex-wrap:wrap}
-  .res-cuota-monto{font-size:clamp(2.4rem,8vw,3.5rem)}
+  .contenedor{padding-inline:14px}
+  .calc-section{padding-top:16px}
+  .calculadora-shell{padding:20px;border-radius:19px}
+  .calc-heading{align-items:flex-start;flex-wrap:wrap;gap:10px}
+  .calc-heading h1{font-size:clamp(2.1rem,8vw,3.4rem)}
+  .calc-heading>div>p:last-child{font-size:12px}
+  .calc-live{font-size:10px;padding:6px 9px}
+  .calc-section .panel-controles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .calc-section .panel-resultado{padding-top:20px}
+  .calc-section .tabla-aviso{display:flex;gap:8px;align-items:center;margin:8px 0 12px;
+    color:#497d62;font-size:12px;font-weight:700}
+  .calc-section .tabla-aviso span{font-size:20px}
+  .calc-section .calendario-panel{padding:18px 15px}
+  .calc-section .res-cuota-monto{font-size:clamp(2.5rem,7vw,3.5rem)}
 }
 @media(max-width:620px){
   .navegacion .nav-cta{display:none}
-  .navegacion .marca{flex-shrink:0}
-  .contenedor{padding-inline:14px}
-  .seccion{padding-top:52px}
-  .panel-controles{grid-template-columns:minmax(0,1fr);gap:14px;padding:16px}
-  .panel-controles>.campo,.panel-controles>.campo-ancho{grid-column:1 / -1;min-width:0}
-  .panel-resultado{padding:20px}
-  .calc-heading{padding:27px 19px;gap:0;border-radius:20px}
-  .calc-heading-arte{display:none}
-  .calc-heading-copia>p:not(.eyebrow){font-size:14px;line-height:1.7}
-  .calc-heading-puntos{gap:7px 12px}
-  .calc-heading-puntos span{font-size:10px}
-  .calc-legal-banda{margin:12px 0;gap:10px}
-  .calc-control-cabecera{flex-wrap:wrap}
-  .calc-control-cabecera span{white-space:normal}
-  .campo input,.campo select{font-size:16px}
-  .campo input[type=date]{display:block;max-width:100%;min-width:0}
-  .campo-moneda-grande{min-width:0}
-  .campo-moneda-grande input{flex:1 1 auto;min-width:0;width:100%;font-size:clamp(1.55rem,7vw,2.1rem)}
-  .campo-cuotas{padding:14px}
-  .calc-stepper{min-width:0;gap:8px}
-  .stepper-boton{flex:0 0 48px;width:48px;min-height:54px}
-  .stepper-entrada{min-width:0;gap:7px;padding:5px}
-  .stepper-entrada input{width:66px;flex:0 1 66px;height:48px;min-width:0;font-size:32px}
-  .stepper-entrada span{font-size:11px}
-  .cuotas-rapidas{grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}
-  .cuotas-rapidas button{min-width:0;min-height:44px;font-size:13px}
-  .resultado-cabecera{flex-wrap:wrap;gap:8px}
-  .res-cinta{gap:6px}
-  .res-tarjetas{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-  .res-tarjetas>div{min-width:0;padding:12px 9px}
-  .res-tarjetas strong{font-size:clamp(1rem,4.8vw,1.35rem)}
-  .res-detalle>div{flex-wrap:wrap;align-items:baseline}
-  .calendario-panel{min-width:0;padding:17px 14px;border-radius:17px}
-  .calendario-cabecera h3{font-size:20px}
-  .tabla-wrap{border:1px solid #e6eee8;border-radius:10px}
-  .tabla-wrap table{min-width:550px}
-  .tabla-wrap th,.tabla-wrap td{padding:12px 10px}
-  .calc-heading,.panel-resultado,.panel-controles{border-radius:18px}
+  .calc-section .panel-controles{grid-template-columns:minmax(0,1fr);gap:13px}
+  .calc-section .panel-controles>.campo{grid-column:1/-1}
+  .calc-section .panel-controles>.campo-ancho{grid-column:1/-1}
+  .calc-section .campo input,.calc-section .campo select{font-size:16px}
+  .calc-section .campo input[type="date"]{min-width:0;max-width:100%}
+  .calc-section .campo-moneda-grande input{font-size:clamp(1.9rem,7vw,2.35rem)}
+  .calc-section .stepper-boton{flex-basis:49px;min-height:52px}
+  .calc-section .stepper-entrada input{font-size:31px}
+  .calc-section .cuotas-rapidas button{min-height:44px}
+  .calc-section .res-tarjetas strong{font-size:clamp(1rem,4.5vw,1.25rem)}
+  .calc-section .calendario-cabecera{flex-wrap:wrap}
+  .calc-section .calendario-cabecera>span{white-space:normal}
+  .calc-section .res-cuota-monto{font-size:clamp(2.45rem,9vw,3.25rem)}
+  .calc-section .res-detalle>div{flex-wrap:wrap}
+  .calc-section .tabla-wrap{border:1px solid #e4ebe4;border-radius:9px}
 }
 @media(max-width:370px){
-  .navegacion{padding:10px 12px;gap:6px}
+  .navegacion{padding:10px 12px;gap:7px}
   .navegacion .marca{font-size:12px;gap:8px}
-  .marca-icono{width:29px;height:29px;font-size:18px}
+  .navegacion .marca-icono{width:29px;height:29px;font-size:18px}
   .mobile-nav summary{padding:8px 10px;font-size:12px}
   .contenedor{padding-inline:10px}
-  .panel-controles,.panel-resultado{padding:14px}
-  .calc-heading{padding:24px 16px}
-  .calc-heading h2{font-size:2.48rem}
-  .calc-heading .calc-eyebrow{font-size:9px;letter-spacing:.1em}
-  .campo-cuotas{padding:12px}
-  .calc-stepper{gap:6px}
-  .stepper-boton{flex-basis:44px;width:44px;min-height:50px}
-  .stepper-entrada{gap:4px;padding:3px}
-  .stepper-entrada input{width:53px;flex-basis:53px;font-size:30px}
-  .stepper-entrada span{font-size:10px}
-  .res-tarjetas strong{font-size:16px}
-  .res-reparto-leyenda{flex-wrap:wrap}
-  .res-cuota-monto{font-size:clamp(2.25rem,9vw,3rem)}
-  .res-detalle b,.res-detalle strong{max-width:100%}
-  .estado-metricas{grid-template-columns:minmax(0,1fr)}
+  .calculadora-shell{padding:15px;border-radius:17px}
+  .calc-heading h1{font-size:2rem}
+  .calc-section .calc-stepper{gap:6px}
+  .calc-section .stepper-boton{flex-basis:44px;min-width:0}
+  .calc-section .stepper-entrada{gap:4px;padding:4px}
+  .calc-section .stepper-entrada input{width:54px;flex-basis:54px;font-size:29px}
+  .calc-section .stepper-entrada span{font-size:10px}
+  .calc-section .res-cuota-monto{font-size:clamp(2.25rem,8.5vw,2.8rem)}
+  .calc-section .res-tarjetas>div{padding:11px 8px}
+  .calc-section .estado-metricas{grid-template-columns:minmax(0,1fr)}
   .estado-metricas div:last-child{grid-column:auto}
 }
+@media(prefers-reduced-motion:reduce){.calc-section *{transition:none!important}}
+/* Keep a last small-screen .sim-grid rule for safeguarding against cascade regressions. */
+@media(max-width:1050px){.sim-grid{grid-template-columns:minmax(0,1fr)}}

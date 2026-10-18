@@ -25,10 +25,21 @@ try{
         cuota:rect('.calc-stepper'),
         tabla:rect('.tabla-wrap'),
         menuDisplay:getComputedStyle(document.querySelector('.mobile-nav')).display,
+        shell:rect('.calculadora-shell'),
+        shellBackground:getComputedStyle(document.querySelector('.calculadora-shell')).backgroundImage,
+        firstSection:document.querySelector('main .contenedor > section')?.id,
+        hasFakeHero:!!document.querySelector('.hero'),
+
       };
     });
     try {
       assert.equal(medidas.viewport,ancho,'viewport incorrecto');
+      assert.equal(medidas.firstSection,'simulador','la calculadora debe ser la sección principal');
+      assert.equal(medidas.hasFakeHero,false,'no debe haber hero ornamental');
+      assert.match(medidas.shellBackground,/gradient/,'calculadora real sin fondo verde');
+      assert.ok(medidas.shell.left>=-1 && medidas.shell.right<=ancho+1,'el contenedor verde se sale del viewport');
+      assert.ok(medidas.form.left>=medidas.shell.left-1 && medidas.form.right<=medidas.shell.right+1,'formulario fuera del contenedor');
+      assert.ok(medidas.result.left>=medidas.shell.left-1 && medidas.result.right<=medidas.shell.right+1,'resumen fuera del contenedor');
       assert.ok(medidas.documento<=ancho+1,'desbordamiento horizontal de página: '+JSON.stringify(medidas));
       for (const campo of ['form','result','calculator','cuota','tabla']){
         assert.ok(medidas[campo].left>=-1 && medidas[campo].right<=ancho+1, campo+' desborda: '+JSON.stringify(medidas[campo]));

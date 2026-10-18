@@ -74,3 +74,7 @@ El archivo CSS de V2.2 tenía un selector de dos columnas para `.sim-grid` **des
 - Tabla de calendario con desplazamiento horizontal **dentro** de la tarjeta, sin ampliar la anchura de toda la web.
 - Navegación móvil desplegable accesible.
 - Pruebas de diseño en viewports de 320, 360, 375, 390, 430, 600, 768, 1024 y 1280 píxeles con Playwright + Chromium en GitHub Actions (requieren descargar Chromium en CI).
+
+## V2.4 — Calculadora como experiencia principal
+
+Se eliminó la portada decorativa y el falso panel verde de la calculadora. El formulario real con número de cuotas manual y el resultado comparten ahora un único contenedor verde oscuro que aparece al inicio del sitio. Se redujeron avisos duplicados y el calendario se mantiene debajo. La simulación personalizada continúa sin representar las modalidades oficiales; las tasas de comparación no pertenecen a Cashea.
