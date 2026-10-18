@@ -78,3 +78,7 @@ El archivo CSS de V2.2 tenía un selector de dos columnas para `.sim-grid` **des
 ## V2.4 — Calculadora como experiencia principal
 
 Se eliminó la portada decorativa y el falso panel verde de la calculadora. El formulario real con número de cuotas manual y el resultado comparten ahora un único contenedor verde oscuro que aparece al inicio del sitio. Se redujeron avisos duplicados y el calendario se mantiene debajo. La simulación personalizada continúa sin representar las modalidades oficiales; las tasas de comparación no pertenecen a Cashea.
+
+## V2.5 — Orden editorial y resultado compacto
+
+Las tres secciones aparecen en el orden **Monitoreo → Calculadora → Comercios**, tanto en navegación como en el contenido. Se eliminó por completo el panel «Resumen de tu compra»; la misma calculadora muestra en un bloque integrado la primera cuota estimada, inicial, total e intereses, con cargos solo cuando correspondan. El calendario de pagos permanece debajo. La simulación de intereses sigue identificada como hipotética y no oficial.

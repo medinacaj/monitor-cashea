@@ -20,7 +20,7 @@ try{
         documento:document.documentElement.scrollWidth,
         body:document.body.scrollWidth,
         form:rect('.panel-controles'),
-        result:rect('.panel-resultado'),
+        result:rect('.calc-resultados'),
         calculator:rect('.sim-grid'),
         cuota:rect('.calc-stepper'),
         tabla:rect('.tabla-wrap'),
@@ -44,9 +44,8 @@ try{
       for (const campo of ['form','result','calculator','cuota','tabla']){
         assert.ok(medidas[campo].left>=-1 && medidas[campo].right<=ancho+1, campo+' desborda: '+JSON.stringify(medidas[campo]));
       }
-      if (ancho<=1050){
-        assert.ok(medidas.result.top>=medidas.form.bottom-2,'calculadora no apilada en '+ancho);
-      }
+      assert.ok(medidas.result.top>=medidas.cuota.bottom-2,'los importes deben aparecer después de las cuotas');
+      assert.ok(medidas.result.bottom<=medidas.form.bottom+1,'resultado fuera del formulario');
       if(ancho<=760){
         assert.notEqual(medidas.menuDisplay,'none','falta menú móvil');
         await pagina.locator('.mobile-nav summary').click();

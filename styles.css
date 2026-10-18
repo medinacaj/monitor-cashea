@@ -450,3 +450,58 @@ tbody tr:last-child td{border-bottom:0}
 @media(prefers-reduced-motion:reduce){.calc-section *{transition:none!important}}
 /* Keep a last small-screen .sim-grid rule for safeguarding against cascade regressions. */
 @media(max-width:1050px){.sim-grid{grid-template-columns:minmax(0,1fr)}}
+
+/* V2.5 — resultado compacto integrado en la calculadora; sin panel independiente. */
+.calc-section .sim-grid{display:block;min-width:0}
+.calc-section .panel-controles{
+  width:100%;padding:18px 0 8px;grid-template-columns:repeat(2,minmax(0,1fr));
+  column-gap:18px;row-gap:16px
+}
+.calc-section .panel-controles>.campo-destacado,
+.calc-section .panel-controles>.campo-cuotas{grid-column:auto}
+.calc-section .calc-resultados{
+  grid-column:1/-1;min-width:0;width:100%;display:grid;
+  grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);align-items:center;
+  gap:12px 22px;margin-top:3px;padding:22px 0 12px;
+  border-top:1px solid rgba(206,247,222,.28)
+}
+.calc-section .calc-resultado-principal{display:flex;flex-direction:column;gap:6px;min-width:0}
+.calc-section .calc-resultado-principal>span{font-size:12px;font-weight:800;color:#c5e8d0}
+.calc-section .calc-resultado-principal>.res-cuota-monto{
+  color:#d7fa73;font:700 clamp(2.4rem,5.5vw,4rem)/1.07 'Space Grotesk',sans-serif;
+  letter-spacing:-.065em;overflow-wrap:anywhere
+}
+.calc-section .calc-resultado-principal small{font-size:11px;line-height:1.5;color:#add1b9}
+.calc-section .calc-resultado-datos{display:grid;gap:12px;min-width:0}
+.calc-section .calc-resultado-datos>div{display:flex;align-items:baseline;justify-content:space-between;gap:10px;min-width:0}
+.calc-section .calc-resultado-datos span{color:#bbddc8;font-size:12px}
+.calc-section .calc-resultado-datos strong{
+  color:#fff;font:700 clamp(1.15rem,2.25vw,1.65rem) 'Space Grotesk',sans-serif;
+  overflow-wrap:anywhere;text-align:right
+}
+.calc-section .calc-resultado-datos>div:last-child strong{color:#d7fa73}
+.calc-section .calc-resultado-extra{
+  grid-column:1/-1;display:flex;justify-content:space-between;gap:10px;
+  margin:0;padding:7px 0;border-top:1px solid rgba(207,255,219,.11);
+  color:#b4d8c0;font-size:11px
+}
+.calc-section .calc-resultado-extra strong{font-size:12px;color:#d7fa73;white-space:nowrap}
+.calc-section .calc-resultado-costo{font-weight:800}
+.calc-section .calc-resultado-aviso{grid-column:1/-1;margin:0;font-size:11px;line-height:1.7;color:#f6dc9b}
+.calc-section .calc-resultados>.advertencia{grid-column:1/-1;margin:0}
+@media(max-width:1050px){
+ .calc-section .panel-controles>.campo-destacado,
+ .calc-section .panel-controles>.campo-cuotas{grid-column:1/-1}
+}
+@media(max-width:760px){
+  .calc-section .calc-resultados{grid-template-columns:minmax(0,1fr)}
+  .calc-section .calc-resultado-datos{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  .calc-section .calc-resultado-datos>div{display:flex;flex-direction:column;align-items:flex-start;gap:5px}
+  .calc-section .calc-resultado-datos strong{text-align:left}
+}
+@media(max-width:620px){
+  .calc-section .panel-controles{grid-template-columns:minmax(0,1fr)}
+  .calc-section .calc-resultados{padding-top:19px;row-gap:12px}
+  .calc-section .calc-resultado-principal>.res-cuota-monto{font-size:clamp(2.55rem,10vw,3.45rem)}
+}
+@media(max-width:370px){.calc-section .calc-resultado-datos strong{font-size:1.12rem}}
