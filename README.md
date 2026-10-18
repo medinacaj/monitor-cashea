@@ -82,3 +82,9 @@ Se eliminó la portada decorativa y el falso panel verde de la calculadora. El f
 ## V2.5 — Orden editorial y resultado compacto
 
 Las tres secciones aparecen en el orden **Monitoreo → Calculadora → Comercios**, tanto en navegación como en el contenido. Se eliminó por completo el panel «Resumen de tu compra»; la misma calculadora muestra en un bloque integrado la primera cuota estimada, inicial, total e intereses, con cargos solo cuando correspondan. El calendario de pagos permanece debajo. La simulación de intereses sigue identificada como hipotética y no oficial.
+
+## V2.6 — Corrección Safari/iPhone de menús desplegables
+
+Los controles **Tipo de simulación**, **Nivel orientativo**, **Ciudad** y **Categoría** usan ahora una envoltura y una única flecha vectorial CSS. El elemento nativo conserva su semántica y apertura accesible, pero su apariencia gráfica (incluyendo indicadores superpuestos de iOS) se desactiva explícitamente con `-webkit-appearance: none`; el fondo claro y texto oscuro se fuerzan incluso en Safari/WebView. La página también revisa foco, tamaños táctiles y anchos de filtros. Se invalida caché del CSS y JS con versión 2.6.0.
+
+La suite responsive automatizada incorpora verificaciones en Chromium y WebKit con 320 a 1280 px. En dispositivos iOS físicos puede haber diferencias de versión del motor, por lo que una inspección de Safari en el teléfono sigue siendo la última comprobación visual.

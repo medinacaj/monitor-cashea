@@ -12,9 +12,9 @@
   <meta property="og:url" content="https://medinacaj.github.io/monitor-cashea/">
   <meta name="robots" content="index,follow">
   <title>Monitor Cashea — Tu guía independiente</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=2.6.0">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Monitor Cashea (no oficial)","url":"https://medinacaj.github.io/monitor-cashea/","inLanguage":"es"}</script>
-  <script type="module" src="app.js"></script>
+  <script type="module" src="app.js?v=2.6.0"></script>
 </head>
 <body>
   <a class="saltar" href="#simulador">Ir a la calculadora</a>
@@ -54,13 +54,13 @@
             <form id="form-sim" class="panel-controles" novalidate aria-label="Configurar simulación de compra">
               <div class="campo campo-ancho">
                 <label for="modalidad">Tipo de simulación</label>
-                <select id="modalidad">
+                <div class="select-control"><select id="modalidad">
                   <option value="personalizada" selected>Personalizada · cuotas libres</option>
                   <option value="principal">Línea Principal · referencia de 3 cuotas</option>
                   <option value="cotidiana">Línea Cotidiana · referencia de 1 cuota</option>
                   <option value="mas">Modo Más Cuotas · referencia de 6, 9 o 12</option>
                   <option value="comparar">Comparación con intereses · no Cashea</option>
-                </select>
+                </select></div>
               </div>
               <div class="campo campo-ancho campo-destacado">
                 <label for="monto">Precio del producto</label>
@@ -88,7 +88,7 @@
               </div>
               <div class="campo">
                 <label for="nivel">Nivel orientativo</label>
-                <select id="nivel"><option value="1">1 · Semilla</option><option value="2">2 · Raíz</option><option value="3" selected>3 · Hoja</option><option value="4">4 · Tronco</option><option value="5">5 · Árbol</option><option value="6">6 · Araguaney</option></select>
+                <div class="select-control"><select id="nivel"><option value="1">1 · Semilla</option><option value="2">2 · Raíz</option><option value="3" selected>3 · Hoja</option><option value="4">4 · Tronco</option><option value="5">5 · Árbol</option><option value="6">6 · Araguaney</option></select></div>
               </div>
               <div class="campo">
                 <label for="dias">Días entre cuotas</label>
@@ -131,8 +131,8 @@
         <p class="intro">Una guía de marcas mencionadas en prensa y fuentes externas. <strong>No verifica aceptación actual por tienda o sucursal.</strong> Confirma cada comercio directamente en la app de Cashea.</p>
         <div class="filtros">
           <div class="campo filtro-busqueda"><label for="q">Buscar comercio</label><input id="q" type="search" placeholder="Ej. Locatel, Damasco, Nike…" autocomplete="off"></div>
-          <div class="campo"><label for="ciudad">Ciudad mencionada</label><select id="ciudad"><option value="">Todas las ciudades</option></select></div>
-          <div class="campo"><label for="categoria">Categoría</label><select id="categoria"><option value="">Todas las categorías</option></select></div>
+          <div class="campo"><label for="ciudad">Ciudad mencionada</label><div class="select-control"><select id="ciudad"><option value="">Todas las ciudades</option></select></div></div>
+          <div class="campo"><label for="categoria">Categoría</label><div class="select-control"><select id="categoria"><option value="">Todas las categorías</option></select></div></div>
         </div>
         <div class="directorio-barra"><p id="contador" aria-live="polite">Cargando comercios…</p><span id="nota-datos">Fuentes externas, consulta orientativa</span></div>
         <ul id="lista" class="lista-comercios"></ul>

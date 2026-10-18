@@ -49,3 +49,7 @@ La calculadora es el primer contenido de la web y ocupa toda la superficie verde
 ## V2.5 — Simplificación de la interfaz
 
 Orden: Monitoreo → Calculadora → Comercios. Sin panel secundario «Resumen de tu compra». Cuota, inicial, total, intereses y avisos condicionales se muestran junto a los controles, sin repetir el desglose del calendario. Pruebas responsive preservadas.
+
+## V2.6 — Incidencia Safari/iOS
+
+El usuario reportó flechas triangulares grandes y barras superpuestas sobre dos selectores en un iPhone. Se normalizan todos los desplegables (tipo, nivel, ciudad, categoría) con apariencia nativa desactivada, una única flecha CSS y contraste controlado. Se añade verificación programática de selectores en Chromium y WebKit, navegación y vista de móviles; no afirmar que una emulación equivale a Safari en iPhone físico.
