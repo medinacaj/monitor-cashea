@@ -1,5 +1,6 @@
 // Clasificación deliberadamente conservadora: un código 403 no demuestra una caída de Cashea.
 export function clasificarHttp(code) {
+  if (code === 0) return 'unknown';
   if (code >= 200 && code < 400) return 'up';
   if ([401, 403, 429].includes(code)) return 'restricted';
   return 'down';

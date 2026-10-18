@@ -149,13 +149,13 @@ function pintarEstado(data) {
     const evaluables = ult24.filter(x => !['restricted','unknown'].includes(x.state)).length;
     const pct = evaluables ? (100 * exitos / evaluables).toFixed(1) + ' %' : 'Sin muestra';
     const c = t.current || h.at(-1) || {};
-    const estado = desactualizado ? 'stale' : c.state === 'restricted' ? 'restricted' : c.up ? 'up' : 'down';
-    const titulo = ({stale:'Información desactualizada',restricted:'Acceso del monitor restringido',up:'El sitio web responde',down:'Respuesta no satisfactoria'})[estado];
+    const estado = desactualizado ? 'stale' : c.state === 'restricted' ? 'restricted' : c.state === 'unknown' ? 'unknown' : c.up ? 'up' : 'down';
+    const titulo = ({stale:'Información desactualizada',restricted:'Acceso del monitor restringido',unknown:'No se pudo comprobar',up:'El sitio web responde',down:'Respuesta no satisfactoria'})[estado];
     const fecha = Date.parse(c.t || data.updated);
     const ultima = Number.isFinite(fecha) ? new Date(fecha).toLocaleString('es-VE') : 'sin fecha válida';
     const barras = ult24.slice(-48).map(x =>
       '<span title="' + esc(new Date(x.t).toLocaleString('es-VE')) +
-      '" class="barra ' + (x.state === 'restricted' ? 'restricted' : x.up ? 'up' : 'down') + '"></span>'
+      '" class="barra ' + (x.state === 'restricted' ? 'restricted' : x.state === 'unknown' ? 'unknown' : x.up ? 'up' : 'down') + '"></span>'
     ).join('');
     return '<article class="estado-card ' + estado + '"><div class="estado-card-top"><div><p class="estado-label">MONITOREO EXTERNO</p><h3>' + esc(t.name) + '</h3></div><span class="estado-indicador"><i></i>' + titulo + '</span></div>' +
       '<div class="estado-metricas"><div><span>Resultado de chequeos en 24 h</span><strong>' + pct + '</strong></div><div><span>Muestras evaluables</span><strong>' + evaluables + '</strong></div><div><span>Última comprobación</span><strong class="dato-hora">' + esc(ultima) + '</strong></div></div>' +

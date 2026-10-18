@@ -4,7 +4,7 @@ Sitio web estático publicado mediante GitHub Pages. **No tiene relación con Ca
 
 ## Qué hace y qué no hace
 
-- **Estado de la web:** GitHub Actions consulta la URL de `targets.json` cada 15 minutos y publica `status.json`. Un HTTP 2xx/3xx indica que el sitio respondió. Un 401/403/429 indica que el monitor fue restringido, **no** una caída global. Otros errores se muestran como respuesta no satisfactoria; pueden ser locales o transitorios. **No comprueba la app ni los pagos.**
+- **Estado de la web:** GitHub Actions consulta la URL HTTPS oficial con `www` de `targets.json` cada 15 minutos y publica `status.json`. Un HTTP 2xx/3xx indica que el sitio respondió. Un 401/403/429 indica que el monitor fue restringido, **no** una caída global. Otros errores HTTP se muestran como respuesta no satisfactoria; los fallos de red se presentan como «No se pudo comprobar» (no indican una caída global). **No comprueba la app ni los pagos.**
 - **Calculadora Cashea:** modelos de Línea Principal, Cotidiana y Más Cuotas con tasa 0 %. El porcentaje inicial es editable y los niveles son orientativos. El usuario debe validar elegibilidad y condiciones en la app oficial.
 - **Comparación con intereses:** préstamo **hipotético y no Cashea**; permite editar tasa nominal anual y calendario. Calcula intereses sobre saldo pendiente con períodos de días/365, redondeo a centavos y ajuste en la última cuota. Una tasa de ejemplo no debe confundirse con condiciones de Cashea.
 - **Atrasos:** estimación basada en un cargo de US$4 por cuota si se superan dos días de gracia, según su centro de ayuda al 18/10/2026. Puede cambiar. No constituye una factura.
