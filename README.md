@@ -98,3 +98,7 @@ El campo «Nivel orientativo» se eliminó junto con las reglas automáticas de 
 ## V2.8 — Estado e historial en una sola tarjeta
 
 Se integraron «Sitio web público de Cashea» e «Historial de verificaciones» en un **único panel**. Primero se presenta el estado observado y las métricas, seguido de la gráfica horaria con selector 24/72h, su leyenda y el botón de actualización. Se eliminó la tira pequeña de barras duplicadas. El porcentaje de respuestas satisfactorias se mantiene únicamente en las métricas; el pie de gráfica muestra cuántas verificaciones y horas sin muestras contiene el período elegido.
+
+## V2.9 — Eliminación del indicador duplicado
+
+Se retira «Respuestas satisfactorias en 24 h / Sin muestra» y «Muestras evaluables» del bloque superior, porque la gráfica y su resumen ya informan sobre el historial. La cabecera muestra ahora el estado corroborado del sitio y la última fecha de comprobación, seguida del gráfico de 24/72 horas. Esto evita confundir la ausencia de muestras evaluables con la ausencia de cualquier verificación.
