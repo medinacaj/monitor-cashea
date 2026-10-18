@@ -53,3 +53,7 @@ Orden: Monitoreo → Calculadora → Comercios. Sin panel secundario «Resumen d
 ## V2.6 — Incidencia Safari/iOS
 
 El usuario reportó flechas triangulares grandes y barras superpuestas sobre dos selectores en un iPhone. Se normalizan todos los desplegables (tipo, nivel, ciudad, categoría) con apariencia nativa desactivada, una única flecha CSS y contraste controlado. Se añade verificación programática de selectores en Chromium y WebKit, navegación y vista de móviles; no afirmar que una emulación equivale a Safari en iPhone físico.
+
+## P1 · Criterio de corroboración (18-10-2026)
+
+Se añadió motor de consenso de dos proveedores independientes y pruebas. La interfaz ya no confunde un único chequeo GitHub con estado global. Hasta provisionar una segunda señal independiente y autorizada, el veredicto permanece **sin corroboración**. No cerrar el Issue #6 hasta prueba con tráfico real y procedencia verificable.
