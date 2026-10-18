@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monitor Cashea (no oficial) | Simulador de cuotas y comercios</title>
+<meta name="description" content="Guía independiente y no oficial: simula tus cuotas quincenales y encuentra comercios que aceptan Cashea en Venezuela, por ciudad y categoría.">
+<link rel="canonical" href="https://medinacaj.github.io/monitor-cashea/">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Monitor Cashea (no oficial)">
+<meta property="og:description" content="Simulador de cuotas y directorio de comercios. Proyecto independiente, no afiliado a Cashea.">
+<meta property="og:url" content="https://medinacaj.github.io/monitor-cashea/">
+<meta name="theme-color" content="#0f766e">
+<link rel="stylesheet" href="styles.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"Monitor Cashea (no oficial)","url":"https://medinacaj.github.io/monitor-cashea/","inLanguage":"es"}
+</script>
+</head>
+<body>
+<div class="aviso" role="note">
+  Proyecto independiente y <strong>no oficial</strong>. No está afiliado, respaldado ni operado por Cashea. Las cifras son referenciales: confirma siempre las condiciones en la app oficial.
+</div>
+
+<header class="hero">
+  <h1>Monitor Cashea <span class="tag">no oficial</span></h1>
+  <p>Calcula cuánto pagarías en cuotas y busca dónde usar el servicio.</p>
+  <nav aria-label="Secciones">
+    <a href="#simulador">Simulador</a>
+    <a href="#directorio">Directorio</a>
+  </nav>
+</header>
+
+<main>
+  <section id="simulador" aria-labelledby="t-sim">
+    <h2 id="t-sim">Simulador de cuotas</h2>
+    <p class="nota">Estimación con porcentaje de inicial y número de cuotas editables. Los valores por defecto son de ejemplo, no las condiciones oficiales.</p>
+    <form id="form-sim" class="grid" novalidate>
+      <label>Monto de la compra (USD)
+        <input id="monto" type="number" inputmode="decimal" min="0" step="0.01" value="100" required>
+      </label>
+      <label>Inicial (%)
+        <input id="inicial" type="number" inputmode="decimal" min="0" max="100" step="1" value="40">
+      </label>
+      <label>Número de cuotas
+        <input id="cuotas" type="number" inputmode="numeric" min="1" max="12" step="1" value="3">
+      </label>
+      <label>Días entre cuotas
+        <input id="dias" type="number" inputmode="numeric" min="1" max="60" step="1" value="14">
+      </label>
+    </form>
+    <div id="resultado" class="resultado" aria-live="polite"></div>
+    <div id="calendario" class="tabla-wrap"></div>
+  </section>
+
+  <section id="directorio" aria-labelledby="t-dir">
+    <h2 id="t-dir">Directorio de comercios</h2>
+    <p class="nota" id="nota-datos"></p>
+    <div class="grid filtros">
+      <label>Buscar
+        <input id="q" type="search" placeholder="Nombre del comercio">
+      </label>
+      <label>Ciudad
+        <select id="ciudad"><option value="">Todas</option></select>
+      </label>
+      <label>Categoría
+        <select id="categoria"><option value="">Todas</option></select>
+      </label>
+    </div>
+    <p id="contador" aria-live="polite"></p>
+    <ul id="lista" class="lista"></ul>
+  </section>
+</main>
+
+<footer>
+  <p>Guía comunitaria independiente. Marcas y nombres pertenecen a sus dueños. ¿Eres un comercio y quieres aparecer o corregir tus datos? Abre un <em>issue</em> en el repositorio.</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

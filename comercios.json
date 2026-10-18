@@ -1,0 +1,5 @@
+[
+  { "nombre": "Comercio de ejemplo 1", "categoria": "Tecnología", "ciudad": "Caracas", "direccion": "", "verificado": "", "ejemplo": true },
+  { "nombre": "Comercio de ejemplo 2", "categoria": "Ropa y calzado", "ciudad": "Valencia", "direccion": "", "verificado": "", "ejemplo": true },
+  { "nombre": "Comercio de ejemplo 3", "categoria": "Farmacia y salud", "ciudad": "Maracaibo", "direccion": "", "verificado": "", "ejemplo": true }
+]
