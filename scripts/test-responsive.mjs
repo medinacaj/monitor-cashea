@@ -39,6 +39,12 @@ for (const profile of profiles) {
         unified:rect('.monitor-unificado'),
         hasStatusInsidePanel:!!document.querySelector('.monitor-unificado #estado-lista .estado-card'),
         hasChartInsidePanel:!!document.querySelector('.monitor-unificado #estado-grafica'),
+        hasTitleInsidePanel:!!document.querySelector('.monitor-unificado #estado-titulo'),
+        hasIntroInsidePanel:!!document.querySelector('.monitor-unificado .monitor-encabezado > p:last-child'),
+        hasRefreshInsidePanel:!!document.querySelector('.monitor-unificado #refrescar'),
+        monitorHeader:rect('.monitor-encabezado'),
+        timeline:rect('.grafica-estado-card'),
+        footer:rect('.monitor-unificado .estado-pie'),
         noOldPercentage:!document.querySelector('.monitor-unificado .estado-metricas'),
         lastCheckLabel:document.querySelector('.monitor-unificado .estado-ultima')?.textContent||'',
         statusCardBorder:getComputedStyle(document.querySelector('.monitor-unificado .estado-card')).borderTopWidth,
@@ -50,12 +56,16 @@ for (const profile of profiles) {
     assert.deepEqual(details.sectionIds,['estado','simulador','directorio'],'orden de secciones');
     assert.ok(details.hasStatusInsidePanel,'estado no integrado');
     assert.ok(details.hasChartInsidePanel,'gráfico no integrado');
+    assert.ok(details.hasTitleInsidePanel&&details.hasIntroInsidePanel&&details.hasRefreshInsidePanel,
+      'título, explicación o botón quedaron fuera de la tarjeta');
+    assert.ok(details.monitorHeader.bottom<=details.timeline.top+1,'título no precede a la gráfica');
+    assert.ok(details.footer.top>=details.timeline.bottom-1,'botón fuera de la sección');
     assert.ok(details.noOldPercentage,'continúa el bloque de porcentajes redundantes');
     assert.match(details.lastCheckLabel,/Última comprobación/,'falta fecha de comprobación');
     assert.equal(details.statusCardBorder,'0px','la tarjeta del estado tiene un borde duplicado');
     assert.equal(details.chartCardBorder,'0px','la gráfica tiene un borde duplicado');
     assert.ok(details.doc<=width+1,'scroll horizontal no deseado: '+JSON.stringify(details));
-    for (const name of ['shell','form','result','stepper','table','status','directory','unified']) {
+    for (const name of ['shell','form','result','stepper','table','status','directory','unified','monitorHeader','timeline','footer']) {
       const b=details[name];
       assert.ok(b.left>=-1&&b.right<=width+1,name+' desborda a '+width+': '+JSON.stringify(b));
     }

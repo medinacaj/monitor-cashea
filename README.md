@@ -102,3 +102,7 @@ Se integraron «Sitio web público de Cashea» e «Historial de verificaciones»
 ## V2.9 — Eliminación del indicador duplicado
 
 Se retira «Respuestas satisfactorias en 24 h / Sin muestra» y «Muestras evaluables» del bloque superior, porque la gráfica y su resumen ya informan sobre el historial. La cabecera muestra ahora el estado corroborado del sitio y la última fecha de comprobación, seguida del gráfico de 24/72 horas. Esto evita confundir la ausencia de muestras evaluables con la ausencia de cualquier verificación.
+
+## V2.10 — Monitoreo en una sola sección visual
+
+«¿La web responde?» se reemplaza por **«Estado y estabilidad.»**, dentro de la única tarjeta del monitor. Allí se incluye la explicación breve de alcance, objetivo de supervisión, estado corroborado, última comprobación, datos HTTP, gráfica 24/72h, leyenda y botón de actualización. Se eliminan textos repetidos en el historial y la leyenda no interpreta HTTP 403 como caída confirmada. El monitor sigue siendo una observación del sitio web, no de los pagos ni de la app.

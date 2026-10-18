@@ -172,13 +172,9 @@ let ultimoEstado = null;
 function pintarGraficaEstado(data) {
   const target = Array.isArray(data?.targets) ? data.targets.find(t => Array.isArray(t?.history)) : null;
   const serie = construirHistorial(target?.history || [], periodoHistorial);
-  const actualizado = Date.parse(data?.updated);
-  const datosVencidos = !Number.isFinite(actualizado) ||
-    Date.now() - actualizado > 3_600_000 || actualizado > Date.now() + 300_000;
   const total = serie.muestras;
   $('grafica-resumen').textContent = total
-    ? total + ' verificaciones registradas · ' + serie.vacios + ' horas sin muestras' +
-      (serie.evaluables ? '' : ' · Sin datos evaluables')
+    ? total + ' verificaciones registradas · ' + serie.vacios + ' horas sin registros'
     : 'Sin verificaciones en las últimas ' + periodoHistorial + ' horas';
   $('estado-grafica').innerHTML = svgHistorial(serie);
   $('estado-grafica').setAttribute('aria-label',
@@ -187,9 +183,8 @@ function pintarGraficaEstado(data) {
     ' no satisfactorias, ' + serie.cuentas.restricted +
     ' accesos restringidos, ' + serie.cuentas.unknown +
     ' sin comprobar y ' + serie.vacios + ' intervalos sin muestras');
-  $('grafica-nota').textContent = (datosVencidos ? 'Datos desactualizados. ' : '') +
-    'Cada barra representa una hora; el color refleja las verificaciones registradas en ella. ' +
-    'HTTP 403 significa acceso restringido, no una caída confirmada. No mide la app ni los pagos.';
+  $('grafica-nota').textContent =
+    'Cada barra agrupa verificaciones por hora. HTTP 403 significa acceso restringido, no una caída confirmada.';
 }
 document.querySelectorAll('[data-periodo]').forEach(btn => btn.addEventListener('click', () => {
   periodoHistorial = Number(btn.dataset.periodo);
@@ -218,9 +213,9 @@ function pintarEstado(data) {
     const titulo = ({stale:'Información desactualizada',unknown:'Sin corroboración independiente',up:'Dos redes confirman respuesta',down:'Dos redes no obtienen respuesta'})[estado];
     const fecha = Date.parse(c.t || data.updated);
     const ultima = Number.isFinite(fecha) ? new Date(fecha).toLocaleString('es-VE') : 'sin fecha válida';
-    return '<article class="estado-card ' + estado + '"><div class="estado-card-top"><div><p class="estado-label">MONITOREO EXTERNO</p><h3>' + esc(t.name) + '</h3></div><span class="estado-indicador"><i></i>' + titulo + '</span></div>' +
+    return '<article class="estado-card ' + estado + '"><div class="estado-card-top"><div><p class="estado-label">SITIO SUPERVISADO</p><h3>' + esc(t.name) + '</h3></div><span class="estado-indicador"><i></i>' + titulo + '</span></div>' +
       '<p class="estado-ultima"><span>Última comprobación</span><strong>' + esc(ultima) + '</strong></p>' +
-      '<p class="estado-detalle">HTTP ' + esc(c.code ?? '—') + ' · ' + esc(c.ms ?? '—') + ' ms · Solo observación HTTP; no verifica app o pagos.</p></article>';
+      '<p class="estado-detalle">HTTP ' + esc(c.code ?? '—') + ' · ' + esc(c.ms ?? '—') + ' ms · Resultado de la última solicitud web.</p></article>';
   }).join('');
 }
 async function actualizarEstado() {
