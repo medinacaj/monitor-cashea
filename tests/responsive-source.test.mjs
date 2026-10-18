@@ -37,7 +37,7 @@ test('gráfica visible con 24/72h y porcentaje inicial sin niveles automáticos'
  assert.match(html,/id="estado-grafica"/);
  assert.match(html,/data-periodo="24"/);
  assert.match(html,/data-periodo="72"/);
- assert.ok(html.indexOf('id="estado-grafica"')<html.indexOf('id="estado-lista"'));
+ assert.ok(html.indexOf('id="estado-lista"')<html.indexOf('id="estado-grafica"'));
  assert.doesNotMatch(html,/id="nivel"/);
  assert.doesNotMatch(app,/\$\('nivel'\)/);
  assert.match(html,/id="inicial"[^>]*value="40"/);
