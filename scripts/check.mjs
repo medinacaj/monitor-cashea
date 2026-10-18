@@ -1,6 +1,6 @@
 // Comprueba exclusivamente si el sitio web público responde. NO certifica la app ni los pagos.
 import { readFile, writeFile } from 'node:fs/promises';
-import { clasificarHttp } from './status-core.mjs';
+import { clasificarHttp, corroborarSitio } from './status-core.mjs';
 const TARGETS_FILE = process.env.TARGETS_FILE || 'targets.json';
 const STATUS_FILE = process.env.STATUS_FILE || 'status.json';
 const MAX_HISTORY = 288; // Aproximadamente 72 horas si se ejecuta cada 15 minutos
@@ -32,7 +32,8 @@ for (const target of targets) {
   const history = old && Array.isArray(old.history) ? old.history.slice(-MAX_HISTORY+1) : [];
   const current = await probe(target.url);
   history.push(current);
-  result.targets.push({name:target.name,url:target.url,current,history});
+  const corroboration = corroborarSitio([{provider:'github-actions', authorized:true, ...current}]);
+  result.targets.push({name:target.name,url:target.url,current,history,corroboration});
   console.log(`${target.url} -> ${current.state.toUpperCase()} (HTTP ${current.code}) ${current.ms}ms`);
 }
 await writeFile(STATUS_FILE, JSON.stringify(result,null,2) + '\n');
