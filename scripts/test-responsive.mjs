@@ -20,7 +20,7 @@ for (const profile of profiles) {
     await page.locator('.res-cuota-monto').waitFor({timeout:12000});
     const details=await page.evaluate(()=>{
       const rect=sel=>{const b=document.querySelector(sel).getBoundingClientRect();return {left:b.left,right:b.right,top:b.top,bottom:b.bottom,width:b.width};};
-      const selectors=['modalidad','nivel','ciudad','categoria'].map(id=>{
+      const selectors=['modalidad','ciudad','categoria'].map(id=>{
         const el=document.getElementById(id),style=getComputedStyle(el);
         const parent=el.closest('.select-control');
         return {id,appearance:style.appearance,webkitAppearance:style.webkitAppearance,
@@ -65,11 +65,24 @@ for (const profile of profiles) {
       await page.locator('.mobile-nav nav a[href="#simulador"]').click();
       assert.equal(await page.locator('#mobile-nav').getAttribute('open'),null);
     }
+    // The chart is populated from the status JSON endpoint; empty windows remain gray.
+    const chart=page.locator('#estado-grafica svg');
+    await chart.waitFor({timeout:12000});
+    assert.equal(await page.locator('#estado-grafica svg rect').count(),24,'gráfica de 24 barras');
+    await page.locator('[data-periodo="72"]').click();
+    assert.equal(await page.locator('[data-periodo="72"]').getAttribute('aria-pressed'),'true');
+    assert.equal(await page.locator('#estado-grafica svg rect').count(),72,'gráfica de 72 barras');
+    await page.locator('[data-periodo="24"]').click();
+    assert.equal(await page.locator('[data-periodo="24"]').getAttribute('aria-pressed'),'true');
+
     // Native dropdowns remain usable after replacing the decorative arrow.
     await page.locator('#modalidad').selectOption('principal');
     assert.equal(await page.locator('#cuotas').inputValue(),'3');
-    await page.locator('#nivel').selectOption('1');
-    assert.equal(await page.locator('#inicial').inputValue(),'60');
+    assert.equal(await page.locator('#inicial').inputValue(),'40');
+    await page.locator('#inicial').fill('25');
+    await page.locator('#inicial').dispatchEvent('input');
+    assert.equal(await page.locator('#inicial').inputValue(),'25');
+    assert.equal(await page.locator('#nivel').count(),0,'el nivel orientativo ya no debe existir');
     await page.locator('#modalidad').selectOption('personalizada');
     await page.locator('#cuotas').fill('12');
     await page.locator('#cuotas').dispatchEvent('input');
