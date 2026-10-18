@@ -1,0 +1,30 @@
+name: Pruebas de calidad
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'status.json'
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validar sintaxis de JavaScript
+        run: |
+          node --check app.js
+          node --check finance.js
+          node --check scripts/check.mjs
+      - name: Ejecutar pruebas
+        run: npm test

@@ -1,15 +1,50 @@
-# Monitor Cashea (no oficial)
+# Monitor Cashea — guía comunitaria independiente
 
-Sitio estático independiente: estado del sitio de Cashea, simulador de cuotas y directorio de comercios. No está afiliado a Cashea.
+Sitio web estático publicado mediante GitHub Pages. **No tiene relación con Cashea**. Tres módulos: observación del sitio público, simulador de pagos y directorio orientativo de comercios con fuentes.
 
-## Cómo editar
-- **Comercios:** edita `comercios.json` (campos: nombre, categoria, ciudades, fuentes). Cada fuente es un id definido en `fuentes.json` (título y enlace). La lista sale de prensa y portales públicos, no de Cashea.
-- **Condiciones del simulador:** los valores por defecto están en `index.html` (inicial 40 %, 3 cuotas, 14 días). Son de ejemplo; verifícalos en la app oficial.
+## Qué hace y qué no hace
 
-## Publicar
-Settings → Pages → Deploy from a branch → `main` / root.
+- **Estado de la web:** GitHub Actions consulta la URL de `targets.json` cada 15 minutos y publica `status.json`. Un HTTP 2xx/3xx indica que el sitio respondió. Un 401/403/429 indica que el monitor fue restringido, **no** una caída global. Otros errores se muestran como respuesta no satisfactoria; pueden ser locales o transitorios. **No comprueba la app ni los pagos.**
+- **Calculadora Cashea:** modelos de Línea Principal, Cotidiana y Más Cuotas con tasa 0 %. El porcentaje inicial es editable y los niveles son orientativos. El usuario debe validar elegibilidad y condiciones en la app oficial.
+- **Comparación con intereses:** préstamo **hipotético y no Cashea**; permite editar tasa nominal anual y calendario. Calcula intereses sobre saldo pendiente con períodos de días/365, redondeo a centavos y ajuste en la última cuota. Una tasa de ejemplo no debe confundirse con condiciones de Cashea.
+- **Atrasos:** estimación basada en un cargo de US$4 por cuota si se superan dos días de gracia, según su centro de ayuda al 18/10/2026. Puede cambiar. No constituye una factura.
+- **Comercios:** `comercios.json` contiene 21 marcas mencionadas por terceros. Cada `fuentes` es una clave de `fuentes.json`. No garantiza aceptación en todas las sucursales ni vigencia actual.
 
-## Estado del servicio
-- `targets.json` lista las URLs a revisar. El workflow `.github/workflows/check.yml` corre cada 15 min, ejecuta `scripts/check.mjs` y guarda el resultado en `status.json`.
-- Mide solo si el sitio responde (código menor a 500). No mide la app ni los pagos.
-- Para probarlo de inmediato: pestaña Actions → "Chequeo de disponibilidad" → Run workflow.
+## Fuentes primarias
+
+- https://www.cashea.app/preguntas-frecuentes/c/que-es-cashea-y-como-funciona
+- https://www.cashea.app/preguntas-frecuentes/c/linea-cotidiana
+- https://www.cashea.app/preguntas-frecuentes/c/modo-mas-cuotas
+- https://intercom.help/cashea/es/articles/8526833-atraso-y-periodo-de-gracia
+
+## Desarrollo y pruebas
+
+Se necesita Node.js 22 o superior. No hay dependencias de producción ni build:
+
+```bash
+npm test
+node scripts/check.mjs
+python3 -m http.server 8000
+```
+
+Abrir http://localhost:8000 (no abrir el HTML directamente como archivo).
+
+La carpeta `tests/` verifica centavos, fechas, intereses hipotéticos, recargos y clasificación de respuestas HTTP. `.github/workflows/test.yml` ejecuta las pruebas en cada PR y en cambios de `main`.
+
+## Primera puesta en marcha del monitor
+
+1. Fusionar el PR en `main` — los cambios del workflow disparan el primer chequeo por `push`.
+2. Revisar **Actions → Comprobar sitio público** para confirmar el resultado.
+3. Comprobar que aparece `status.json` en la rama `main`.
+4. Los chequeos programados pueden retrasarse respecto a los 15 minutos previstos.
+
+El workflow necesita permiso de escritura de contenidos en Actions para publicar el JSON. Si la política del repositorio bloquea `GITHUB_TOKEN`, revisa Settings → Actions → General. La rama `main` no debe exigir una regla que impida el commit del bot al archivo de estado, a menos que se cambie la arquitectura.
+
+## Seguridad y privacidad
+
+El proyecto no solicita credenciales, no gestiona dinero y no instala analítica de terceros. Los enlaces externos usan `noopener noreferrer`. Para cambios, abre un issue o PR. Evita incorporar datos personales, información de transacciones o logos que sugieran afiliación oficial.
+
+## Versiones
+
+- **V2.0:** rediseño responsivo, simulación financiera comparativa, calendario por fecha, cargos por atraso, estados de monitoreo conservadores y pruebas.
+- **V1.0:** MVP del monitor y directorio inicial.
