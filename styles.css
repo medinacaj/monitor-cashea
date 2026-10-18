@@ -505,3 +505,110 @@ tbody tr:last-child td{border-bottom:0}
   .calc-section .calc-resultado-principal>.res-cuota-monto{font-size:clamp(2.55rem,10vw,3.45rem)}
 }
 @media(max-width:370px){.calc-section .calc-resultado-datos strong{font-size:1.12rem}}
+
+/* V2.6 · iOS/Safari: normalize all native select chrome.
+   Select arrows are drawn ONCE by a parent wrapper instead of layering
+   iOS native indicators and CSS background gradients on the select. */
+.select-control{
+  position:relative;display:block;min-width:0;width:100%;isolation:isolate;
+}
+.select-control::after{
+  content:"";position:absolute;z-index:1;right:19px;top:50%;
+  width:9px;height:9px;border:solid #1b604b;border-width:0 2px 2px 0;
+  transform:translateY(-70%) rotate(45deg);pointer-events:none;
+}
+html body .select-control > select,
+html body .calc-section .campo .select-control > select,
+html body .filtros .campo .select-control > select{
+  display:block;box-sizing:border-box;width:100%;max-width:100%;min-width:0;
+  height:54px;min-height:54px;margin:0;padding:0 50px 0 15px;
+  -webkit-appearance:none!important;-moz-appearance:none!important;appearance:none!important;
+  background-color:#f6faf8!important;background-image:none!important;background-clip:padding-box;
+  border:1px solid #b5d5c7!important;border-radius:12px!important;
+  color:#123b30!important;-webkit-text-fill-color:#123b30!important;
+  font-family:'DM Sans',system-ui,-apple-system,sans-serif!important;
+  font-size:16px!important;font-weight:700!important;line-height:normal!important;
+  letter-spacing:0!important;text-shadow:none!important;box-shadow:none!important;
+  text-overflow:ellipsis;white-space:nowrap;overflow:hidden;direction:ltr;
+  opacity:1!important;cursor:pointer;color-scheme:light;
+}
+html body .select-control > select option{
+  background:#fff!important;color:#123b30!important;
+  font-size:16px!important;font-weight:500;
+}
+html body .select-control > select:focus-visible{
+  outline:3px solid #9cedae!important;outline-offset:2px!important;
+  border-color:#1b9e77!important;
+}
+html body .select-control > select:disabled{opacity:.75!important;cursor:not-allowed;background:#e3ede7!important}
+html body .campo input[type="date"]{color-scheme:light}
+html body .campo input[type="number"],html body .campo input[type="date"],html body .filtro-busqueda input{
+  -webkit-text-fill-color:currentColor;
+}
+html body .calc-section .campo input[type="number"]:not(:focus),
+html body .calc-section .campo input[type="date"]:not(:focus){background-clip:padding-box}
+@supports (-webkit-touch-callout:none){
+  /* iOS Safari/WebView: prevent glass-style select fill from inheriting a dark backdrop. */
+  html body .select-control > select,
+  html body .calc-section .campo .select-control > select,
+  html body .filtros .campo .select-control > select{
+    -webkit-appearance:none!important;appearance:none!important;
+    background:#f6faf8!important;color:#123b30!important;
+    -webkit-text-fill-color:#123b30!important;
+  }
+}
+/* Consistent focus rings and legible touch targets across the complete site. */
+.navegacion .mobile-nav summary:focus-visible,
+.calc-fuentes summary:focus-visible,
+#refrescar:focus-visible,.cuotas-rapidas button:focus-visible{
+  outline:3px solid #2ea985;outline-offset:3px;
+}
+.independiente{line-height:1.5}
+.navegacion{min-height:70px}
+.navegacion .marca{min-width:0}
+.navegacion .marca-fina{color:#217767}
+.estado-card,.comercio,.calendario-panel,.filtros{min-width:0;max-width:100%}
+.estado-metricas{grid-template-columns:repeat(3,minmax(0,1fr))}
+.estado-metricas strong,.estado-card h3,.directorio-barra p{overflow-wrap:anywhere}
+.estado-pie{flex-wrap:wrap}
+.calc-section .campo-destacado,.calc-section .campo-cuotas{min-width:0;max-width:100%}
+.calc-section .calc-resultado-datos strong{overflow-wrap:anywhere}
+.filtros .campo input,.filtros .campo select{font-size:16px;min-height:48px}
+.filtros .select-control > select{min-height:52px}
+.filtros{grid-template-columns:minmax(0,1.3fr) repeat(2,minmax(0,1fr));gap:12px}
+.lista-comercios{grid-template-columns:repeat(3,minmax(0,1fr))}
+.calc-section .calc-resultados{min-width:0}
+@media(max-width:980px){
+  .filtros{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .filtro-busqueda{grid-column:1/-1}
+  .lista-comercios{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:720px){
+  .navegacion{min-height:62px}
+  .contenedor{padding-inline:14px}
+  .seccion{padding-top:54px;scroll-margin-top:70px}
+  .estado-metricas{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .estado-metricas div:last-child{grid-column:1/-1}
+  .estado-card{padding:19px;border-radius:18px}
+  .filtros{grid-template-columns:minmax(0,1fr);padding:16px;gap:14px}
+  .filtro-busqueda{grid-column:auto}
+  .lista-comercios{grid-template-columns:minmax(0,1fr)}
+  .calc-section{padding-top:54px}
+  .calc-section .campo .select-control{max-width:100%}
+  .calc-section .panel-controles{padding-top:16px}
+  .calc-section .campo .select-control > select{font-size:16px!important}
+  .calc-section .campo input[type="number"],
+  .calc-section .campo input[type="date"]{font-size:16px!important}
+  .calc-section .calc-resultados{grid-template-columns:minmax(0,1fr)}
+  .pie{margin-top:52px}
+}
+@media(max-width:370px){
+  .contenedor{padding-inline:10px}
+  .navegacion .marca{font-size:12px}
+  .select-control::after{right:16px}
+  html body .select-control > select,
+  html body .calc-section .campo .select-control > select,
+  html body .filtros .campo .select-control > select{padding-left:12px;padding-right:38px;font-size:16px!important}
+  .estado-metricas{grid-template-columns:minmax(0,1fr)}
+  .estado-metricas div:last-child{grid-column:auto}
+}
