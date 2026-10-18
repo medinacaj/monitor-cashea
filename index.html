@@ -12,12 +12,12 @@
   <meta property="og:url" content="https://medinacaj.github.io/monitor-cashea/">
   <meta name="robots" content="index,follow">
   <title>Monitor Cashea — Tu guía independiente</title>
-  <link rel="stylesheet" href="styles.css?v=2.9.0">
+  <link rel="stylesheet" href="styles.css?v=2.10.0">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Monitor Cashea (no oficial)","url":"https://medinacaj.github.io/monitor-cashea/","inLanguage":"es"}</script>
-  <script type="module" src="app.js?v=2.9.0"></script>
+  <script type="module" src="app.js?v=2.10.0"></script>
 </head>
 <body>
-  <a class="saltar" href="#simulador">Ir a la calculadora</a>
+  <a class="saltar" href="#estado">Ir al monitoreo</a>
   <div class="independiente" role="note"><span class="mini-punto"></span> PROYECTO INDEPENDIENTE · No afiliado, respaldado ni operado por Cashea</div>
   <header class="navegacion">
     <a href="#inicio" class="marca" aria-label="Monitor Cashea, inicio"><span class="marca-icono">M<span class="marca-onda">•</span></span><span>MONITOR<span class="marca-fina">/CASHEA</span></span></a>
@@ -34,10 +34,13 @@
   </header>
   <main id="inicio" tabindex="-1">
     <div class="contenedor">
-      <section id="estado" class="seccion" aria-labelledby="estado-titulo">
-        <div class="titulo-seccion"><div><p class="eyebrow">01 / SEÑAL DEL SITIO</p><h2 id="estado-titulo">¿La web <span>responde?</span></h2></div><span class="seccion-indice">WEB STATUS / 24H</span></div>
-        <p class="intro">Realizamos solicitudes automáticas al sitio público. <strong>No comprobamos la aplicación, las compras ni los pagos.</strong> Un bloqueo al monitor tampoco significa que Cashea esté caído.</p>
+      <section id="estado" class="seccion seccion-monitor" aria-labelledby="estado-titulo">
         <div class="monitor-unificado" aria-label="Monitoreo del sitio web público de Cashea">
+          <header class="monitor-encabezado">
+            <p class="eyebrow">01 / MONITOREO</p>
+            <h2 id="estado-titulo">Estado y <span>estabilidad.</span></h2>
+            <p>Verificamos el sitio web público de Cashea, no la aplicación, las compras ni los pagos.</p>
+          </header>
           <div id="estado-lista" class="estado-lista" aria-live="polite">
             <div class="estado-espera">Consultando los últimos datos…</div>
           </div>
@@ -56,12 +59,12 @@
               <span><i class="grafica-punto down" aria-hidden="true"></i> Respuesta no satisfactoria</span>
               <span><i class="grafica-punto restricted" aria-hidden="true"></i> Acceso restringido</span>
               <span><i class="grafica-punto unknown" aria-hidden="true"></i> No comprobado</span>
-              <span><i class="grafica-punto empty" aria-hidden="true"></i> Sin muestras</span>
+              <span><i class="grafica-punto empty" aria-hidden="true"></i> Sin verificaciones</span>
             </div>
-            <p id="grafica-nota" class="grafica-nota">Las verificaciones corresponden al sitio web, no a la aplicación ni a los pagos. HTTP 403 es acceso restringido, no una caída confirmada.</p>
+            <p id="grafica-nota" class="grafica-nota">Las barras agrupan verificaciones por hora. HTTP 403 significa acceso restringido, no una caída confirmada.</p>
           </div>
           <div class="estado-pie">
-            <span>Comprobaciones previstas cada 15 minutos; GitHub Actions puede retrasarse.</span>
+            <span>Verificación prevista cada 15 minutos; puede retrasarse.</span>
             <button id="refrescar" type="button" class="enlace-boton">Actualizar datos ↻</button>
           </div>
         </div>

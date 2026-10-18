@@ -36,3 +36,30 @@ test('la gráfica sustituye la métrica duplicada de 24 horas',async()=>{
   assert.match(js,/Última comprobación/);
   assert.match(js,/pintarGraficaEstado\(data\)/);
 });
+
+test('título, explicación, estado, gráfico y botón viven en una sola tarjeta',async()=>{
+  const html=await readFile(new URL('../index.html',import.meta.url),'utf8');
+  const a=html.indexOf('<section id="estado"');
+  const b=html.indexOf('</section>',a);
+  const section=html.slice(a,b);
+  const cardStart=section.indexOf('<div class="monitor-unificado"');
+  const card=section.slice(cardStart);
+  assert.ok(cardStart>0);
+  for (const id of ['estado-titulo','estado-lista','grafica-titulo','grafica-resumen','estado-grafica','grafica-nota','refrescar'])
+    assert.ok(card.includes('id="'+id+'"'),'Falta '+id+' dentro de la tarjeta');
+  assert.match(card,/Estado y <span>estabilidad\.<\/span>/);
+  assert.match(card,/Verificamos el sitio web público de Cashea/);
+  assert.ok(card.indexOf('id="estado-titulo"')<card.indexOf('id="estado-lista"'));
+  assert.ok(card.indexOf('id="estado-lista"')<card.indexOf('id="estado-grafica"'));
+  assert.equal((section.match(/class="monitor-unificado"/g)||[]).length,1);
+  assert.doesNotMatch(section,/\?La web/);
+});
+test('el texto legal no se repite en el encabezado y la gráfica',async()=>{
+  const html=await readFile(new URL('../index.html',import.meta.url),'utf8');
+  const js=await readFile(new URL('../app.js',import.meta.url),'utf8');
+  assert.doesNotMatch(html,/WEB STATUS \/ 24H/);
+  assert.doesNotMatch(js,/No mide la app ni los pagos/);
+  assert.doesNotMatch(js,/Solo observación HTTP; no verifica app o pagos/);
+  assert.doesNotMatch(js,/Sin datos evaluables/);
+  assert.match(js,/HTTP 403 significa acceso restringido/);
+});
