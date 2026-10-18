@@ -17,13 +17,14 @@
   <script type="module" src="app.js"></script>
 </head>
 <body>
+  <a class="saltar" href="#simulador">Ir a la calculadora</a>
   <div class="independiente" role="note"><span class="mini-punto"></span> PROYECTO INDEPENDIENTE · No afiliado, respaldado ni operado por Cashea</div>
   <header class="navegacion">
     <a href="#inicio" class="marca" aria-label="Monitor Cashea, inicio"><span class="marca-icono">M<span class="marca-onda">•</span></span><span>MONITOR<span class="marca-fina">/CASHEA</span></span></a>
     <nav aria-label="Navegación principal"><a href="#estado">Estado web</a><a href="#simulador">Calculadora</a><a href="#directorio">Comercios</a></nav>
     <a href="#simulador" class="nav-cta">Calcular <span aria-hidden="true">↗</span></a>
   </header>
-  <main id="inicio">
+  <main id="inicio" tabindex="-1">
     <section class="hero" aria-labelledby="titular">
       <div class="hero-fondo" aria-hidden="true"></div>
       <div class="hero-interior">
@@ -71,7 +72,7 @@
           <div class="panel-resultado" aria-live="polite"><div class="resultado-cabecera"><span>ESTIMACIÓN DE TU COMPRA</span><span class="indicador-resultado">USD</span></div><div id="resultado" class="resultado"></div><div class="panel-aclaracion">Información referencial. La oferta, elegibilidad y fechas definitivas son las indicadas en la app oficial.</div></div>
         </div>
         <div class="calendario-panel"><div class="calendario-cabecera"><h3>Tu calendario de pagos</h3><span>FECHAS ESTIMADAS</span></div><div id="calendario" class="tabla-wrap"></div></div>
-        <p class="fuente-oficial">Condiciones oficiales: <a href="https://www.cashea.app/preguntas-frecuentes/c/que-es-cashea-y-como-funciona" target="_blank" rel="noopener noreferrer">Preguntas frecuentes de Cashea ↗</a> · <a href="https://intercom.help/cashea/es/articles/8526833-atraso-y-periodo-de-gracia" target="_blank" rel="noopener noreferrer">Atrasos y período de gracia ↗</a></p>
+        <p class="fuente-oficial">Modo Más Cuotas: las dos páginas oficiales publican importes mínimos distintos; esta simulación no confirma elegibilidad. <a href="https://www.cashea.app/preguntas-frecuentes/c/modo-mas-cuotas" target="_blank" rel="noopener noreferrer">Preguntas frecuentes ↗</a> · <a href="https://www.cashea.app/mas-cuotas" target="_blank" rel="noopener noreferrer">Página del producto ↗</a></p><p class="fuente-oficial">Condiciones oficiales: <a href="https://www.cashea.app/preguntas-frecuentes/c/que-es-cashea-y-como-funciona" target="_blank" rel="noopener noreferrer">Preguntas frecuentes de Cashea ↗</a> · <a href="https://intercom.help/cashea/es/articles/8526833-atraso-y-periodo-de-gracia" target="_blank" rel="noopener noreferrer">Atrasos y período de gracia ↗</a></p>
       </section>
 
       <section id="directorio" class="seccion" aria-labelledby="dir-titulo">
