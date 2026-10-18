@@ -54,25 +54,80 @@
       </section>
 
       <section id="simulador" class="seccion" aria-labelledby="sim-titulo">
-        <div class="titulo-seccion"><div><p class="eyebrow">02 / PLANEA TU COMPRA</p><h2 id="sim-titulo">Haz números.<br><span>Sin sorpresas.</span></h2></div><span class="seccion-indice">CALCULADORA / USD</span></div>
-        <p class="intro">Los planes Cashea se calculan con <strong>0 % de interés</strong>. También puedes seleccionar una comparación financiera con una tasa editable, que <strong>no es una tasa de Cashea</strong>.</p>
+        <div class="calc-heading">
+          <div class="calc-heading-copia">
+            <p class="eyebrow calc-eyebrow"><span class="calc-destello" aria-hidden="true">✦</span> 02 / CALCULADORA INTERACTIVA</p>
+            <h2 id="sim-titulo">Tu compra.<br><span>Tus números.</span></h2>
+            <p>Prueba distintas cantidades de cuotas, cambia el monto y observa cuánto pagarías al instante.</p>
+            <div class="calc-heading-puntos">
+              <span>✓ Ajustes en tiempo real</span>
+              <span>✓ Cuotas de 1 a 12</span>
+              <span>✓ Calendario de pagos</span>
+            </div>
+          </div>
+          <div class="calc-heading-arte" aria-hidden="true">
+            <div class="calc-arte-circulo calc-arte-circulo-uno"></div>
+            <div class="calc-arte-circulo calc-arte-circulo-dos"></div>
+            <div class="calc-arte-tarjeta"><small>PLANEA TU COMPRA</small><b>$300<span>.00</span></b><span class="calc-arte-barra"><i></i></span><span class="calc-arte-pie">Presupuesto inteligente <em>↗</em></span></div>
+          </div>
+        </div>
+        <div class="calc-legal-banda"><span class="calc-legal-icono" aria-hidden="true">i</span>
+          <p>Las modalidades oficiales de Cashea se simulan con <strong>0 % de interés</strong>. El modo personalizado es ilustrativo; la comparación con interés <strong>no es una tasa de Cashea</strong>.</p>
+        </div>
         <div class="sim-grid">
           <form id="form-sim" class="panel-controles" novalidate>
-            <div class="campo campo-ancho"><label for="modalidad">Tipo de simulación</label><select id="modalidad"><option value="principal">Línea Principal · 3 cuotas, sin interés</option><option value="cotidiana">Línea Cotidiana · 1 cuota, sin interés</option><option value="mas">Modo Más Cuotas · sin interés</option><option value="comparar">Comparación con intereses · no Cashea</option></select></div>
-            <div class="campo campo-ancho"><label for="monto">Precio del producto (USD)</label><div class="campo-moneda"><span>$</span><input id="monto" type="number" min="0.01" max="1000000" step="0.01" inputmode="decimal" value="300" required></div></div>
-            <div class="campo"><label for="nivel">Nivel de referencia</label><select id="nivel"><option value="1">1 · Semilla</option><option value="2">2 · Raíz</option><option value="3" selected>3 · Hoja</option><option value="4">4 · Tronco</option><option value="5">5 · Árbol</option><option value="6">6 · Araguaney</option></select></div>
-            <div class="campo"><label for="inicial">Inicial (%)</label><input id="inicial" type="number" min="0" max="100" step="0.01" inputmode="decimal" value="40"></div>
-            <div class="campo"><label for="cuotas">Número de cuotas</label><input id="cuotas" type="number" min="1" max="12" step="1" value="3"></div>
-            <div class="campo"><label for="dias">Días entre pagos</label><input id="dias" type="number" min="1" max="90" step="1" value="14"></div>
-            <div class="campo campo-ancho"><label for="fecha">Fecha de compra</label><input id="fecha" type="date" required></div>
-            <div class="campo campo-ancho comparar-extra" id="comparar-extra" hidden><label for="tasa">Tasa anual de interés (%) · solo comparación hipotética</label><div class="campo-moneda"><input id="tasa" type="number" min="0" max="200" step="0.1" value="24"><span>%</span></div><p class="micro">24 % anual es un ejemplo editable, NO una tasa de Cashea. Se estima con interés sobre saldo insoluto.</p></div>
-            <div class="atrasos campo-ancho" id="atrasos"><div class="campo-cabecera"><strong>¿Quieres simular un atraso?</strong><span>Opcional</span></div><div class="dos-campos"><div class="campo"><label for="atraso-dias">Días de atraso</label><input id="atraso-dias" type="number" min="0" max="365" step="1" value="0"></div><div class="campo"><label for="cuotas-vencidas">Cuotas atrasadas</label><input id="cuotas-vencidas" type="number" min="0" max="12" step="1" value="0"></div></div><p class="micro">Referencia Cashea: 2 días de gracia; después, US$4 por cuota atrasada. Sin intereses de mora.</p></div>
+            <div class="calc-form-intro campo-ancho">
+              <div class="calc-form-marca"><span class="calc-form-marca-icono" aria-hidden="true">↗</span><div><span>ARMAR MI SIMULACIÓN</span><h3>Configura tu compra</h3></div></div>
+              <span class="calc-form-version">01 / 02</span>
+            </div>
+            <div class="campo campo-ancho"><label for="modalidad">Tipo de cálculo</label>
+              <select id="modalidad">
+                <option value="personalizada" selected>Personalizado · elige tus cuotas libremente</option>
+                <option value="principal">Línea Principal · referencia de 3 cuotas</option>
+                <option value="cotidiana">Línea Cotidiana · referencia de 1 cuota</option>
+                <option value="mas">Modo Más Cuotas · 6, 9 o 12 cuotas referenciales</option>
+                <option value="comparar">Comparación con intereses · no Cashea</option>
+              </select>
+            </div>
+            <div class="campo campo-ancho campo-destacado"><label for="monto">¿Cuánto cuesta lo que quieres comprar?</label>
+              <div class="campo-moneda campo-moneda-grande"><span aria-hidden="true">$</span><input id="monto" type="number" min="0.01" max="1000000" step="0.01" inputmode="decimal" value="300" required><span class="codigo-moneda">USD</span></div>
+            </div>
+            <div class="campo campo-ancho campo-cuotas">
+              <div class="calc-control-cabecera"><label for="cuotas">¿En cuántas cuotas quieres pagar?</label><span>1 a 12 cuotas</span></div>
+              <div class="calc-stepper" role="group" aria-label="Elegir cantidad de cuotas">
+                <button type="button" class="stepper-boton" id="cuotas-menos" aria-label="Restar una cuota">−</button>
+                <div class="stepper-entrada"><input id="cuotas" type="number" inputmode="numeric" min="1" max="12" step="1" value="3" required aria-describedby="ayuda-cuotas"><span>cuotas</span></div>
+                <button type="button" class="stepper-boton stepper-boton-mas" id="cuotas-mas" aria-label="Sumar una cuota">+</button>
+              </div>
+              <p class="micro" id="ayuda-cuotas">Escribe un número manualmente, usa + y − o selecciona una opción rápida.</p>
+              <div class="cuotas-rapidas" role="group" aria-label="Cantidades rápidas de cuotas">
+                <button type="button" data-cuotas="1" aria-pressed="false">1</button>
+                <button type="button" data-cuotas="3" aria-pressed="true">3</button>
+                <button type="button" data-cuotas="6" aria-pressed="false">6</button>
+                <button type="button" data-cuotas="9" aria-pressed="false">9</button>
+                <button type="button" data-cuotas="12" aria-pressed="false">12</button>
+              </div>
+            </div>
+            <div class="campo"><label for="nivel">Nivel orientativo</label><select id="nivel"><option value="1">1 · Semilla</option><option value="2">2 · Raíz</option><option value="3" selected>3 · Hoja</option><option value="4">4 · Tronco</option><option value="5">5 · Árbol</option><option value="6">6 · Araguaney</option></select></div>
+            <div class="campo"><label for="inicial">Pago inicial (%)</label><input id="inicial" type="number" min="0" max="100" step="0.01" inputmode="decimal" value="40"></div>
+            <div class="campo"><label for="dias">Días entre cuotas</label><input id="dias" type="number" inputmode="numeric" min="1" max="90" step="1" value="14"></div>
+            <div class="campo"><label for="fecha">Fecha de compra</label><input id="fecha" type="date" required></div>
+            <div class="campo campo-ancho comparar-extra" id="comparar-extra" hidden><label for="tasa">Interés anual (%) · comparación hipotética</label><div class="campo-moneda"><input id="tasa" type="number" min="0" max="200" step="0.1" value="24"><span aria-hidden="true">%</span></div><p class="micro">24 % es un ejemplo editable y NO corresponde a Cashea. Interés calculado sobre saldo pendiente.</p></div>
+            <div class="atrasos campo-ancho" id="atrasos" hidden><div class="campo-cabecera"><strong>Simular atraso de una modalidad Cashea</strong><span>Opcional</span></div><div class="dos-campos"><div class="campo"><label for="atraso-dias">Días de atraso</label><input id="atraso-dias" type="number" min="0" max="365" step="1" value="0"></div><div class="campo"><label for="cuotas-vencidas">Cuotas atrasadas</label><input id="cuotas-vencidas" type="number" min="0" max="12" step="1" value="0"></div></div><p class="micro">Referencia: dos días de gracia, luego US$4 por cuota atrasada. Los valores pueden cambiar.</p></div>
             <p class="campo-ancho formulario-nota" id="plan-nota"></p>
           </form>
-          <div class="panel-resultado" aria-live="polite"><div class="resultado-cabecera"><span>ESTIMACIÓN DE TU COMPRA</span><span class="indicador-resultado">USD</span></div><div id="resultado" class="resultado"></div><div class="panel-aclaracion">Información referencial. La oferta, elegibilidad y fechas definitivas son las indicadas en la app oficial.</div></div>
+          <div class="panel-resultado" aria-live="polite" aria-label="Resultado de la simulación">
+            <div class="resultado-cabecera"><span><span class="resultado-pulso" aria-hidden="true"></span> RESULTADO EN TIEMPO REAL</span><span class="indicador-resultado">USD</span></div>
+            <div id="resultado" class="resultado"></div>
+            <div class="panel-aclaracion">Simulación orientativa. Las condiciones reales, elegibilidad y fechas dependen de la oferta que aparezca en la aplicación oficial.</div>
+          </div>
         </div>
-        <div class="calendario-panel"><div class="calendario-cabecera"><h3>Tu calendario de pagos</h3><span>FECHAS ESTIMADAS</span></div><div id="calendario" class="tabla-wrap"></div></div>
-        <p class="fuente-oficial">Modo Más Cuotas: las dos páginas oficiales publican importes mínimos distintos; esta simulación no confirma elegibilidad. <a href="https://www.cashea.app/preguntas-frecuentes/c/modo-mas-cuotas" target="_blank" rel="noopener noreferrer">Preguntas frecuentes ↗</a> · <a href="https://www.cashea.app/mas-cuotas" target="_blank" rel="noopener noreferrer">Página del producto ↗</a></p><p class="fuente-oficial">Condiciones oficiales: <a href="https://www.cashea.app/preguntas-frecuentes/c/que-es-cashea-y-como-funciona" target="_blank" rel="noopener noreferrer">Preguntas frecuentes de Cashea ↗</a> · <a href="https://intercom.help/cashea/es/articles/8526833-atraso-y-periodo-de-gracia" target="_blank" rel="noopener noreferrer">Atrasos y período de gracia ↗</a></p>
+        <div class="calendario-panel">
+          <div class="calendario-cabecera"><div><p class="eyebrow">PLAN DE PAGOS</p><h3>Así quedarían tus cuotas</h3></div><span>FECHAS ESTIMADAS</span></div>
+          <div id="calendario" class="tabla-wrap"></div>
+        </div>
+        <p class="fuente-oficial">Modo Más Cuotas: las dos páginas oficiales publican importes mínimos distintos; esta simulación no confirma elegibilidad. <a href="https://www.cashea.app/preguntas-frecuentes/c/modo-mas-cuotas" target="_blank" rel="noopener noreferrer">Preguntas frecuentes ↗</a> · <a href="https://www.cashea.app/mas-cuotas" target="_blank" rel="noopener noreferrer">Página del producto ↗</a></p>
+        <p class="fuente-oficial">Condiciones oficiales: <a href="https://www.cashea.app/preguntas-frecuentes/c/que-es-cashea-y-como-funciona" target="_blank" rel="noopener noreferrer">Preguntas frecuentes de Cashea ↗</a> · <a href="https://intercom.help/cashea/es/articles/8526833-atraso-y-periodo-de-gracia" target="_blank" rel="noopener noreferrer">Atrasos y período de gracia ↗</a></p>
       </section>
 
       <section id="directorio" class="seccion" aria-labelledby="dir-titulo">

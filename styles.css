@@ -215,3 +215,119 @@ tbody tr:last-child td{border-bottom:0}
  html{scroll-behavior:auto}
  *{transition:none!important;animation:none!important}
 }
+
+
+/* V2.2 — Calculadora protagonista. Mantener los avisos independientes del servicio. */
+.calc-heading{display:grid;grid-template-columns:1.3fr .7fr;gap:18px;align-items:center;position:relative;isolation:isolate;overflow:hidden;min-height:325px;border-radius:28px;background:radial-gradient(circle at 87% 9%,rgba(124,244,196,.18),transparent 39%),linear-gradient(126deg,#0b322c 0%,#104e41 59%,#16846b 100%);padding:40px 48px;color:#fff;box-shadow:0 25px 60px rgba(14,86,67,.16)}
+.calc-heading:before{content:"";position:absolute;z-index:-1;inset:0;opacity:.26;background-image:linear-gradient(to right,rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,.06) 1px,transparent 1px);background-size:44px 44px}
+.calc-heading .calc-eyebrow{display:flex;gap:9px;align-items:center;color:#b8f19c;margin:0 0 16px}
+.calc-destello{font-size:20px;line-height:1}
+.calc-heading h2{color:#fff;font-size:clamp(2.9rem,5vw,4.6rem)}
+.calc-heading h2 span{color:#d7fa73}
+.calc-heading-copia>p:not(.eyebrow){color:#d0e8e0;font-size:15px;line-height:1.8;max-width:470px;margin:19px 0 22px}
+.calc-heading-puntos{display:flex;gap:10px 18px;flex-wrap:wrap}
+.calc-heading-puntos span{color:#d7f6df;font-size:11px;font-weight:700;white-space:nowrap}
+.calc-heading-arte{min-height:225px;display:grid;place-items:center;position:relative}
+.calc-arte-circulo{position:absolute;border:1px solid rgba(205,255,202,.32);border-radius:50%}
+.calc-arte-circulo-uno{width:250px;height:250px}
+.calc-arte-circulo-dos{width:325px;height:325px;border-style:dashed;opacity:.5}
+.calc-arte-tarjeta{position:relative;transform:rotate(7deg);width:255px;padding:25px;border:1px solid rgba(255,255,255,.58);border-radius:19px;background:linear-gradient(145deg,#fbfff1,#d7fad5);color:#0a4538;box-shadow:0 25px 55px rgba(0,14,14,.31)}
+.calc-arte-tarjeta small{display:block;font-size:10px;font-weight:800;letter-spacing:.15em;color:#447f67}
+.calc-arte-tarjeta b{display:block;margin:14px 0;font:700 48px/1.05 'Space Grotesk',sans-serif;letter-spacing:-.075em}
+.calc-arte-tarjeta b span{font-size:26px;letter-spacing:-.04em}
+.calc-arte-barra{display:block;height:9px;background:#b1dcba;border-radius:99px;overflow:hidden}
+.calc-arte-barra i{display:block;height:100%;width:58%;background:#178c67;border-radius:99px}
+.calc-arte-pie{display:flex;justify-content:space-between;align-items:center;margin-top:20px;color:#4b8066;font-size:11px;font-weight:800}
+.calc-arte-pie em{font-style:normal;font-size:22px;color:#178c67}
+.calc-legal-banda{display:flex;gap:13px;align-items:center;background:#e3f6eb;border:1px solid #c7e8d2;border-radius:15px;padding:12px 18px;margin:18px 0;color:#275e4b}
+.calc-legal-icono{display:grid;place-items:center;flex:none;width:25px;height:25px;background:#156b50;color:#fff;border-radius:50%;font-family:Georgia,serif;font-size:17px;font-weight:700}
+.calc-legal-banda p{font-size:12px;line-height:1.75;margin:0}
+.calc-legal-banda strong{color:#0d583e}
+.sim-grid{grid-template-columns:1.07fr .93fr;gap:17px}
+.panel-controles{padding:25px;gap:15px;align-content:start;border-color:#d9ece1;box-shadow:0 14px 45px rgba(16,79,57,.08)}
+.calc-form-intro{display:flex;align-items:center;justify-content:space-between;gap:15px;padding-bottom:17px;border-bottom:1px solid #e5eee8;margin-bottom:4px}
+.calc-form-marca{display:flex;align-items:center;gap:12px}
+.calc-form-marca-icono{display:grid;place-items:center;background:#e5f9ea;color:#107b56;font-size:25px;width:45px;height:45px;border-radius:12px;font-weight:700}
+.calc-form-marca div span{font-size:10px;color:#7f998c;font-weight:800;letter-spacing:.1em}
+.calc-form-marca h3{font:700 19px 'Space Grotesk',sans-serif;letter-spacing:-.045em;margin:1px 0 0;color:#163b2e}
+.calc-form-version{font-size:11px;letter-spacing:.09em;color:#8faaa0;font-weight:800}
+.campo-destacado{border-radius:15px;padding:16px 17px;background:#f1faee;border:1px solid #d9edcb}
+.campo-destacado label{color:#306c46;font-size:12px}
+.campo-moneda-grande{border-color:#cee2ca;background:white;padding:2px 13px 2px 16px;box-shadow:0 7px 15px rgba(31,106,65,.04)}
+.campo-moneda-grande>span:first-child{font-size:27px;font-weight:700;color:#117448}
+.campo-moneda-grande input{height:62px;font:700 clamp(1.9rem,4vw,2.5rem) 'Space Grotesk',sans-serif;letter-spacing:-.045em;color:#124b38}
+.campo-moneda-grande .codigo-moneda{font:800 10px 'DM Sans',sans-serif;letter-spacing:.1em;color:#71978a}
+.campo-cuotas{padding:18px;background:linear-gradient(140deg,#e7f9f0,#f4f9f1);border:1px solid #cce8d6;border-radius:16px;box-shadow:inset 0 1px rgba(255,255,255,.9)}
+.calc-control-cabecera{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.calc-control-cabecera span{font-size:10px;font-weight:800;color:#258363;background:#d5f1de;border-radius:30px;padding:3px 9px;white-space:nowrap}
+.calc-control-cabecera label{font-size:13px;color:#135c40}
+.calc-stepper{display:flex;align-items:stretch;justify-content:space-between;gap:10px;margin:14px 0 7px}
+.stepper-boton{display:grid;place-items:center;flex:0 0 56px;width:56px;min-height:65px;border:1px solid #b7dbc4;border-radius:14px;background:#fff;color:#186448;font:700 30px 'Space Grotesk',sans-serif;transition:background .18s,transform .18s}
+.stepper-boton:hover:not(:disabled){background:#e5f5e9;transform:translateY(-2px)}
+.stepper-boton:active:not(:disabled){transform:scale(.97)}
+.stepper-boton-mas{background:#155c46;color:#fff;border-color:#155c46}
+.stepper-boton-mas:hover:not(:disabled){background:#177657}
+.stepper-boton:disabled{opacity:.36;cursor:not-allowed}
+.stepper-entrada{flex:1;display:flex;min-width:0;align-items:center;justify-content:center;gap:10px;padding:7px;background:white;border:1px solid #c6e3ce;border-radius:14px}
+.stepper-entrada input{width:76px;min-width:0;max-width:110px;appearance:textfield;-moz-appearance:textfield;border:none;background:transparent;padding:0;color:#0c523a;text-align:right;font:700 37px 'Space Grotesk',sans-serif;height:52px;box-shadow:none}
+.stepper-entrada input::-webkit-inner-spin-button,.stepper-entrada input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.stepper-entrada input:focus{outline:2px solid #68aa86;outline-offset:1px;border-radius:6px;box-shadow:none}
+.stepper-entrada span{font-size:12px;color:#6a967b;font-weight:800}
+.campo-cuotas>.micro{margin:7px 0 12px;font-size:11px;color:#5d8570}
+.cuotas-rapidas{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}
+.cuotas-rapidas button{min-height:37px;border:1px solid #c5e2cf;border-radius:9px;background:white;color:#286d4e;font-weight:800;font-size:12px;transition:background .15s,color .15s,border-color .15s}
+.cuotas-rapidas button:hover{border-color:#14966a}
+.cuotas-rapidas button.activo,.cuotas-rapidas button[aria-pressed="true"]{background:#165e46;color:#fff;border-color:#165e46;box-shadow:0 3px 8px rgba(20,93,67,.17)}
+.panel-resultado{background:radial-gradient(circle at 93% 6%,rgba(51,154,117,.31),transparent 37%),linear-gradient(165deg,#071e1b,#103b30 73%,#13513d);border-color:#2c5f47;box-shadow:0 23px 62px rgba(8,49,38,.16);padding:28px}
+.panel-resultado::after{width:340px;height:340px;background:radial-gradient(circle,rgba(99,196,145,.13),transparent 70%);top:-145px;right:-185px}
+.resultado-cabecera>span:first-child{display:flex;align-items:center;gap:9px}
+.resultado-pulso{width:8px;height:8px;display:inline-block;background:#adfa7d;border-radius:50%;box-shadow:0 0 0 4px rgba(173,250,125,.14)}
+.res-modo{display:inline-block;max-width:100%;margin:23px 0 17px;padding:7px 13px;background:rgba(202,252,205,.11);border:1px solid rgba(216,255,193,.2);border-radius:50px;color:#b4e8c4;font-size:11px;font-weight:800;line-height:1.5}
+.res-cuota-kicker{color:#b1d5bc;font-size:11px;letter-spacing:.14em;font-weight:800;margin:0 0 5px}
+.res-cuota-fila{display:flex;flex-wrap:wrap;gap:10px;align-items:baseline}
+.res-cuota-monto{font:700 clamp(2.9rem,5.5vw,4.3rem)/1.12 'Space Grotesk',sans-serif;color:#ddff8d;letter-spacing:-.08em;word-break:break-word}
+.res-cuota-fila>span{font-size:11px;color:#9bcdb2;font-weight:700}
+.res-fecha{color:#89b49e;font-size:12px;margin:8px 0 17px}
+.res-cinta{display:flex;flex-wrap:wrap;gap:7px}
+.res-cinta>span{border-radius:8px;padding:7px 9px;background:#214b3a;color:#ceefd2;font-size:10px;font-weight:700;line-height:1.4}
+.res-cinta i{font-style:normal;color:#d8ff87}
+.res-separador{margin:23px 0 20px;border-bottom:1px dashed #47705a}
+.res-total-bloque>span{color:#9bcab1;font-size:10px;letter-spacing:.14em;font-weight:800}
+.res-total-bloque .res-total{display:block;margin-top:5px;font-size:clamp(2rem,4vw,3rem);color:#fff}
+.res-tarjetas{margin:21px 0 15px}
+.res-tarjetas>div{background:rgba(232,255,240,.08);border-color:#3b6752}
+.res-tarjetas strong{font-size:clamp(1.1rem,2.1vw,1.5rem)}
+.res-reparto{display:flex;width:100%;height:10px;background:#3d725a;border-radius:30px;overflow:hidden}
+.res-reparto>span{display:block;height:100%;background:#d7fa73;border-radius:30px;transition:width .3s ease}
+.res-reparto-leyenda{display:flex;justify-content:space-between;gap:10px;margin:7px 0 24px;color:#9acbb0;font-size:10px}
+.res-detalle>div{border-bottom-color:#2c5746}
+.res-fuerte strong{color:#d7fa73}
+.calendario-panel{border-color:#d8ebdf;box-shadow:0 10px 28px rgba(35,77,55,.04)}
+.calendario-cabecera .eyebrow{margin:0 0 7px}
+.calendario-cabecera h3{font-size:23px}
+@media(max-width:980px){
+  .calc-heading{grid-template-columns:1fr .55fr;padding:34px}
+  .calc-heading-arte{transform:scale(.82)}
+}
+@media(max-width:720px){
+  .calc-heading{grid-template-columns:1fr;min-height:unset;padding:30px 24px;gap:10px}
+  .calc-heading h2{font-size:clamp(2.8rem,10vw,4.1rem)}
+  .calc-heading-arte{transform:none;min-height:185px}
+  .calc-arte-tarjeta{width:210px;padding:20px;transform:rotate(4deg)}
+  .calc-arte-tarjeta b{font-size:36px}
+  .calc-arte-circulo-uno{width:195px;height:195px}
+  .calc-arte-circulo-dos{width:250px;height:250px}
+  .calc-legal-banda{align-items:flex-start;padding:12px}
+  .panel-controles,.panel-resultado{padding:19px}
+  .res-cuota-monto{font-size:clamp(2.6rem,10vw,3.8rem)}
+  .stepper-boton{flex-basis:50px;width:50px;min-height:59px}
+}
+@media(max-width:400px){
+  .campo-cuotas .calc-control-cabecera{flex-wrap:wrap}
+  .calc-heading-puntos{gap:6px 13px}
+  .res-cuota-fila{align-items:flex-start;flex-direction:column;gap:4px}
+  .stepper-boton{width:45px;flex-basis:45px}
+  .stepper-entrada input{width:53px;font-size:32px}
+  .stepper-entrada span{font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){.res-reparto>span{transition:none}}

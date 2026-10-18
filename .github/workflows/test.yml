@@ -24,6 +24,7 @@ jobs:
       - name: Validar sintaxis de JavaScript
         run: |
           node --check app.js
+          node --check calculator-options.js
           node --check finance.js
           node --check scripts/check.mjs
       - name: Validar directorio

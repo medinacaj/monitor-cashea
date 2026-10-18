@@ -1,4 +1,5 @@
 import { calcularPlan } from './finance.js';
+import { CUOTAS_MIN, CUOTAS_MAX, modoTrasEditarCuotas, ajustarCuotas } from './calculator-options.js';
 
 const $ = id => document.getElementById(id);
 const fmt = n => new Intl.NumberFormat('es-VE', { style: 'currency', currency: 'USD' }).format(n / 100);
@@ -13,6 +14,7 @@ const notas = {
   principal: 'Línea Principal: normalmente 3 cuotas sin interés. El porcentaje de inicial es editable y puede variar según nivel, comercio y promociones.',
   cotidiana: 'Línea Cotidiana: una cuota sin interés a 14 días. Comprueba en la app tu línea disponible y los comercios participantes.',
   mas: 'Modo Más Cuotas: 6 cuotas desde nivel 3, 9 desde nivel 5 y 12 desde nivel 6, en productos online seleccionados. Las páginas oficiales publican importes mínimos diferentes: verifica las condiciones actuales y tu elegibilidad en la app. No es combinable con otras reducciones de inicial.',
+  personalizada: 'Simulación libre, no oficial: puedes elegir entre 1 y 12 cuotas, el porcentaje inicial y los días entre pagos. No implica que Cashea ofrezca esos plazos.',
   comparar: 'Comparador de un préstamo hipotético: la tasa anual es editable y NO corresponde a Cashea. Los resultados no constituyen oferta financiera.'
 };
 function hoy() {
@@ -21,22 +23,52 @@ function hoy() {
 }
 $('fecha').value = hoy();
 
-function cambiarModo() {
+function actualizarSeleccionCuotas() {
+  const n = Number($('cuotas').value);
+  document.querySelectorAll('[data-cuotas]').forEach(b => {
+    const activo = n === Number(b.dataset.cuotas);
+    b.setAttribute('aria-pressed', String(activo));
+    b.classList.toggle('activo', activo);
+  });
+  $('cuotas-menos').disabled = !Number.isInteger(n) || n <= CUOTAS_MIN;
+  $('cuotas-mas').disabled = !Number.isInteger(n) || n >= CUOTAS_MAX;
+}
+function cambiarModo(preservarCuotas = false) {
   const m = $('modalidad').value;
   $('comparar-extra').hidden = m !== 'comparar';
-  $('atrasos').hidden = m === 'comparar';
+  $('atrasos').hidden = m === 'comparar' || m === 'personalizada';
   $('nivel').disabled = m === 'comparar';
-  $('cuotas').readOnly = m === 'principal' || m === 'cotidiana';
-  $('dias').readOnly = m !== 'comparar';
-  if (m === 'principal') $('cuotas').value = 3;
-  if (m === 'cotidiana') $('cuotas').value = 1;
-  if (m === 'mas' && ![6,9,12].includes(Number($('cuotas').value))) $('cuotas').value = 6;
-  if (m === 'comparar') $('cuotas').value = 3;
-  if (m !== 'comparar') $('dias').value = 14;
+  $('dias').readOnly = !['personalizada','comparar'].includes(m);
+  // La cantidad siempre se puede editar. Al editar un preset oficial pasa a "Personalizado".
+  $('cuotas').readOnly = false;
+  if (!preservarCuotas) {
+    if (m === 'principal') $('cuotas').value = 3;
+    if (m === 'cotidiana') $('cuotas').value = 1;
+    if (m === 'mas') $('cuotas').value = 6;
+    if (m === 'personalizada' && !Number.isInteger(Number($('cuotas').value))) $('cuotas').value = 3;
+  }
+  if (!preservarCuotas && m !== 'comparar') $('dias').value = 14;
   $('plan-nota').textContent = notas[m];
+  actualizarSeleccionCuotas();
   simular();
 }
+function cuotasIntroducidas() {
+  const actual = $('modalidad').value;
+  const siguiente = modoTrasEditarCuotas(actual);
+  if (actual !== siguiente) {
+    $('modalidad').value = siguiente;
+    cambiarModo(true);
+  } else {
+    actualizarSeleccionCuotas();
+    simular();
+  }
+}
+function establecerCuotas(numero) {
+  $('cuotas').value = ajustarCuotas(numero);
+  cuotasIntroducidas();
+}
 function comprobarElegibilidad(m, monto, n, nivel) {
+  if (m === 'personalizada') return 'El número de cuotas seleccionado es una estimación libre, no una modalidad aprobada por Cashea. Consulta sus condiciones reales en la aplicación.';
   if (m !== 'mas') return '';
   if (![6,9,12].includes(n)) return 'Modo Más Cuotas: selecciona 6, 9 o 12 cuotas.';
   const minNivel = n === 6 ? 3 : n === 9 ? 5 : 6;
@@ -54,22 +86,34 @@ function simular() {
       monto, inicialPct: Number($('inicial').value),
       cuotas, dias: Number($('dias').value),
       tasaAnual: m === 'comparar' ? Number($('tasa').value) : 0,
-      diasAtraso: m === 'comparar' ? 0 : Number($('atraso-dias').value),
-      cuotasAtrasadas: m === 'comparar' ? 0 : Number($('cuotas-vencidas').value),
+      diasAtraso: ['comparar','personalizada'].includes(m) ? 0 : Number($('atraso-dias').value),
+      cuotasAtrasadas: ['comparar','personalizada'].includes(m) ? 0 : Number($('cuotas-vencidas').value),
       fecha: $('fecha').value
     });
     const elegible = comprobarElegibilidad(m, monto, cuotas, nivel);
+    const tipo = m === 'personalizada' ? 'Escenario a tu medida · no oficial'
+      : m === 'comparar' ? 'Financiamiento hipotético · no Cashea'
+      : 'Referencia ' + ({principal:'Línea Principal',cotidiana:'Línea Cotidiana',mas:'Modo Más Cuotas'})[m];
+    const primerPago = plan.filas[0];
+    const porcentajeInicial = plan.montoC ? (plan.inicialC / plan.montoC * 100) : 0;
     $('resultado').innerHTML = `
-      <p class="res-kicker">${m === 'comparar' ? 'TOTAL CON INTERÉS HIPOTÉTICO' : 'TOTAL ESTIMADO A PAGAR'}</p>
-      <strong class="res-total">${fmt(plan.totalC)}</strong>
-      <div class="res-tarjetas"><div><span>Pago inicial</span><strong>${fmt(plan.inicialC)}</strong></div><div><span>Saldo financiado</span><strong>${fmt(plan.financiadoC)}</strong></div></div>
+      <div class="res-modo">${esc(tipo)}</div>
+      <p class="res-cuota-kicker">TU PRÓXIMA CUOTA ESTIMADA</p>
+      <div class="res-cuota-fila"><strong class="res-cuota-monto">${fmt(primerPago.totalC)}</strong><span>cuota 1 de ${plan.filas.length}</span></div>
+      <p class="res-fecha">A partir del ${esc(fechas(primerPago.fecha))}</p>
+      <div class="res-cinta"><span><i aria-hidden="true">✧</i> ${plan.filas.length} cuota(s) seleccionada(s)</span><span>${m === 'comparar' ? 'Interés ilustrativo' : '0 % de interés en el cálculo'}</span></div>
+      <div class="res-separador"></div>
+      <div class="res-total-bloque"><span>TOTAL ESTIMADO A PAGAR</span><strong class="res-total">${fmt(plan.totalC)}</strong></div>
+      <div class="res-tarjetas"><div><span>Pago inicial</span><strong>${fmt(plan.inicialC)}</strong></div><div><span>Saldo en cuotas</span><strong>${fmt(plan.financiadoC)}</strong></div></div>
+      <div class="res-reparto" aria-hidden="true"><span style="width:${porcentajeInicial}%"></span></div>
+      <div class="res-reparto-leyenda"><span>Inicial ${porcentajeInicial.toFixed(1)} %</span><span>En cuotas ${(100 - porcentajeInicial).toFixed(1)} %</span></div>
       <div class="res-detalle">
         <div><span>Precio del producto</span><b>${fmt(plan.montoC)}</b></div>
-        <div><span>Intereses ${m === 'comparar' ? '(hipotéticos)' : '(Cashea)'}</span><b class="${plan.interesesC ? 'costo-extra' : 'sin-costo'}">${fmt(plan.interesesC)}</b></div>
+        <div><span>Intereses ${m === 'comparar' ? '(hipotéticos)' : '(en el cálculo)'}</span><b class="${plan.interesesC ? 'costo-extra' : 'sin-costo'}">${fmt(plan.interesesC)}</b></div>
         <div><span>Recargo por atraso (estimado)</span><b>${fmt(plan.recargosC)}</b></div>
         <div class="res-fuerte"><span>Costo adicional total</span><strong>${fmt(plan.interesesC + plan.recargosC)}</strong></div>
       </div>
-      <p class="res-aclaracion">${m === 'comparar' ? 'Tasa anual ilustrativa: ' + esc($('tasa').value) + ' %. No es un producto ni un interés de Cashea.' : 'Sin intereses de financiamiento. Los recargos se simulan solo cuando hay más de 2 días de atraso.'}</p>
+      <p class="res-aclaracion">${m === 'comparar' ? 'Tasa anual ilustrativa: ' + esc($('tasa').value) + ' %. No es un producto ni un interés de Cashea.' : 'Sin intereses de financiamiento en esta simulación. Las modalidades de Cashea deben verificarse en la aplicación.'}</p>
       ${elegible ? '<p class="advertencia">' + esc(elegible) + '</p>' : ''}
     `;
     const fila = (fecha, concepto, capital, interes, total) =>
@@ -83,9 +127,13 @@ function simular() {
     $('calendario').innerHTML = '';
   }
 }
-$('modalidad').addEventListener('change', cambiarModo);
+$('modalidad').addEventListener('change', () => cambiarModo());
 $('nivel').addEventListener('change', () => { $('inicial').value = levels[$('nivel').value]; simular(); });
-['monto','inicial','cuotas','dias','fecha','tasa','atraso-dias','cuotas-vencidas'].forEach(id => $(id).addEventListener('input', simular));
+$('cuotas').addEventListener('input', cuotasIntroducidas);
+$('cuotas-menos').addEventListener('click', () => establecerCuotas(Number($('cuotas').value) - 1));
+$('cuotas-mas').addEventListener('click', () => establecerCuotas(Number($('cuotas').value) + 1));
+document.querySelectorAll('[data-cuotas]').forEach(b => b.addEventListener('click', () => establecerCuotas(Number(b.dataset.cuotas))));
+['monto','inicial','dias','fecha','tasa','atraso-dias','cuotas-vencidas'].forEach(id => $(id).addEventListener('input', simular));
 $('form-sim').addEventListener('submit', e => { e.preventDefault(); simular(); });
 cambiarModo();
 

@@ -56,3 +56,11 @@ Las páginas oficiales consultadas el 18/10/2026 no concuerdan: preguntas frecue
 ## Gobierno de datos
 
 El archivo `fuentes.json` incluye `fecha_publicacion` para cada referencia. La fecha corresponde al artículo de terceros, **no** a verificación contemporánea de afiliación. Ejecuta `npm run validate:data` antes de modificar el directorio. Consulta `CONTRIBUTING.md` y `PROJECT_STATUS.md`.
+
+## V2.2 — Calculadora interactiva
+
+- **Cuotas manuales:** permite escribir cualquier valor entero de **1 a 12** directamente, utilizar botones +/− o escoger 1, 3, 6, 9 o 12 como atajos.
+- **Transparencia del modo:** editar la cantidad de cuotas de una modalidad predefinida cambia automáticamente el selector a **Personalizado (no oficial)**. El modo de comparación de intereses conserva su identificación hipotética.
+- **Resumen inmediato:** primera cuota estimada, calendario, total, inicial, parte financiada y representación visual del reparto de la compra.
+- **Validez:** Modo Personalizado no certifica elegibilidad ni número de cuotas disponibles en Cashea. La app oficial determina los plazos definitivos. La simulación personalizada no incorpora cargos de atraso atribuidos a Cashea.
+- **Accesibilidad:** controles con etiquetas, estado de los accesos rápidos y avisos de validación. Pruebas unitarias de los 12 valores posibles.

@@ -1,6 +1,6 @@
 # Monitor Cashea — seguimiento del proyecto
 
-**Revisión:** 18 de octubre de 2026 · **Fase:** V2.1, calidad y mantenimiento · **Alcance:** sitio comunitario y no oficial.
+**Revisión:** 18 de octubre de 2026 · **Fase:** V2.2, calculadora interactiva · **Alcance:** sitio comunitario y no oficial.
 
 | Área | Estado y límite |
 |---|---|
@@ -29,3 +29,11 @@
 - `npm run validate:data` pasa.
 - Workflows de GitHub Actions terminan en éxito.
 - No se anuncia afiliación con Cashea ni cobertura de la app y pagos.
+
+## V2.2 — Experiencia de cálculo
+
+- Calculadora con sección protagonista, vista de cuota próxima, reparto inicial / saldo y cambios en tiempo real.
+- Campo numérico manual entre 1 y 12, +/- y accesos rápidos 1, 3, 6, 9, 12.
+- La edición manual de una modalidad Cashea cambia a escenario personalizado y evita atribuir cuotas libres a la oferta oficial.
+- Persiste la advertencia sobre diferentes condiciones vigentes publicadas para Modo Más Cuotas.
+- Pendiente de inspección visual manual de móviles y contraste real (Issue #8).
