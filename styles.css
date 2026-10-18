@@ -331,3 +331,118 @@ tbody tr:last-child td{border-bottom:0}
   .stepper-entrada span{font-size:10px}
 }
 @media(prefers-reduced-motion:reduce){.res-reparto>span{transition:none}}
+
+
+/* V2.3: overrides responsivos al FINAL del CSS.
+   La versión V2.2 declaraba .sim-grid después de sus media queries,
+   restableciendo accidentalmente las dos columnas en teléfonos. */
+.mobile-nav{display:none}
+.sim-grid,.panel-controles,.panel-resultado,.calc-heading,.calendario-panel,.tabla-wrap,
+.campo,.campo-moneda,.campo-moneda input,.stepper-entrada,.res-tarjetas>div{
+  min-width:0;
+}
+.contenedor,.seccion,.calc-heading,.sim-grid,.calendario-panel,.panel-resultado{
+  max-width:100%;
+}
+.res-cuota-monto,.res-total,.res-tarjetas strong,.res-detalle b,.res-detalle strong,
+.res-modo,.res-cinta>span,.campo-cuotas>.micro,.formulario-nota{
+  overflow-wrap:anywhere;
+}
+.res-detalle>div{min-width:0}
+.res-detalle b,.res-detalle strong{white-space:normal;text-align:right}
+.res-tarjetas strong{overflow-wrap:anywhere;word-break:break-word}
+.tabla-aviso{display:none}
+.tabla-wrap{width:100%;max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+.tabla-wrap table{width:100%;min-width:560px}
+@media(max-width:1050px){
+  /* La regla queda deliberadamente después de .sim-grid V2.2. */
+  .sim-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+  .panel-controles,.panel-resultado{width:100%;min-width:0}
+  .res-cuota-monto{font-size:clamp(2.7rem,6vw,4rem)}
+}
+@media(max-width:760px){
+  .navegacion{gap:10px;justify-content:space-between;padding:12px 18px}
+  .navegacion>nav{display:none}
+  .navegacion .mobile-nav{display:block;position:relative;margin-left:auto;z-index:42}
+  .mobile-nav summary{cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;list-style:none;min-height:44px;padding:8px 13px;border:1px solid #d5e8dc;border-radius:11px;background:#f6faf6;color:#15573d;font-size:13px;font-weight:800;white-space:nowrap}
+  .mobile-nav summary::-webkit-details-marker{display:none}
+  .mobile-nav summary>span{font-size:18px;line-height:1}
+  .mobile-nav[open] summary{background:#e6f6e9;border-color:#88c6a1}
+  .navegacion .mobile-nav nav{display:flex;flex-direction:column;gap:0;position:absolute;top:calc(100% + 10px);right:0;min-width:210px;padding:7px;border-radius:14px;background:#fff;border:1px solid #dceae1;box-shadow:0 17px 38px rgba(6,47,33,.17)}
+  .navegacion .mobile-nav nav a{display:block;padding:13px 14px;font-size:14px;color:#1d503d;border-radius:8px}
+  .navegacion .mobile-nav nav a:hover,.navegacion .mobile-nav nav a:focus-visible{background:#eff8f1}
+  .tabla-aviso{display:flex;gap:8px;align-items:center;color:#497d62;font-size:12px;font-weight:700;margin:8px 0 12px}
+  .tabla-aviso span{font-size:20px}
+  .calc-heading{grid-template-columns:minmax(0,1fr);padding:28px 22px}
+  .calc-heading-copia{min-width:0}
+  .calc-heading h2{font-size:clamp(2.6rem,9vw,4.1rem)}
+  .calc-heading-puntos span{white-space:normal}
+  .calendario-cabecera{flex-wrap:wrap}
+  .calendario-cabecera>span{white-space:normal}
+  .estado-card-top,.estado-pie{flex-wrap:wrap}
+  .res-cuota-monto{font-size:clamp(2.4rem,8vw,3.5rem)}
+}
+@media(max-width:620px){
+  .navegacion .nav-cta{display:none}
+  .navegacion .marca{flex-shrink:0}
+  .contenedor{padding-inline:14px}
+  .seccion{padding-top:52px}
+  .panel-controles{grid-template-columns:minmax(0,1fr);gap:14px;padding:16px}
+  .panel-controles>.campo,.panel-controles>.campo-ancho{grid-column:1 / -1;min-width:0}
+  .panel-resultado{padding:20px}
+  .calc-heading{padding:27px 19px;gap:0;border-radius:20px}
+  .calc-heading-arte{display:none}
+  .calc-heading-copia>p:not(.eyebrow){font-size:14px;line-height:1.7}
+  .calc-heading-puntos{gap:7px 12px}
+  .calc-heading-puntos span{font-size:10px}
+  .calc-legal-banda{margin:12px 0;gap:10px}
+  .calc-control-cabecera{flex-wrap:wrap}
+  .calc-control-cabecera span{white-space:normal}
+  .campo input,.campo select{font-size:16px}
+  .campo input[type=date]{display:block;max-width:100%;min-width:0}
+  .campo-moneda-grande{min-width:0}
+  .campo-moneda-grande input{flex:1 1 auto;min-width:0;width:100%;font-size:clamp(1.55rem,7vw,2.1rem)}
+  .campo-cuotas{padding:14px}
+  .calc-stepper{min-width:0;gap:8px}
+  .stepper-boton{flex:0 0 48px;width:48px;min-height:54px}
+  .stepper-entrada{min-width:0;gap:7px;padding:5px}
+  .stepper-entrada input{width:66px;flex:0 1 66px;height:48px;min-width:0;font-size:32px}
+  .stepper-entrada span{font-size:11px}
+  .cuotas-rapidas{grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}
+  .cuotas-rapidas button{min-width:0;min-height:44px;font-size:13px}
+  .resultado-cabecera{flex-wrap:wrap;gap:8px}
+  .res-cinta{gap:6px}
+  .res-tarjetas{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .res-tarjetas>div{min-width:0;padding:12px 9px}
+  .res-tarjetas strong{font-size:clamp(1rem,4.8vw,1.35rem)}
+  .res-detalle>div{flex-wrap:wrap;align-items:baseline}
+  .calendario-panel{min-width:0;padding:17px 14px;border-radius:17px}
+  .calendario-cabecera h3{font-size:20px}
+  .tabla-wrap{border:1px solid #e6eee8;border-radius:10px}
+  .tabla-wrap table{min-width:550px}
+  .tabla-wrap th,.tabla-wrap td{padding:12px 10px}
+  .calc-heading,.panel-resultado,.panel-controles{border-radius:18px}
+}
+@media(max-width:370px){
+  .navegacion{padding:10px 12px;gap:6px}
+  .navegacion .marca{font-size:12px;gap:8px}
+  .marca-icono{width:29px;height:29px;font-size:18px}
+  .mobile-nav summary{padding:8px 10px;font-size:12px}
+  .contenedor{padding-inline:10px}
+  .panel-controles,.panel-resultado{padding:14px}
+  .calc-heading{padding:24px 16px}
+  .calc-heading h2{font-size:2.48rem}
+  .calc-heading .calc-eyebrow{font-size:9px;letter-spacing:.1em}
+  .campo-cuotas{padding:12px}
+  .calc-stepper{gap:6px}
+  .stepper-boton{flex-basis:44px;width:44px;min-height:50px}
+  .stepper-entrada{gap:4px;padding:3px}
+  .stepper-entrada input{width:53px;flex-basis:53px;font-size:30px}
+  .stepper-entrada span{font-size:10px}
+  .res-tarjetas strong{font-size:16px}
+  .res-reparto-leyenda{flex-wrap:wrap}
+  .res-cuota-monto{font-size:clamp(2.25rem,9vw,3rem)}
+  .res-detalle b,.res-detalle strong{max-width:100%}
+  .estado-metricas{grid-template-columns:minmax(0,1fr)}
+  .estado-metricas div:last-child{grid-column:auto}
+}

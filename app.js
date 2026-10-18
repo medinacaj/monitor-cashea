@@ -225,6 +225,10 @@ async function actualizarEstado() {
     b.disabled = false; b.textContent = 'Actualizar datos ↻';
   }
 }
+// El menú móvil se cierra al navegar sin bloquear el desplazamiento hasta las secciones.
+document.querySelectorAll('#mobile-nav a').forEach(enlace => enlace.addEventListener('click', () => {
+  $('mobile-nav').open = false;
+}));
 $('refrescar').addEventListener('click', actualizarEstado);
 actualizarEstado();
 setInterval(actualizarEstado, 5 * 60 * 1000);

@@ -37,3 +37,7 @@
 - La edición manual de una modalidad Cashea cambia a escenario personalizado y evita atribuir cuotas libres a la oferta oficial.
 - Persiste la advertencia sobre diferentes condiciones vigentes publicadas para Modo Más Cuotas.
 - Pendiente de inspección visual manual de móviles y contraste real (Issue #8).
+
+## V2.3 — Mobile responsive
+
+Corrección del orden de cascada CSS que invalidaba el breakpoint de dos columnas. Se añadió navegación móvil y un test de navegador Chromium que comprueba anchos y funcionalidad en 320–1280 px. Una compilación correcta no sustituye comprobar visualmente Safari/iOS en un dispositivo real.

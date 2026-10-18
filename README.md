@@ -64,3 +64,13 @@ El archivo `fuentes.json` incluye `fecha_publicacion` para cada referencia. La f
 - **Resumen inmediato:** primera cuota estimada, calendario, total, inicial, parte financiada y representación visual del reparto de la compra.
 - **Validez:** Modo Personalizado no certifica elegibilidad ni número de cuotas disponibles en Cashea. La app oficial determina los plazos definitivos. La simulación personalizada no incorpora cargos de atraso atribuidos a Cashea.
 - **Accesibilidad:** controles con etiquetas, estado de los accesos rápidos y avisos de validación. Pruebas unitarias de los 12 valores posibles.
+
+## V2.3 — Corrección responsive móvil
+
+El archivo CSS de V2.2 tenía un selector de dos columnas para `.sim-grid` **después** de los media queries originales, por lo que sobrescribía el apilamiento móvil. La V2.3 incorpora reglas de ancho y columnas al final del CSS y valida el resultado en un navegador Chromium real.
+
+- Hasta 1050 px, calculadora en una única columna; formulario y resultado nunca quedan lado a lado.
+- Por debajo de 620 px, campos de ancho completo; botones de cuotas de tamaño táctil, entradas de al menos 16 px para evitar zoom automático de iOS, importes largos que pueden partirse sin desbordar.
+- Tabla de calendario con desplazamiento horizontal **dentro** de la tarjeta, sin ampliar la anchura de toda la web.
+- Navegación móvil desplegable accesible.
+- Pruebas de diseño en viewports de 320, 360, 375, 390, 430, 600, 768, 1024 y 1280 píxeles con Playwright + Chromium en GitHub Actions (requieren descargar Chromium en CI).
