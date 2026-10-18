@@ -26,5 +26,7 @@ jobs:
           node --check app.js
           node --check finance.js
           node --check scripts/check.mjs
+      - name: Validar directorio
+        run: npm run validate:data
       - name: Ejecutar pruebas
         run: npm test
