@@ -1,0 +1,27 @@
+{
+  "updated": "2026-10-18T11:51:26.556Z",
+  "targets": [
+    {
+      "name": "Sitio web público de Cashea",
+      "url": "https://cashea.app",
+      "current": {
+        "t": "2026-10-18T11:51:26.789Z",
+        "state": "down",
+        "up": false,
+        "code": 0,
+        "ms": 233,
+        "err": "network"
+      },
+      "history": [
+        {
+          "t": "2026-10-18T11:51:26.789Z",
+          "state": "down",
+          "up": false,
+          "code": 0,
+          "ms": 233,
+          "err": "network"
+        }
+      ]
+    }
+  ]
+}
