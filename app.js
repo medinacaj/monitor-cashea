@@ -111,4 +111,43 @@
   ['q', 'ciudad', 'categoria'].forEach(function (id) {
     $(id).addEventListener('input', pintar);
   });
+
+  // ---------- Estado del servicio ----------
+  var ESTADO_VIEJO_MIN = 60; // más de 60 min sin actualizar = dato desactualizado
+
+  function pintarEstado(data) {
+    var cont = $('estado-lista');
+    var targets = data && Array.isArray(data.targets) ? data.targets : [];
+    if (!targets.length) {
+      cont.innerHTML = '<p class="meta">Sin datos todavía. El primer chequeo aparece en cuanto corra el proceso automático.</p>';
+      return;
+    }
+    var edadMin = (Date.now() - new Date(data.updated).getTime()) / 60000;
+    var viejo = !isFinite(edadMin) || edadMin > ESTADO_VIEJO_MIN;
+
+    cont.innerHTML = targets.map(function (t) {
+      var h = Array.isArray(t.history) ? t.history : [];
+      var cur = t.current || h[h.length - 1] || {};
+      var ult24 = h.slice(-96);
+      var ups = ult24.filter(function (x) { return x.up; }).length;
+      var pct = ult24.length ? (ups / ult24.length * 100).toFixed(1) : '—';
+      var cls = viejo ? 'viejo' : (cur.up ? 'ok' : 'mal');
+      var txt = viejo ? 'Dato desactualizado' : (cur.up ? 'El sitio responde' : 'El sitio no responde');
+      var barras = h.slice(-48).map(function (x) {
+        return '<span class="b ' + (x.up ? 'ok' : 'mal') + '" title="' + esc(new Date(x.t).toLocaleString('es-VE')) + '"></span>';
+      }).join('');
+      return '<div class="estado ' + cls + '">' +
+        '<div class="estado-fila"><span class="punto" aria-hidden="true"></span><strong>' + esc(t.name) + '</strong>: ' + txt + '</div>' +
+        '<div class="meta">Último chequeo: ' + esc(new Date(cur.t || data.updated).toLocaleString('es-VE')) +
+        (cur.ms ? ' · ' + cur.ms + ' ms' : '') + ' · Disponibilidad (últimas 24 h): ' + pct + (pct === '—' ? '' : ' %') + '</div>' +
+        '<div class="barras" aria-label="Últimos chequeos">' + barras + '</div></div>';
+    }).join('');
+  }
+
+  fetch('status.json', { cache: 'no-cache' })
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(pintarEstado)
+    .catch(function () {
+      $('estado-lista').innerHTML = '<p class="meta">Sin datos todavía. El primer chequeo aparece en cuanto corra el proceso automático.</p>';
+    });
 })();

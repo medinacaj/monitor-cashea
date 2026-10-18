@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Monitor Cashea (no oficial) | Simulador de cuotas y comercios</title>
-<meta name="description" content="Guía independiente y no oficial: simula tus cuotas quincenales y encuentra comercios que aceptan Cashea en Venezuela, por ciudad y categoría.">
+<meta name="description" content="Proyecto independiente y no oficial: estado del sitio de Cashea, simulador de cuotas quincenales y directorio de comercios en Venezuela.">
 <link rel="canonical" href="https://medinacaj.github.io/monitor-cashea/">
 <meta name="robots" content="index,follow">
 <meta property="og:type" content="website">
@@ -24,14 +24,21 @@
 
 <header class="hero">
   <h1>Monitor Cashea <span class="tag">no oficial</span></h1>
-  <p>Calcula cuánto pagarías en cuotas y busca dónde usar el servicio.</p>
+  <p>Revisa si el sitio de Cashea responde, calcula tus cuotas y busca dónde usar el servicio.</p>
   <nav aria-label="Secciones">
+    <a href="#estado">Estado</a>
     <a href="#simulador">Simulador</a>
     <a href="#directorio">Directorio</a>
   </nav>
 </header>
 
 <main>
+  <section id="estado" aria-labelledby="t-est">
+    <h2 id="t-est">Estado del servicio</h2>
+    <p class="nota">Chequeo automático cada 15 minutos que mide solo si el <strong>sitio web público</strong> responde. No mide la app ni los pagos, y puede fallar por causas ajenas a Cashea.</p>
+    <div id="estado-lista" aria-live="polite">Cargando estado…</div>
+  </section>
+
   <section id="simulador" aria-labelledby="t-sim">
     <h2 id="t-sim">Simulador de cuotas</h2>
     <p class="nota">Estimación con porcentaje de inicial y número de cuotas editables. Los valores por defecto son de ejemplo, no las condiciones oficiales.</p>
