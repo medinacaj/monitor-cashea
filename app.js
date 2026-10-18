@@ -14,7 +14,7 @@ const notas = {
   principal: 'Línea Principal: normalmente 3 cuotas sin interés. El porcentaje de inicial es editable y puede variar según nivel, comercio y promociones.',
   cotidiana: 'Línea Cotidiana: una cuota sin interés a 14 días. Comprueba en la app tu línea disponible y los comercios participantes.',
   mas: 'Modo Más Cuotas: 6 cuotas desde nivel 3, 9 desde nivel 5 y 12 desde nivel 6, en productos online seleccionados. Las páginas oficiales publican importes mínimos diferentes: verifica las condiciones actuales y tu elegibilidad en la app. No es combinable con otras reducciones de inicial.',
-  personalizada: 'Simulación libre, no oficial: puedes elegir entre 1 y 12 cuotas, el porcentaje inicial y los días entre pagos. No implica que Cashea ofrezca esos plazos.',
+  personalizada: 'Simulación libre: las cuotas elegidas son orientativas y no una oferta oficial.',
   comparar: 'Comparador de un préstamo hipotético: la tasa anual es editable y NO corresponde a Cashea. Los resultados no constituyen oferta financiera.'
 };
 function hoy() {
@@ -68,7 +68,7 @@ function establecerCuotas(numero) {
   cuotasIntroducidas();
 }
 function comprobarElegibilidad(m, monto, n, nivel) {
-  if (m === 'personalizada') return 'El número de cuotas seleccionado es una estimación libre, no una modalidad aprobada por Cashea. Consulta sus condiciones reales en la aplicación.';
+  if (m === 'personalizada') return '';
   if (m !== 'mas') return '';
   if (![6,9,12].includes(n)) return 'Modo Más Cuotas: selecciona 6, 9 o 12 cuotas.';
   const minNivel = n === 6 ? 3 : n === 9 ? 5 : 6;
@@ -113,7 +113,7 @@ function simular() {
         <div><span>Recargo por atraso (estimado)</span><b>${fmt(plan.recargosC)}</b></div>
         <div class="res-fuerte"><span>Costo adicional total</span><strong>${fmt(plan.interesesC + plan.recargosC)}</strong></div>
       </div>
-      <p class="res-aclaracion">${m === 'comparar' ? 'Tasa anual ilustrativa: ' + esc($('tasa').value) + ' %. No es un producto ni un interés de Cashea.' : 'Sin intereses de financiamiento en esta simulación. Las modalidades de Cashea deben verificarse en la aplicación.'}</p>
+      ${m === 'comparar' ? '<p class="res-aclaracion">Interés anual hipotético: ' + esc($('tasa').value) + ' %. No corresponde a Cashea.</p>' : ''}
       ${elegible ? '<p class="advertencia">' + esc(elegible) + '</p>' : ''}
     `;
     const fila = (fecha, concepto, capital, interes, total) =>

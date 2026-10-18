@@ -41,3 +41,7 @@
 ## V2.3 — Mobile responsive
 
 Corrección del orden de cascada CSS que invalidaba el breakpoint de dos columnas. Se añadió navegación móvil y un test de navegador Chromium que comprueba anchos y funcionalidad en 320–1280 px. Una compilación correcta no sustituye comprobar visualmente Safari/iOS en un dispositivo real.
+
+## V2.4 — Calculadora principal sin bloques redundantes
+
+La calculadora es el primer contenido de la web y ocupa toda la superficie verde oscura; no existe una portada ni una tarjeta decorativa ficticia. El formulario y el resumen viven en el mismo módulo, con diseño responsive y un único aviso de uso orientativo. Las fuentes se agrupan en un desplegable. Pruebas unitarias y Chromium de 320–1280 px.
