@@ -48,3 +48,11 @@ El proyecto no solicita credenciales, no gestiona dinero y no instala analítica
 
 - **V2.0:** rediseño responsivo, simulación financiera comparativa, calendario por fecha, cargos por atraso, estados de monitoreo conservadores y pruebas.
 - **V1.0:** MVP del monitor y directorio inicial.
+
+## Contradicción en límites de Modo Más Cuotas
+
+Las páginas oficiales consultadas el 18/10/2026 no concuerdan: preguntas frecuentes (300/450/600 USD para 6/9/12 cuotas) y página específica (700/850/1000 USD). **No hay verificación de elegibilidad por precio** en este proyecto: el usuario debe comprobar el producto y su nivel dentro de la app. La selección del nivel sirve para estimar la inicial, no autoriza ni garantiza una compra.
+
+## Gobierno de datos
+
+El archivo `fuentes.json` incluye `fecha_publicacion` para cada referencia. La fecha corresponde al artículo de terceros, **no** a verificación contemporánea de afiliación. Ejecuta `npm run validate:data` antes de modificar el directorio. Consulta `CONTRIBUTING.md` y `PROJECT_STATUS.md`.

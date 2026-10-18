@@ -1,0 +1,31 @@
+# Monitor Cashea — seguimiento del proyecto
+
+**Revisión:** 18 de octubre de 2026 · **Fase:** V2.1, calidad y mantenimiento · **Alcance:** sitio comunitario y no oficial.
+
+| Área | Estado y límite |
+|---|---|
+| Diseño | Página responsive implementada. Pendiente revisión visual manual en dispositivos reales. |
+| Calculadora | Principal, Cotidiana, Más Cuotas y comparación hipotética con intereses, con pruebas matemáticas. |
+| Intereses | Los planes Cashea muestran 0 %; los intereses son solo comparación de otro financiamiento hipotético. |
+| Atrasos | Simulación basada en cargo US$4 tras 2 días de gracia, según centro de ayuda. |
+| Directorio | 21 marcas y 6 referencias externas; no verificación por sucursal. |
+| Fuentes | Verificación de estructura, fecha y URL; no equivale a comprobación comercial actual. |
+| Monitoreo | Solicitud automática desde GitHub. Un error de red se clasifica indeterminado, no caída. |
+| CI | Pruebas de cálculo, estado y calidad editorial; quedan pendientes pruebas visuales E2E. |
+| Seguridad GitHub | Sin protección de main confirmada; gestionar en Settings y considerar rama de datos separada. |
+
+## Riesgos y tareas abiertas
+
+1. **Alta:** estudiar corroboración de estado web desde más de una red antes de afirmar incidentes o crear alertas.
+2. **Alta:** umbrales mínimos contradictorios en dos páginas oficiales del Modo Más Cuotas. Mantener advertencia y revisar sus cambios periódicamente.
+3. **Media:** inspección visual, navegación por teclado, contraste y comportamiento de formularios en dispositivos reales.
+4. **Media:** validar vigencia de marcas por sucursal y mantener evidencia con fecha; no ampliar la lista automáticamente sin fuentes.
+5. **Media:** proteger `main` y mover el JSON de estado a una rama separada para evitar conflictos con las reglas de protección.
+6. **Posterior:** historial y alertas solo después de mejorar la certeza del monitor.
+
+## Calidad antes de publicar
+
+- `npm test` pasa.
+- `npm run validate:data` pasa.
+- Workflows de GitHub Actions terminan en éxito.
+- No se anuncia afiliación con Cashea ni cobertura de la app y pagos.

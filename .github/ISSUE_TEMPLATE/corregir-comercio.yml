@@ -1,0 +1,39 @@
+name: Corregir información de un comercio
+description: Propón una corrección del directorio público de menciones.
+title: "[Directorio] "
+body:
+  - type: markdown
+    attributes:
+      value: "No incluyas datos personales ni información de pagos. Una mención no confirma aceptación actual en todas las sucursales."
+  - type: input
+    id: nombre
+    attributes:
+      label: Marca o comercio
+      placeholder: Nombre en el directorio
+    validations:
+      required: true
+  - type: dropdown
+    id: tipo
+    attributes:
+      label: Dato por revisar
+      options:
+        - Datos desactualizados
+        - Ciudad
+        - Categoría
+        - Nueva fuente
+        - Posible retiro de marca
+        - Otra corrección
+    validations:
+      required: true
+  - type: input
+    id: fuente
+    attributes:
+      label: URL pública de referencia
+    validations:
+      required: true
+  - type: textarea
+    id: explicacion
+    attributes:
+      label: Explicación y fecha de la publicación
+    validations:
+      required: true
