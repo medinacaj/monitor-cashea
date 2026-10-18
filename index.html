@@ -1,88 +1,92 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Monitor Cashea (no oficial) | Simulador de cuotas y comercios</title>
-<meta name="description" content="Proyecto independiente y no oficial: estado del sitio de Cashea, simulador de cuotas quincenales y directorio de comercios en Venezuela.">
-<link rel="canonical" href="https://medinacaj.github.io/monitor-cashea/">
-<meta name="robots" content="index,follow">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Monitor Cashea (no oficial)">
-<meta property="og:description" content="Simulador de cuotas y directorio de comercios. Proyecto independiente, no afiliado a Cashea.">
-<meta property="og:url" content="https://medinacaj.github.io/monitor-cashea/">
-<meta name="theme-color" content="#0f766e">
-<link rel="stylesheet" href="styles.css">
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","name":"Monitor Cashea (no oficial)","url":"https://medinacaj.github.io/monitor-cashea/","inLanguage":"es"}
-</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#081b1a">
+  <meta name="description" content="Monitor comunitario independiente de Cashea: estado verificable del sitio web, calculadora de cuotas sin interés, simulación comparativa y directorio de comercios.">
+  <link rel="canonical" href="https://medinacaj.github.io/monitor-cashea/">
+  <meta property="og:title" content="Monitor Cashea · Información clara, decisiones mejores">
+  <meta property="og:description" content="Consulta la web, simula tus pagos y descubre comercios. Proyecto independiente.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://medinacaj.github.io/monitor-cashea/">
+  <meta name="robots" content="index,follow">
+  <title>Monitor Cashea — Tu guía independiente</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Monitor Cashea (no oficial)","url":"https://medinacaj.github.io/monitor-cashea/","inLanguage":"es"}</script>
+  <script type="module" src="app.js"></script>
 </head>
 <body>
-<div class="aviso" role="note">
-  Proyecto independiente y <strong>no oficial</strong>. No está afiliado, respaldado ni operado por Cashea. Las cifras son referenciales: confirma siempre las condiciones en la app oficial.
-</div>
+  <div class="independiente" role="note"><span class="mini-punto"></span> PROYECTO INDEPENDIENTE · No afiliado, respaldado ni operado por Cashea</div>
+  <header class="navegacion">
+    <a href="#inicio" class="marca" aria-label="Monitor Cashea, inicio"><span class="marca-icono">M<span class="marca-onda">•</span></span><span>MONITOR<span class="marca-fina">/CASHEA</span></span></a>
+    <nav aria-label="Navegación principal"><a href="#estado">Estado web</a><a href="#simulador">Calculadora</a><a href="#directorio">Comercios</a></nav>
+    <a href="#simulador" class="nav-cta">Calcular <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="inicio">
+    <section class="hero" aria-labelledby="titular">
+      <div class="hero-fondo" aria-hidden="true"></div>
+      <div class="hero-interior">
+        <div class="hero-copia">
+          <p class="kicker"><span class="mini-punto"></span> FINANZAS MÁS CLARAS · VENEZUELA</p>
+          <h1 id="titular">Compra con <em>claridad.</em><br>Decide con <span class="subrayado">datos.</span></h1>
+          <p class="hero-descripcion">Consulta el estado observable del sitio web, calcula cuánto pagarías y encuentra marcas mencionadas como aliadas. Sin confundir estimaciones con condiciones oficiales.</p>
+          <div class="hero-acciones"><a class="boton boton-claro" href="#simulador">Simular mis cuotas <span aria-hidden="true">↗</span></a><a class="boton boton-fantasma" href="#estado">Ver estado web <span aria-hidden="true">↓</span></a></div>
+          <p class="hero-aclaracion"><span aria-hidden="true">✳</span> Las compras Cashea son sin interés. Los intereses de comparación son hipotéticos.</p>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="visual-radial"></div>
+          <div class="tarjeta-flotante tarjeta-arriba"><span>CONTROLA TU PRESUPUESTO</span><strong>Antes de comprar.</strong></div>
+          <div class="moneda-ficticia"><span>0<span>%</span></span><small>INTERÉS EN PLAN CASHEA</small></div>
+          <div class="tarjeta-flotante tarjeta-abajo"><span class="pulso"></span><span>Información transparente</span><b>↗</b></div>
+        </div>
+      </div>
+      <div class="hero-pie"><span>01 / ESTADO WEB</span><span>02 / CALCULADORA</span><span>03 / DIRECTORIO</span></div>
+    </section>
 
-<header class="hero">
-  <h1>Monitor Cashea <span class="tag">no oficial</span></h1>
-  <p>Revisa si el sitio de Cashea responde, calcula tus cuotas y busca dónde usar el servicio.</p>
-  <nav aria-label="Secciones">
-    <a href="#estado">Estado</a>
-    <a href="#simulador">Simulador</a>
-    <a href="#directorio">Directorio</a>
-  </nav>
-</header>
+    <div class="contenedor">
+      <section id="estado" class="seccion" aria-labelledby="estado-titulo">
+        <div class="titulo-seccion"><div><p class="eyebrow">01 / SEÑAL DEL SITIO</p><h2 id="estado-titulo">¿La web <span>responde?</span></h2></div><span class="seccion-indice">WEB STATUS / 24H</span></div>
+        <p class="intro">Realizamos solicitudes automáticas al sitio público. <strong>No comprobamos la aplicación, las compras ni los pagos.</strong> Un bloqueo al monitor tampoco significa que Cashea esté caído.</p>
+        <div id="estado-lista" class="estado-lista" aria-live="polite"><div class="estado-espera">Consultando los últimos datos…</div></div>
+        <div class="estado-pie"><span>Actualización programada cada 15 minutos (puede haber retrasos de GitHub Actions).</span><button id="refrescar" type="button" class="enlace-boton">Actualizar datos ↻</button></div>
+      </section>
 
-<main>
-  <section id="estado" aria-labelledby="t-est">
-    <h2 id="t-est">Estado del servicio</h2>
-    <p class="nota">Chequeo automático cada 15 minutos que mide solo si el <strong>sitio web público</strong> responde. No mide la app ni los pagos, y puede fallar por causas ajenas a Cashea.</p>
-    <div id="estado-lista" aria-live="polite">Cargando estado…</div>
-  </section>
+      <section id="simulador" class="seccion" aria-labelledby="sim-titulo">
+        <div class="titulo-seccion"><div><p class="eyebrow">02 / PLANEA TU COMPRA</p><h2 id="sim-titulo">Haz números.<br><span>Sin sorpresas.</span></h2></div><span class="seccion-indice">CALCULADORA / USD</span></div>
+        <p class="intro">Los planes Cashea se calculan con <strong>0 % de interés</strong>. También puedes seleccionar una comparación financiera con una tasa editable, que <strong>no es una tasa de Cashea</strong>.</p>
+        <div class="sim-grid">
+          <form id="form-sim" class="panel-controles" novalidate>
+            <div class="campo campo-ancho"><label for="modalidad">Tipo de simulación</label><select id="modalidad"><option value="principal">Línea Principal · 3 cuotas, sin interés</option><option value="cotidiana">Línea Cotidiana · 1 cuota, sin interés</option><option value="mas">Modo Más Cuotas · sin interés</option><option value="comparar">Comparación con intereses · no Cashea</option></select></div>
+            <div class="campo campo-ancho"><label for="monto">Precio del producto (USD)</label><div class="campo-moneda"><span>$</span><input id="monto" type="number" min="0.01" max="1000000" step="0.01" inputmode="decimal" value="300" required></div></div>
+            <div class="campo"><label for="nivel">Nivel de referencia</label><select id="nivel"><option value="1">1 · Semilla</option><option value="2">2 · Raíz</option><option value="3" selected>3 · Hoja</option><option value="4">4 · Tronco</option><option value="5">5 · Árbol</option><option value="6">6 · Araguaney</option></select></div>
+            <div class="campo"><label for="inicial">Inicial (%)</label><input id="inicial" type="number" min="0" max="100" step="0.01" inputmode="decimal" value="40"></div>
+            <div class="campo"><label for="cuotas">Número de cuotas</label><input id="cuotas" type="number" min="1" max="12" step="1" value="3"></div>
+            <div class="campo"><label for="dias">Días entre pagos</label><input id="dias" type="number" min="1" max="90" step="1" value="14"></div>
+            <div class="campo campo-ancho"><label for="fecha">Fecha de compra</label><input id="fecha" type="date" required></div>
+            <div class="campo campo-ancho comparar-extra" id="comparar-extra" hidden><label for="tasa">Tasa anual de interés (%) · solo comparación hipotética</label><div class="campo-moneda"><input id="tasa" type="number" min="0" max="200" step="0.1" value="24"><span>%</span></div><p class="micro">24 % anual es un ejemplo editable, NO una tasa de Cashea. Se estima con interés sobre saldo insoluto.</p></div>
+            <div class="atrasos campo-ancho" id="atrasos"><div class="campo-cabecera"><strong>¿Quieres simular un atraso?</strong><span>Opcional</span></div><div class="dos-campos"><div class="campo"><label for="atraso-dias">Días de atraso</label><input id="atraso-dias" type="number" min="0" max="365" step="1" value="0"></div><div class="campo"><label for="cuotas-vencidas">Cuotas atrasadas</label><input id="cuotas-vencidas" type="number" min="0" max="12" step="1" value="0"></div></div><p class="micro">Referencia Cashea: 2 días de gracia; después, US$4 por cuota atrasada. Sin intereses de mora.</p></div>
+            <p class="campo-ancho formulario-nota" id="plan-nota"></p>
+          </form>
+          <div class="panel-resultado" aria-live="polite"><div class="resultado-cabecera"><span>ESTIMACIÓN DE TU COMPRA</span><span class="indicador-resultado">USD</span></div><div id="resultado" class="resultado"></div><div class="panel-aclaracion">Información referencial. La oferta, elegibilidad y fechas definitivas son las indicadas en la app oficial.</div></div>
+        </div>
+        <div class="calendario-panel"><div class="calendario-cabecera"><h3>Tu calendario de pagos</h3><span>FECHAS ESTIMADAS</span></div><div id="calendario" class="tabla-wrap"></div></div>
+        <p class="fuente-oficial">Condiciones oficiales: <a href="https://www.cashea.app/preguntas-frecuentes/c/que-es-cashea-y-como-funciona" target="_blank" rel="noopener noreferrer">Preguntas frecuentes de Cashea ↗</a> · <a href="https://intercom.help/cashea/es/articles/8526833-atraso-y-periodo-de-gracia" target="_blank" rel="noopener noreferrer">Atrasos y período de gracia ↗</a></p>
+      </section>
 
-  <section id="simulador" aria-labelledby="t-sim">
-    <h2 id="t-sim">Simulador de cuotas</h2>
-    <p class="nota">Estimación con porcentaje de inicial y número de cuotas editables. Los valores por defecto son de ejemplo, no las condiciones oficiales.</p>
-    <form id="form-sim" class="grid" novalidate>
-      <label>Monto de la compra (USD)
-        <input id="monto" type="number" inputmode="decimal" min="0" step="0.01" value="100" required>
-      </label>
-      <label>Inicial (%)
-        <input id="inicial" type="number" inputmode="decimal" min="0" max="100" step="1" value="40">
-      </label>
-      <label>Número de cuotas
-        <input id="cuotas" type="number" inputmode="numeric" min="1" max="12" step="1" value="3">
-      </label>
-      <label>Días entre cuotas
-        <input id="dias" type="number" inputmode="numeric" min="1" max="60" step="1" value="14">
-      </label>
-    </form>
-    <div id="resultado" class="resultado" aria-live="polite"></div>
-    <div id="calendario" class="tabla-wrap"></div>
-  </section>
-
-  <section id="directorio" aria-labelledby="t-dir">
-    <h2 id="t-dir">Directorio de comercios</h2>
-    <p class="nota" id="nota-datos"></p>
-    <div class="grid filtros">
-      <label>Buscar
-        <input id="q" type="search" placeholder="Nombre del comercio">
-      </label>
-      <label>Ciudad
-        <select id="ciudad"><option value="">Todas</option></select>
-      </label>
-      <label>Categoría
-        <select id="categoria"><option value="">Todas</option></select>
-      </label>
+      <section id="directorio" class="seccion" aria-labelledby="dir-titulo">
+        <div class="titulo-seccion"><div><p class="eyebrow">03 / EXPLORA MARCAS</p><h2 id="dir-titulo">Dónde <span>buscar.</span></h2></div><span class="seccion-indice">DIRECTORIO / FUENTES PÚBLICAS</span></div>
+        <p class="intro">Una guía de marcas mencionadas en prensa y fuentes externas. <strong>No verifica aceptación actual por tienda o sucursal.</strong> Confirma cada comercio directamente en la app de Cashea.</p>
+        <div class="filtros">
+          <div class="campo filtro-busqueda"><label for="q">Buscar comercio</label><input id="q" type="search" placeholder="Ej. Locatel, Damasco, Nike…" autocomplete="off"></div>
+          <div class="campo"><label for="ciudad">Ciudad mencionada</label><select id="ciudad"><option value="">Todas las ciudades</option></select></div>
+          <div class="campo"><label for="categoria">Categoría</label><select id="categoria"><option value="">Todas las categorías</option></select></div>
+        </div>
+        <div class="directorio-barra"><p id="contador" aria-live="polite">Cargando comercios…</p><span id="nota-datos">Fuentes externas, consulta orientativa</span></div>
+        <ul id="lista" class="lista-comercios"></ul>
+      </section>
     </div>
-    <p id="contador" aria-live="polite"></p>
-    <ul id="lista" class="lista"></ul>
-  </section>
-</main>
-
-<footer>
-  <p>Guía comunitaria independiente. Marcas y nombres pertenecen a sus dueños. ¿Eres un comercio y quieres aparecer o corregir tus datos? Abre un <em>issue</em> en el repositorio.</p>
-</footer>
-
-<script src="app.js"></script>
+  </main>
+  <footer class="pie"><div class="pie-interior"><div><div class="marca pie-marca"><span class="marca-icono">M<span class="marca-onda">•</span></span><span>MONITOR<span class="marca-fina">/CASHEA</span></span></div><p>Proyecto abierto e independiente de orientación pública.</p></div><div class="pie-links"><a href="https://github.com/medinacaj/monitor-cashea" target="_blank" rel="noopener noreferrer">Ver código ↗</a><a href="https://github.com/medinacaj/monitor-cashea/issues/new" target="_blank" rel="noopener noreferrer">Sugerir una corrección ↗</a></div></div><p class="pie-legal">No afiliado a Cashea. Las marcas pertenecen a sus respectivos titulares. No recopilamos contraseñas ni procesamos pagos.</p></footer>
 </body>
 </html>
