@@ -91,29 +91,22 @@ function simular() {
       fecha: $('fecha').value
     });
     const elegible = comprobarElegibilidad(m, monto, cuotas, nivel);
-    const tipo = m === 'personalizada' ? 'Escenario a tu medida · no oficial'
-      : m === 'comparar' ? 'Financiamiento hipotético · no Cashea'
-      : 'Referencia ' + ({principal:'Línea Principal',cotidiana:'Línea Cotidiana',mas:'Modo Más Cuotas'})[m];
     const primerPago = plan.filas[0];
-    const porcentajeInicial = plan.montoC ? (plan.inicialC / plan.montoC * 100) : 0;
+    const costoAdicional = plan.interesesC + plan.recargosC;
     $('resultado').innerHTML = `
-      <div class="res-modo">${esc(tipo)}</div>
-      <p class="res-cuota-kicker">TU PRÓXIMA CUOTA ESTIMADA</p>
-      <div class="res-cuota-fila"><strong class="res-cuota-monto">${fmt(primerPago.totalC)}</strong><span>cuota 1 de ${plan.filas.length}</span></div>
-      <p class="res-fecha">A partir del ${esc(fechas(primerPago.fecha))}</p>
-      <div class="res-cinta"><span><i aria-hidden="true">✧</i> ${plan.filas.length} cuota(s) seleccionada(s)</span><span>${m === 'comparar' ? 'Interés ilustrativo' : '0 % de interés en el cálculo'}</span></div>
-      <div class="res-separador"></div>
-      <div class="res-total-bloque"><span>TOTAL ESTIMADO A PAGAR</span><strong class="res-total">${fmt(plan.totalC)}</strong></div>
-      <div class="res-tarjetas"><div><span>Pago inicial</span><strong>${fmt(plan.inicialC)}</strong></div><div><span>Saldo en cuotas</span><strong>${fmt(plan.financiadoC)}</strong></div></div>
-      <div class="res-reparto" aria-hidden="true"><span style="width:${porcentajeInicial}%"></span></div>
-      <div class="res-reparto-leyenda"><span>Inicial ${porcentajeInicial.toFixed(1)} %</span><span>En cuotas ${(100 - porcentajeInicial).toFixed(1)} %</span></div>
-      <div class="res-detalle">
-        <div><span>Precio del producto</span><b>${fmt(plan.montoC)}</b></div>
-        <div><span>Intereses ${m === 'comparar' ? '(hipotéticos)' : '(en el cálculo)'}</span><b class="${plan.interesesC ? 'costo-extra' : 'sin-costo'}">${fmt(plan.interesesC)}</b></div>
-        <div><span>Recargo por atraso (estimado)</span><b>${fmt(plan.recargosC)}</b></div>
-        <div class="res-fuerte"><span>Costo adicional total</span><strong>${fmt(plan.interesesC + plan.recargosC)}</strong></div>
+      <div class="calc-resultado-principal">
+        <span>Tu cuota estimada</span>
+        <strong class="res-cuota-monto">${fmt(primerPago.totalC)}</strong>
+        <small>Cuota 1 de ${plan.filas.length} · ${esc(fechas(primerPago.fecha))}</small>
       </div>
-      ${m === 'comparar' ? '<p class="res-aclaracion">Interés anual hipotético: ' + esc($('tasa').value) + ' %. No corresponde a Cashea.</p>' : ''}
+      <div class="calc-resultado-datos">
+        <div><span>Pago inicial</span><strong>${fmt(plan.inicialC)}</strong></div>
+        <div><span>Total a pagar</span><strong>${fmt(plan.totalC)}</strong></div>
+      </div>
+      <p class="calc-resultado-extra"><span>Intereses ${m === 'comparar' ? '(hipotéticos)' : ''}</span><strong>${fmt(plan.interesesC)}</strong></p>
+      ${plan.recargosC ? '<p class="calc-resultado-extra"><span>Recargo estimado por atraso</span><strong>' + fmt(plan.recargosC) + '</strong></p>' : ''}
+      ${costoAdicional ? '<p class="calc-resultado-extra calc-resultado-costo"><span>Costo adicional total</span><strong>' + fmt(costoAdicional) + '</strong></p>' : ''}
+      ${m === 'comparar' ? '<p class="calc-resultado-aviso">Tasa anual hipotética de ' + esc($('tasa').value) + ' %. No corresponde a Cashea.</p>' : ''}
       ${elegible ? '<p class="advertencia">' + esc(elegible) + '</p>' : ''}
     `;
     const fila = (fecha, concepto, capital, interes, total) =>

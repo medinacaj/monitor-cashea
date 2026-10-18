@@ -4,9 +4,9 @@ import {readFile} from 'node:fs/promises';
 
 test('el diseño final no revierte la calculadora móvil a dos columnas',async()=>{
   const css=await readFile(new URL('../styles.css',import.meta.url),'utf8');
-  const indexUltimo=css.lastIndexOf('.sim-grid{');
-  const final=css.slice(indexUltimo,indexUltimo+130);
-  assert.match(final,/grid-template-columns:minmax\(0,1fr\)/);
+  assert.match(css,/\.calc-section \.sim-grid\{display:block/);
+  assert.match(css,/\.calc-section \.calc-resultados\{/);
+  assert.match(css,/\.calc-section \.panel-controles\{/);
   assert.match(css,/@media\(max-width:1050px\)/);
   assert.match(css,/@media\(max-width:620px\)/);
 });

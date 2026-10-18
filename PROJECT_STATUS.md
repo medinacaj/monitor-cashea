@@ -45,3 +45,7 @@ Corrección del orden de cascada CSS que invalidaba el breakpoint de dos columna
 ## V2.4 — Calculadora principal sin bloques redundantes
 
 La calculadora es el primer contenido de la web y ocupa toda la superficie verde oscura; no existe una portada ni una tarjeta decorativa ficticia. El formulario y el resumen viven en el mismo módulo, con diseño responsive y un único aviso de uso orientativo. Las fuentes se agrupan en un desplegable. Pruebas unitarias y Chromium de 320–1280 px.
+
+## V2.5 — Simplificación de la interfaz
+
+Orden: Monitoreo → Calculadora → Comercios. Sin panel secundario «Resumen de tu compra». Cuota, inicial, total, intereses y avisos condicionales se muestran junto a los controles, sin repetir el desglose del calendario. Pruebas responsive preservadas.
