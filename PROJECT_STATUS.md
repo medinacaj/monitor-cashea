@@ -57,3 +57,7 @@ El usuario reportó flechas triangulares grandes y barras superpuestas sobre dos
 ## P1 · Criterio de corroboración (18-10-2026)
 
 Se añadió motor de consenso de dos proveedores independientes y pruebas. La interfaz ya no confunde un único chequeo GitHub con estado global. Hasta provisionar una segunda señal independiente y autorizada, el veredicto permanece **sin corroboración**. No cerrar el Issue #6 hasta prueba con tráfico real y procedencia verificable.
+
+## V2.7 · Criterio P1 de independencia (18-10-2026)
+
+Se integró consenso para dos observadores HTTP desde redes autorizadas y pruebas de regresión. El estado público es prudente cuando solo existe GitHub Actions. No se declara corroboración ni se cierra el Issue #6 hasta incorporar y verificar un segundo proveedor independiente.
