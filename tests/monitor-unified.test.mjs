@@ -24,3 +24,15 @@ test('No dibujar dos veces el historial y mantener estados HTTP honestos',async(
   assert.match(js,/pintarGraficaEstado\(data\)/);
   assert.match(js,/HTTP 403 significa acceso restringido/);
 });
+
+test('la gráfica sustituye la métrica duplicada de 24 horas',async()=>{
+  const js=await readFile(new URL('../app.js',import.meta.url),'utf8');
+  assert.doesNotMatch(js,/Respuestas satisfactorias en 24 h/);
+  assert.doesNotMatch(js,/Sin muestra['"]/);
+  assert.doesNotMatch(js,/Muestras evaluables/);
+  assert.doesNotMatch(js,/class="estado-metricas"/);
+  assert.doesNotMatch(js,/\*Porcentaje de muestras del monitor/);
+  assert.match(js,/class="estado-ultima"/);
+  assert.match(js,/Última comprobación/);
+  assert.match(js,/pintarGraficaEstado\(data\)/);
+});

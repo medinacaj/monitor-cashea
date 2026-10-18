@@ -212,13 +212,6 @@ function pintarEstado(data) {
   const desactualizado = !Number.isFinite(actualizado) || ahora - actualizado > 60 * 60 * 1000 || actualizado > ahora + 5 * 60 * 1000;
   $('estado-lista').innerHTML = targets.map(t => {
     const h = Array.isArray(t.history) ? t.history : [];
-    const ult24 = h.filter(x => {
-      const tm = Date.parse(x.t);
-      return Number.isFinite(tm) && tm >= ahora - 86_400_000 && tm <= ahora + 300_000;
-    });
-    const exitos = ult24.filter(x => x.state === 'up' || (!x.state && x.up === true)).length;
-    const evaluables = ult24.filter(x => !['restricted','unknown'].includes(x.state) && x.code !== 0).length;
-    const pct = evaluables ? (100 * exitos / evaluables).toFixed(1) + ' %' : 'Sin muestra';
     const c = t.current || h.at(-1) || {};
     const decision = t.corroboration?.verdict === 'responding' ? 'up' : t.corroboration?.verdict === 'unresponsive' ? 'down' : 'unknown';
     const estado = desactualizado ? 'stale' : decision;
@@ -226,8 +219,8 @@ function pintarEstado(data) {
     const fecha = Date.parse(c.t || data.updated);
     const ultima = Number.isFinite(fecha) ? new Date(fecha).toLocaleString('es-VE') : 'sin fecha válida';
     return '<article class="estado-card ' + estado + '"><div class="estado-card-top"><div><p class="estado-label">MONITOREO EXTERNO</p><h3>' + esc(t.name) + '</h3></div><span class="estado-indicador"><i></i>' + titulo + '</span></div>' +
-      '<div class="estado-metricas"><div><span>Respuestas satisfactorias en 24 h*</span><strong>' + pct + '</strong></div><div><span>Muestras evaluables</span><strong>' + evaluables + '</strong></div><div><span>Última comprobación</span><strong class="dato-hora">' + esc(ultima) + '</strong></div></div>' +
-      '<p class="estado-detalle">HTTP ' + esc(c.code ?? '—') + ' · ' + esc(c.ms ?? '—') + ' ms · Solo observación HTTP; no verifica app o pagos. *Porcentaje de muestras del monitor, no disponibilidad global.</p></article>';
+      '<p class="estado-ultima"><span>Última comprobación</span><strong>' + esc(ultima) + '</strong></p>' +
+      '<p class="estado-detalle">HTTP ' + esc(c.code ?? '—') + ' · ' + esc(c.ms ?? '—') + ' ms · Solo observación HTTP; no verifica app o pagos.</p></article>';
   }).join('');
 }
 async function actualizarEstado() {

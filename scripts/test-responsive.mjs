@@ -39,6 +39,8 @@ for (const profile of profiles) {
         unified:rect('.monitor-unificado'),
         hasStatusInsidePanel:!!document.querySelector('.monitor-unificado #estado-lista .estado-card'),
         hasChartInsidePanel:!!document.querySelector('.monitor-unificado #estado-grafica'),
+        noOldPercentage:!document.querySelector('.monitor-unificado .estado-metricas'),
+        lastCheckLabel:document.querySelector('.monitor-unificado .estado-ultima')?.textContent||'',
         statusCardBorder:getComputedStyle(document.querySelector('.monitor-unificado .estado-card')).borderTopWidth,
         chartCardBorder:getComputedStyle(document.querySelector('.monitor-unificado .grafica-estado-card')).borderLeftWidth,
         selectors,
@@ -48,6 +50,8 @@ for (const profile of profiles) {
     assert.deepEqual(details.sectionIds,['estado','simulador','directorio'],'orden de secciones');
     assert.ok(details.hasStatusInsidePanel,'estado no integrado');
     assert.ok(details.hasChartInsidePanel,'gráfico no integrado');
+    assert.ok(details.noOldPercentage,'continúa el bloque de porcentajes redundantes');
+    assert.match(details.lastCheckLabel,/Última comprobación/,'falta fecha de comprobación');
     assert.equal(details.statusCardBorder,'0px','la tarjeta del estado tiene un borde duplicado');
     assert.equal(details.chartCardBorder,'0px','la gráfica tiene un borde duplicado');
     assert.ok(details.doc<=width+1,'scroll horizontal no deseado: '+JSON.stringify(details));

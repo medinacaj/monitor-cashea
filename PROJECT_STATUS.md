@@ -63,3 +63,7 @@ El usuario reportó flechas triangulares grandes y barras superpuestas sobre dos
 ## V2.8 — Monitoreo unificado
 
 Una sola tarjeta muestra resultado actual, métricas y el gráfico de 24/72 horas. Eliminado el historial en mini-barras de las tarjetas dinámicas. La presentación no equipara 403 con caída, ni ausencia de corroboración con disponibilidad; conserva el estado del monitor sin atribuir fiabilidad global.
+
+## V2.9 — Panel de monitor más claro
+
+Eliminadas las dos métricas redundantes de respuestas satisfactorias y muestras evaluables. Se conserva la última comprobación y el estado corroborado, seguidos de la gráfica; se mantienen distinciones entre acceso restringido, sin datos y respuestas no satisfactorias. Verificado con pruebas de código y navegadores móviles.

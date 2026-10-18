@@ -704,3 +704,18 @@ html body .calc-section .campo input[type="date"]:not(:focus){background-clip:pa
   #estado .monitor-unificado .estado-metricas div:last-child{grid-column:auto}
   #estado .monitor-unificado .estado-card-top{flex-direction:column}
 }
+
+/* V2.9 — estado + última verificación, sin porcentajes redundantes con gráfica. */
+#estado .monitor-unificado .estado-ultima{
+  display:flex;align-items:baseline;flex-wrap:wrap;gap:7px 16px;
+  border-top:1px solid #e9f0ed;padding-top:16px;margin:17px 0 8px;
+  font-size:12px;line-height:1.5;color:#59766a;
+}
+#estado .monitor-unificado .estado-ultima span{font-weight:700}
+#estado .monitor-unificado .estado-ultima strong{
+  font:700 13px/1.5 'DM Sans',system-ui,sans-serif;color:#194c3c;overflow-wrap:anywhere;
+}
+#estado .monitor-unificado .estado-detalle{margin:0 0 17px}
+@media(max-width:720px){
+  #estado .monitor-unificado .estado-ultima{margin:14px 0 7px;padding-top:13px}
+}
