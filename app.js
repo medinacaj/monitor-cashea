@@ -73,32 +73,47 @@
     });
   }
 
+  var fuentes = {};
+
+  function enlaces(ids) {
+    return (ids || []).map(function (id) {
+      var f = fuentes[id];
+      if (!f || String(f.url).indexOf('https://') !== 0) return '';
+      return '<a href="' + esc(f.url) + '" target="_blank" rel="noopener noreferrer">' + esc(f.titulo) + '</a>';
+    }).filter(Boolean).join(' · ');
+  }
+
   function pintar() {
     var q = norm($('q').value);
     var ciudad = $('ciudad').value;
     var cat = $('categoria').value;
     var res = comercios.filter(function (c) {
       return (!q || norm(c.nombre).indexOf(q) !== -1) &&
-             (!ciudad || c.ciudad === ciudad) &&
+             (!ciudad || (c.ciudades || []).indexOf(ciudad) !== -1) &&
              (!cat || c.categoria === cat);
     });
     $('contador').textContent = res.length + ' comercio(s) encontrado(s)';
     $('lista').innerHTML = res.map(function (c) {
-      return '<li><h3>' + esc(c.nombre) + (c.ejemplo ? '<span class="badge">ejemplo</span>' : '') + '</h3>' +
-        '<div class="meta">' + esc(c.categoria) + ' · ' + esc(c.ciudad) + (c.direccion ? ' · ' + esc(c.direccion) : '') + '</div>' +
-        (c.verificado ? '<div class="meta">Verificado: ' + esc(c.verificado) + '</div>' : '') + '</li>';
+      var ciu = (c.ciudades || []).length ? esc(c.ciudades.join(', ')) : 'sin confirmar';
+      var n = (c.fuentes || []).length;
+      return '<li><h3>' + esc(c.nombre) + (n < 2 ? '<span class="badge">1 fuente</span>' : '') + '</h3>' +
+        '<div class="meta">' + esc(c.categoria) + ' · Ciudades (según terceros): ' + ciu + '</div>' +
+        '<div class="meta fuentes">Fuentes: ' + enlaces(c.fuentes) + '</div></li>';
     }).join('');
   }
 
-  fetch('comercios.json', { cache: 'no-cache' })
-    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
-    .then(function (data) {
+  Promise.all([
+    fetch('comercios.json', { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+    fetch('fuentes.json', { cache: 'no-cache' }).then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; })
+  ])
+    .then(function (res) {
+      var data = res[0];
+      fuentes = res[1] || {};
       comercios = Array.isArray(data) ? data : [];
-      var hayEjemplo = comercios.some(function (c) { return c.ejemplo; });
-      $('nota-datos').textContent = hayEjemplo
-        ? 'Los comercios marcados como "ejemplo" son datos de muestra, no comercios reales. Se reemplazarán por comercios verificados.'
-        : 'Lista de comercios verificados por la comunidad. Confirma disponibilidad en la app oficial.';
-      var ciudades = Array.from(new Set(comercios.map(function (c) { return c.ciudad; }))).sort();
+      $('nota-datos').textContent = 'Marcas que aparecen como aliadas de Cashea en prensa y portales (revisado el 18 oct 2026). No es una lista oficial ni completa: Cashea tiene cientos de comercios. Confirma en la app oficial antes de comprar.';
+      var todas = [];
+      comercios.forEach(function (c) { (c.ciudades || []).forEach(function (x) { todas.push(x); }); });
+      var ciudades = Array.from(new Set(todas)).sort();
       var cats = Array.from(new Set(comercios.map(function (c) { return c.categoria; }))).sort();
       llenarSelect('ciudad', ciudades);
       llenarSelect('categoria', cats);

@@ -1,5 +1,23 @@
 [
-  { "nombre": "Comercio de ejemplo 1", "categoria": "Tecnología", "ciudad": "Caracas", "direccion": "", "verificado": "", "ejemplo": true },
-  { "nombre": "Comercio de ejemplo 2", "categoria": "Ropa y calzado", "ciudad": "Valencia", "direccion": "", "verificado": "", "ejemplo": true },
-  { "nombre": "Comercio de ejemplo 3", "categoria": "Farmacia y salud", "ciudad": "Maracaibo", "direccion": "", "verificado": "", "ejemplo": true }
+  { "nombre": "Damasco", "categoria": "Hogar y electrodomésticos", "ciudades": ["Caracas", "Maracaibo"], "fuentes": ["cripto", "descubre1", "notiCaracas", "notiMaracaibo"] },
+  { "nombre": "IVOO", "categoria": "Tecnología", "ciudades": ["Caracas", "Maracaibo"], "fuentes": ["cripto", "notiCaracas", "notiMaracaibo"] },
+  { "nombre": "Locatel", "categoria": "Farmacia y salud", "ciudades": ["Caracas", "Maracaibo"], "fuentes": ["cripto", "descubre2", "notiCaracas", "notiMaracaibo"] },
+  { "nombre": "Beco", "categoria": "Tienda por departamentos", "ciudades": ["Caracas"], "fuentes": ["cripto", "notiCaracas"] },
+  { "nombre": "Gama", "categoria": "Supermercado", "ciudades": ["Caracas"], "fuentes": ["cripto", "notiCaracas"] },
+  { "nombre": "Hiperlíder y Superlíder", "categoria": "Supermercado", "ciudades": [], "fuentes": ["descubre3"] },
+  { "nombre": "Óptica Caroní", "categoria": "Salud visual", "ciudades": ["Caracas", "Maracaibo"], "fuentes": ["cripto", "notiCaracas", "notiMaracaibo"] },
+  { "nombre": "Nike", "categoria": "Ropa y calzado deportivo", "ciudades": ["Caracas", "Maracaibo"], "fuentes": ["cripto", "descubre1", "notiCaracas", "notiMaracaibo"] },
+  { "nombre": "Levi's", "categoria": "Ropa y moda", "ciudades": ["Caracas", "Maracaibo"], "fuentes": ["cripto", "descubre1", "notiCaracas", "notiMaracaibo"] },
+  { "nombre": "Mango", "categoria": "Ropa y moda", "ciudades": ["Caracas", "Maracaibo"], "fuentes": ["cripto", "notiCaracas", "notiMaracaibo"] },
+  { "nombre": "Gina", "categoria": "Ropa y moda", "ciudades": ["Caracas", "Maracaibo"], "fuentes": ["cripto", "notiCaracas", "notiMaracaibo"] },
+  { "nombre": "Swarovski", "categoria": "Joyería y accesorios", "ciudades": ["Caracas"], "fuentes": ["cripto", "notiCaracas"] },
+  { "nombre": "Parfois", "categoria": "Joyería y accesorios", "ciudades": ["Caracas"], "fuentes": ["cripto", "notiCaracas"] },
+  { "nombre": "Macuto", "categoria": "Ropa y calzado deportivo", "ciudades": [], "fuentes": ["cripto"] },
+  { "nombre": "Soy Techno", "categoria": "Tecnología", "ciudades": [], "fuentes": ["cripto"] },
+  { "nombre": "Crocs", "categoria": "Ropa y calzado deportivo", "ciudades": [], "fuentes": ["cripto"] },
+  { "nombre": "Timberland", "categoria": "Ropa y calzado deportivo", "ciudades": [], "fuentes": ["cripto"] },
+  { "nombre": "Casio", "categoria": "Tecnología", "ciudades": [], "fuentes": ["cripto"] },
+  { "nombre": "Original Penguin", "categoria": "Ropa y moda", "ciudades": [], "fuentes": ["cripto"] },
+  { "nombre": "Lee Cooper", "categoria": "Ropa y moda", "ciudades": [], "fuentes": ["cripto"] },
+  { "nombre": "El Palacio del Blumer", "categoria": "Ropa y moda", "ciudades": [], "fuentes": ["cripto"] }
 ]

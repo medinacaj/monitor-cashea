@@ -31,6 +31,7 @@ th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;white
 .lista h3{margin:0 0 4px;font-size:1.05rem}
 .meta{color:var(--muted);font-size:.9rem}
 .badge{display:inline-block;font-size:.72rem;background:var(--warn);color:var(--warn-ink);padding:1px 8px;border-radius:99px;margin-left:6px}
+.fuentes a{color:var(--brand)}
 .err{color:#b42318}
 .estado{border:1px solid var(--line);border-radius:10px;padding:12px;background:var(--bg)}
 .estado-fila{display:flex;align-items:center;gap:8px;flex-wrap:wrap}

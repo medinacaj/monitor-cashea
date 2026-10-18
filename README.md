@@ -3,7 +3,7 @@
 Sitio estático independiente: estado del sitio de Cashea, simulador de cuotas y directorio de comercios. No está afiliado a Cashea.
 
 ## Cómo editar
-- **Comercios:** edita `comercios.json` (campos: nombre, categoria, ciudad, direccion, verificado). Quita `"ejemplo": true` en los reales.
+- **Comercios:** edita `comercios.json` (campos: nombre, categoria, ciudades, fuentes). Cada fuente es un id definido en `fuentes.json` (título y enlace). La lista sale de prensa y portales públicos, no de Cashea.
 - **Condiciones del simulador:** los valores por defecto están en `index.html` (inicial 40 %, 3 cuotas, 14 días). Son de ejemplo; verifícalos en la app oficial.
 
 ## Publicar
