@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { construirHistorial, estadoMuestra, svgHistorial } from '../monitor-chart.js';
+import { construirHistorial, estadoMuestra, svgHistorial, COLORES, coberturaSuficiente, etiquetasEje } from '../monitor-chart.js';
 const ahora=Date.parse('2026-10-18T12:00:00Z');
 const row=(h,attrs)=>({t:new Date(ahora-h*3_600_000).toISOString(),...attrs});
 test('los bloqueos 403 y errores de red nunca figuran como caída',()=>{
@@ -25,7 +25,8 @@ test('muestras reales, intervalos sin datos y porcentaje sobre verificables',()=
  assert.equal(s.porcentaje,50);
  assert.equal(s.vacios,20);
  const svg=svgHistorial(s);
- assert.match(svg,/viewBox="0 0 900 162"/);
+ assert.match(svg,/viewBox="0 0 900 124"/);
+ assert.doesNotMatch(svg,/<text/,'las etiquetas del eje viven en HTML');
  assert.match(svg,/sin verificaciones/);
 });
 test('solo accesos restringidos no producen falsa tasa de estabilidad ni caídas',()=>{
@@ -41,4 +42,24 @@ test('rango de 72 horas y limitaciones de fechas',()=>{
  assert.equal(s.muestras,1);
  assert.equal(s.cuentas.up,1);
  assert.throws(()=>construirHistorial([],7,ahora),RangeError);
+});
+
+const contraste=(a,b)=>{
+ const L=h=>{const c=[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)/255).map(v=>v<=.03928?v/12.92:((v+.055)/1.055)**2.4);return .2126*c[0]+.7152*c[1]+.0722*c[2];};
+ const x=L(a),y=L(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);
+};
+test('la paleta del gráfico cumple contraste no textual 3:1 y no depende solo del color',()=>{
+ for(const [k,c] of Object.entries(COLORES)) assert.ok(contraste(c,'#f7faf8')>=3,k+' '+c+' por debajo de 3:1');
+ const s=construirHistorial([row(1,{state:'down',code:503})],24,ahora);
+ const svg=svgHistorial(s);
+ assert.match(svg,/fill="url\(#trama-down\)"/);
+ assert.match(svg,/stroke-dasharray/,'las horas vacías se dibujan con contorno');
+});
+test('cobertura y etiquetas del eje',()=>{
+ const pocas=construirHistorial([row(1,{code:403,state:'restricted'})],24,ahora);
+ assert.equal(coberturaSuficiente(pocas),false);
+ const filas=Array.from({length:24},(_,i)=>row(i+.5,{code:200,up:true}));
+ assert.equal(coberturaSuficiente(construirHistorial(filas,24,ahora)),true);
+ assert.deepEqual(etiquetasEje(24),['−24 h','−18 h','−12 h','−6 h','Ahora']);
+ assert.equal(etiquetasEje(72).length,5);
 });

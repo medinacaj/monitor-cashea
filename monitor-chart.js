@@ -34,19 +34,31 @@ export function construirHistorial(history=[], horas=24, ahora=Date.now()) {
     vacios:barras.filter(b=>ESTADOS.every(k=>b[k]===0)).length,
   };
 }
+// Paleta con contraste no textual ≥ 3:1 sobre la superficie de la gráfica (#f7faf8).
+export const COLORES = Object.freeze({up:'#1d8a5f',down:'#c0453d',restricted:'#b07d12',unknown:'#6f8597',vacio:'#7d9289'});
+export const ETIQUETAS = Object.freeze({up:'Respondió',down:'Respuesta no satisfactoria',restricted:'Acceso restringido',unknown:'No comprobado'});
+// Cobertura mínima para hablar de tendencia: al menos la mitad de las horas con muestras.
+export function coberturaSuficiente(serie) {
+  return serie.horas > 0 && (serie.horas - serie.vacios) / serie.horas >= 0.5;
+}
+// Etiquetas del eje en HTML para que mantengan un tamaño legible en móviles.
+export function etiquetasEje(horas) {
+  return [0,Math.floor(horas/4),Math.floor(horas/2),Math.floor(horas*3/4),horas]
+    .map(t => t===horas ? 'Ahora' : '−'+(horas-t)+' h');
+}
 export function svgHistorial(serie) {
   const {barras,horas}=serie;
-  const W=900,H=162,left=12,right=12,top=14,barH=105,gap=horas===24?8:3;
+  const W=900,H=124,left=12,right=12,top=14,barH=105,gap=horas===24?8:3;
   const step=(W-left-right)/barras.length;
   const width=Math.max(3,step-gap);
-  const colors={up:'#2abb83',down:'#db736c',restricted:'#eab852',unknown:'#91a6b8'};
   const fragments=[];
   for(let i=0;i<barras.length;i++) {
     const b=barras[i],x=left+step*i+gap/2;
     const n=ESTADOS.reduce((s,k)=>s+b[k],0);
     const title=new Date(b.t).toLocaleString('es-VE',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'});
     if(!n) {
-      fragments.push(`<rect x="${x.toFixed(1)}" y="${top}" width="${width.toFixed(1)}" height="${barH}" rx="3" fill="#e5ece9"><title>${title}: sin verificaciones</title></rect>`);
+      // Hueco sin muestras: contorno discontinuo, nunca un color de estado.
+      fragments.push(`<rect x="${(x+.75).toFixed(1)}" y="${top+.75}" width="${(width-1.5).toFixed(1)}" height="${barH-1.5}" rx="3" fill="none" stroke="${COLORES.vacio}" stroke-width="1.5" stroke-dasharray="4 3"><title>${title}: sin verificaciones</title></rect>`);
       continue;
     }
     let y=top+barH;
@@ -55,17 +67,13 @@ export function svgHistorial(serie) {
       if(!b[key]) continue;
       const h=barH*b[key]/n;
       y-=h;
-      const caption={up:'Respondió',down:'Respuesta no satisfactoria',restricted:'Acceso restringido',unknown:'No comprobado'}[key];
-      fragments.push(`<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${width.toFixed(1)}" height="${h.toFixed(1)}" fill="${colors[key]}" rx="2"><title>${title}: ${b[key]} × ${caption}</title></rect>`);
+      const fill=key==='down'?'url(#trama-down)':COLORES[key];
+      fragments.push(`<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${width.toFixed(1)}" height="${h.toFixed(1)}" fill="${fill}" rx="2"><title>${title}: ${b[key]} × ${ETIQUETAS[key]}</title></rect>`);
     }
   }
-  const ticks=[0,Math.floor(horas/4),Math.floor(horas/2),Math.floor(horas*3/4),horas];
-  const labels=ticks.map(t=>{
-    const x=left+(W-left-right)*t/horas;
-    const label=t===horas?'Ahora':'−'+(horas-t)+' h';
-    return `<text x="${x.toFixed(1)}" y="148" text-anchor="${t===0?'start':t===horas?'end':'middle'}" font-size="13" font-family="system-ui,sans-serif" font-weight="600" fill="#617a71">${label}</text>`;
-  }).join('');
+  // La trama diagonal distingue las respuestas no satisfactorias sin depender del color.
   return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <defs><pattern id="trama-down" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0H8V8H0Z" fill="${COLORES.down}"/><path d="M0 0V8" stroke="#7a221d" stroke-width="3"/></pattern></defs>
     <line x1="12" y1="120" x2="888" y2="120" stroke="#cedbd3" stroke-width="1"/>
-    ${fragments.join('')}${labels}</svg>`;
+    ${fragments.join('')}</svg>`;
 }

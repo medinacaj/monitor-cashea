@@ -106,3 +106,11 @@ Se retira «Respuestas satisfactorias en 24 h / Sin muestra» y «Muestras evalu
 ## V2.10 — Monitoreo en una sola sección visual
 
 «¿La web responde?» se reemplaza por **«Estado y estabilidad.»**, dentro de la única tarjeta del monitor. Allí se incluye la explicación breve de alcance, objetivo de supervisión, estado corroborado, última comprobación, datos HTTP, gráfica 24/72h, leyenda y botón de actualización. Se eliminan textos repetidos en el historial y la leyenda no interpreta HTTP 403 como caída confirmada. El monitor sigue siendo una observación del sitio web, no de los pagos ni de la app.
+
+## V2.11 — Interfaz, colores y accesibilidad
+
+- **Orden:** Calculadora → Monitoreo → Comercios (revierte el orden de V2.5, ver ADR-005). Una franja compacta sobre la calculadora resume el estado del sitio web y enlaza al historial.
+- **Monitoreo:** con menos del 50 % de horas con muestras, el resumen indica «Datos insuficientes» y la gráfica se reduce. Las etiquetas del eje pasan a HTML (legibles en móvil); paleta con contraste no textual ≥ 3:1, trama en «no satisfactoria» y contorno discontinuo en horas vacías. «Desactualizada» deja de compartir el ámbar de «acceso restringido».
+- **Calculadora:** validación por campo con `aria-invalid`; distintivo «0 % interés» en lugar de «Intereses USD 0,00»; calendario unido a la calculadora, sin columnas de interés vacías y apilado en móvil; cuota flotante en móvil mientras el resultado queda fuera de pantalla.
+- **Directorio:** ciudades como chips, fuentes plegadas por comercio; el aviso «sin verificar por sucursal» se mantiene una vez en la introducción.
+- **Sistema visual:** hoja de estilos única con tokens de color, radio y tipografía; tamaño mínimo 12 px; contraste AA verificado en Chromium/WebKit. Tipografías DM Sans y Space Grotesk alojadas en `fonts/` bajo SIL Open Font License 1.1 (licencias incluidas); el sitio ya no contacta a Google Fonts.

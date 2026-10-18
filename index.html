@@ -3,78 +3,49 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#081b1a">
-  <meta name="description" content="Monitor comunitario independiente de Cashea: estado verificable del sitio web, calculadora de cuotas sin interés, simulación comparativa y directorio de comercios.">
+  <meta name="theme-color" content="#f5f7f4">
+  <meta name="description" content="Monitor comunitario independiente de Cashea: calculadora de cuotas sin interés, simulación comparativa, estado verificable del sitio web y directorio de comercios.">
   <link rel="canonical" href="https://medinacaj.github.io/monitor-cashea/">
   <meta property="og:title" content="Monitor Cashea · Información clara, decisiones mejores">
-  <meta property="og:description" content="Consulta la web, simula tus pagos y descubre comercios. Proyecto independiente.">
+  <meta property="og:description" content="Simula tus pagos, consulta la web y descubre comercios. Proyecto independiente.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://medinacaj.github.io/monitor-cashea/">
   <meta name="robots" content="index,follow">
   <title>Monitor Cashea — Tu guía independiente</title>
-  <link rel="stylesheet" href="styles.css?v=2.10.0">
+  <link rel="preload" href="fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css?v=2.11.0">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Monitor Cashea (no oficial)","url":"https://medinacaj.github.io/monitor-cashea/","inLanguage":"es"}</script>
-  <script type="module" src="app.js?v=2.10.0"></script>
+  <script type="module" src="app.js?v=2.11.0"></script>
 </head>
 <body>
-  <a class="saltar" href="#estado">Ir al monitoreo</a>
-  <div class="independiente" role="note"><span class="mini-punto"></span> PROYECTO INDEPENDIENTE · No afiliado, respaldado ni operado por Cashea</div>
+  <a class="saltar" href="#simulador">Ir a la calculadora</a>
+  <div class="independiente" role="note"><span class="mini-punto" aria-hidden="true"></span> PROYECTO INDEPENDIENTE · No afiliado, respaldado ni operado por Cashea</div>
   <header class="navegacion">
-    <a href="#inicio" class="marca" aria-label="Monitor Cashea, inicio"><span class="marca-icono">M<span class="marca-onda">•</span></span><span>MONITOR<span class="marca-fina">/CASHEA</span></span></a>
-    <nav aria-label="Navegación principal"><a href="#estado">Monitoreo</a><a href="#simulador">Calculadora</a><a href="#directorio">Comercios</a></nav>
-    <a href="#simulador" class="nav-cta">Calcular <span aria-hidden="true">↗</span></a>
+    <a href="#inicio" class="marca" aria-label="Monitor Cashea, inicio"><span class="marca-icono" aria-hidden="true">M<span class="marca-onda">•</span></span><span>MONITOR<span class="marca-fina">/CASHEA</span></span></a>
+    <nav aria-label="Navegación principal"><a href="#simulador">Calculadora</a><a href="#estado">Monitoreo</a><a href="#directorio">Comercios</a></nav>
     <details class="mobile-nav" id="mobile-nav">
       <summary aria-label="Abrir menú de navegación"><span aria-hidden="true">☰</span> Menú</summary>
       <nav aria-label="Navegación móvil">
-        <a href="#estado">Monitoreo</a>
         <a href="#simulador">Calculadora</a>
+        <a href="#estado">Monitoreo</a>
         <a href="#directorio">Comercios</a>
       </nav>
     </details>
   </header>
   <main id="inicio" tabindex="-1">
     <div class="contenedor">
-      <section id="estado" class="seccion seccion-monitor" aria-labelledby="estado-titulo">
-        <div class="monitor-unificado" aria-label="Monitoreo del sitio web público de Cashea">
-          <header class="monitor-encabezado">
-            <p class="eyebrow">01 / MONITOREO</p>
-            <h2 id="estado-titulo">Estado y <span>estabilidad.</span></h2>
-            <p>Verificamos el sitio web público de Cashea, no la aplicación, las compras ni los pagos.</p>
-          </header>
-          <div id="estado-lista" class="estado-lista" aria-live="polite">
-            <div class="estado-espera">Consultando los últimos datos…</div>
-          </div>
-          <div class="grafica-estado-card" aria-labelledby="grafica-titulo">
-            <div class="grafica-estado-head">
-              <h3 id="grafica-titulo">Historial de verificaciones</h3>
-              <div class="grafica-periodos" role="group" aria-label="Período del historial">
-                <button type="button" data-periodo="24" aria-pressed="true">24 h</button>
-                <button type="button" data-periodo="72" aria-pressed="false">72 h</button>
-              </div>
-            </div>
-            <p id="grafica-resumen" class="grafica-resumen" aria-live="polite">Cargando historial…</p>
-            <div id="estado-grafica" class="estado-grafica" role="img" aria-label="Historial de respuestas del sitio web: cargando datos"></div>
-            <div class="grafica-leyenda" aria-label="Leyenda del historial">
-              <span><i class="grafica-punto up" aria-hidden="true"></i> Respondió</span>
-              <span><i class="grafica-punto down" aria-hidden="true"></i> Respuesta no satisfactoria</span>
-              <span><i class="grafica-punto restricted" aria-hidden="true"></i> Acceso restringido</span>
-              <span><i class="grafica-punto unknown" aria-hidden="true"></i> No comprobado</span>
-              <span><i class="grafica-punto empty" aria-hidden="true"></i> Sin verificaciones</span>
-            </div>
-            <p id="grafica-nota" class="grafica-nota">Las barras agrupan verificaciones por hora. HTTP 403 significa acceso restringido, no una caída confirmada.</p>
-          </div>
-          <div class="estado-pie">
-            <span>Verificación prevista cada 15 minutos; puede retrasarse.</span>
-            <button id="refrescar" type="button" class="enlace-boton">Actualizar datos ↻</button>
-          </div>
-        </div>
-      </section>
+      <a href="#estado" id="estado-franja" class="estado-franja unknown">
+        <i aria-hidden="true"></i>
+        <span class="estado-franja-texto"><strong>Sitio web de Cashea</strong> <span id="estado-franja-detalle">consultando el último dato…</span></span>
+        <span class="estado-franja-accion">Ver historial <span aria-hidden="true">↓</span></span>
+      </a>
 
       <section id="simulador" class="seccion calc-section" aria-labelledby="sim-titulo">
         <div class="calculadora-shell">
           <div class="calc-heading">
             <div>
-              <p class="calc-kicker">02 / CALCULADORA</p>
+              <p class="calc-kicker">01 / CALCULADORA</p>
               <h1 id="sim-titulo">Calcula tu <span>compra.</span></h1>
               <p>Ingresa el monto, el inicial y tus cuotas.</p>
             </div>
@@ -116,7 +87,7 @@
                 <input id="inicial" type="number" min="0" max="100" step="0.01" inputmode="decimal" value="40" aria-describedby="inicial-ayuda">
                 <small id="inicial-ayuda" class="input-ayuda">40 % es un ejemplo; introduce el porcentaje de tu compra.</small>
               </div>
-               <div class="campo">
+              <div class="campo">
                 <label for="dias">Días entre cuotas</label>
                 <input id="dias" type="number" inputmode="numeric" min="1" max="90" step="1" value="14">
               </div>
@@ -142,8 +113,7 @@
         </div>
         <div class="calendario-panel">
           <div class="calendario-cabecera"><div><p class="eyebrow">PLAN DE PAGOS</p><h3>Calendario de cuotas</h3></div><span>FECHAS ESTIMADAS</span></div>
-          <p class="tabla-aviso"><span aria-hidden="true">↔</span> Desliza la tabla horizontalmente para ver los importes.</p>
-          <div id="calendario" class="tabla-wrap" tabindex="0" role="region" aria-label="Calendario de pagos; desliza horizontalmente para ver las columnas"></div>
+          <div id="calendario" class="tabla-wrap" tabindex="0" role="region" aria-label="Calendario de pagos"></div>
         </div>
         <details class="calc-fuentes">
           <summary>Condiciones, fuentes y límites de la simulación</summary>
@@ -152,19 +122,57 @@
         </details>
       </section>
 
+      <section id="estado" class="seccion seccion-monitor" aria-labelledby="estado-titulo">
+        <div class="monitor-unificado" aria-label="Monitoreo del sitio web público de Cashea">
+          <header class="monitor-encabezado">
+            <p class="eyebrow">02 / MONITOREO</p>
+            <h2 id="estado-titulo">Estado y <span>estabilidad.</span></h2>
+            <p>Verificamos el sitio web público de Cashea, no la aplicación, las compras ni los pagos.</p>
+          </header>
+          <div id="estado-lista" class="estado-lista" aria-live="polite">
+            <div class="estado-espera">Consultando los últimos datos…</div>
+          </div>
+          <div class="grafica-estado-card" aria-labelledby="grafica-titulo">
+            <div class="grafica-estado-head">
+              <h3 id="grafica-titulo">Historial de verificaciones</h3>
+              <div class="grafica-periodos" role="group" aria-label="Período del historial">
+                <button type="button" data-periodo="24" aria-pressed="true">24 h</button>
+                <button type="button" data-periodo="72" aria-pressed="false">72 h</button>
+              </div>
+            </div>
+            <p id="grafica-resumen" class="grafica-resumen" aria-live="polite">Cargando historial…</p>
+            <div id="estado-grafica" class="estado-grafica" role="img" aria-label="Historial de respuestas del sitio web: cargando datos"></div>
+            <div id="grafica-eje" class="grafica-eje" aria-hidden="true"></div>
+            <ul class="grafica-leyenda" aria-label="Leyenda del historial">
+              <li><i class="grafica-punto up" aria-hidden="true"></i> Respondió</li>
+              <li><i class="grafica-punto down" aria-hidden="true"></i> Respuesta no satisfactoria</li>
+              <li><i class="grafica-punto restricted" aria-hidden="true"></i> Acceso restringido</li>
+              <li><i class="grafica-punto unknown" aria-hidden="true"></i> No comprobado</li>
+              <li><i class="grafica-punto empty" aria-hidden="true"></i> Sin verificaciones</li>
+            </ul>
+            <p id="grafica-nota" class="grafica-nota">Las barras agrupan verificaciones por hora. HTTP 403 significa acceso restringido, no una caída confirmada.</p>
+          </div>
+          <div class="estado-pie">
+            <span>Verificación prevista cada 15 minutos; puede retrasarse.</span>
+            <button id="refrescar" type="button" class="enlace-boton">Actualizar datos ↻</button>
+          </div>
+        </div>
+      </section>
+
       <section id="directorio" class="seccion" aria-labelledby="dir-titulo">
         <div class="titulo-seccion"><div><p class="eyebrow">03 / EXPLORA MARCAS</p><h2 id="dir-titulo">Dónde <span>buscar.</span></h2></div><span class="seccion-indice">DIRECTORIO / FUENTES PÚBLICAS</span></div>
         <p class="intro">Una guía de marcas mencionadas en prensa y fuentes externas. <strong>No verifica aceptación actual por tienda o sucursal.</strong> Confirma cada comercio directamente en la app de Cashea.</p>
         <div class="filtros">
           <div class="campo filtro-busqueda"><label for="q">Buscar comercio</label><input id="q" type="search" placeholder="Ej. Locatel, Damasco, Nike…" autocomplete="off"></div>
-          <div class="campo"><label for="ciudad">Ciudad mencionada</label><div class="select-control"><select id="ciudad"><option value="">Todas las ciudades</option></select></div></div>
           <div class="campo"><label for="categoria">Categoría</label><div class="select-control"><select id="categoria"><option value="">Todas las categorías</option></select></div></div>
+          <div class="campo campo-ciudades"><span class="campo-etiqueta" id="ciudad-etiqueta">Ciudad mencionada</span><div id="ciudad-chips" class="chips" role="group" aria-labelledby="ciudad-etiqueta"><button type="button" data-ciudad="" aria-pressed="true">Todas</button></div></div>
         </div>
         <div class="directorio-barra"><p id="contador" aria-live="polite">Cargando comercios…</p><span id="nota-datos">Fuentes externas, consulta orientativa</span></div>
         <ul id="lista" class="lista-comercios"></ul>
       </section>
     </div>
   </main>
-  <footer class="pie"><div class="pie-interior"><div><div class="marca pie-marca"><span class="marca-icono">M<span class="marca-onda">•</span></span><span>MONITOR<span class="marca-fina">/CASHEA</span></span></div><p>Proyecto abierto e independiente de orientación pública.</p></div><div class="pie-links"><a href="https://github.com/medinacaj/monitor-cashea" target="_blank" rel="noopener noreferrer">Ver código ↗</a><a href="https://github.com/medinacaj/monitor-cashea/issues/new" target="_blank" rel="noopener noreferrer">Sugerir una corrección ↗</a></div></div><p class="pie-legal">No afiliado a Cashea. Las marcas pertenecen a sus respectivos titulares. No recopilamos contraseñas ni procesamos pagos.</p></footer>
+  <div id="cuota-flotante" class="cuota-flotante" aria-hidden="true" hidden><span>Tu cuota estimada</span><strong id="cuota-flotante-monto"></strong></div>
+  <footer class="pie"><div class="pie-interior"><div><div class="marca pie-marca"><span class="marca-icono" aria-hidden="true">M<span class="marca-onda">•</span></span><span>MONITOR<span class="marca-fina">/CASHEA</span></span></div><p>Proyecto abierto e independiente de orientación pública.</p></div><div class="pie-links"><a href="https://github.com/medinacaj/monitor-cashea" target="_blank" rel="noopener noreferrer">Ver código ↗</a><a href="https://github.com/medinacaj/monitor-cashea/issues/new" target="_blank" rel="noopener noreferrer">Sugerir una corrección ↗</a></div></div><p class="pie-legal">No afiliado a Cashea. Las marcas pertenecen a sus respectivos titulares. No recopilamos contraseñas ni procesamos pagos.</p></footer>
 </body>
 </html>
