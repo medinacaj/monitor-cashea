@@ -53,3 +53,9 @@ Orden: Monitoreo → Calculadora → Comercios. Sin panel secundario «Resumen d
 ## V2.6 — Incidencia Safari/iOS
 
 El usuario reportó flechas triangulares grandes y barras superpuestas sobre dos selectores en un iPhone. Se normalizan todos los desplegables (tipo, nivel, ciudad, categoría) con apariencia nativa desactivada, una única flecha CSS y contraste controlado. Se añade verificación programática de selectores en Chromium y WebKit, navegación y vista de móviles; no afirmar que una emulación equivale a Safari en iPhone físico.
+
+## V2.7 — Gráfica 24/72h y eliminación del nivel orientativo
+
+- Gráfica horaria de muestras reales de `status.json`, distingue satisfactoria/no satisfactoria/restringida/desconocida/vacía. Si 403, NO inferir caída.
+- Sin nivel orientativo ni inicial automatizada por nivel; 40 % solo valor editable de ejemplo. Se conserva el modo de cuotas libre, referencia de plazos y calendario.
+- Pendiente: ampliar corroboración del estado desde puntos diferentes antes de lanzar alertas de caída verificadas (issue #6).

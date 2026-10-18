@@ -1,4 +1,5 @@
 import { calcularPlan } from './finance.js';
+import { construirHistorial, svgHistorial } from './monitor-chart.js';
 import { CUOTAS_MIN, CUOTAS_MAX, modoTrasEditarCuotas, ajustarCuotas } from './calculator-options.js';
 
 const $ = id => document.getElementById(id);
@@ -9,11 +10,10 @@ const fechas = s => {
   const [y, m, d] = s.split('-').map(Number);
   return new Intl.DateTimeFormat('es-VE', { day:'2-digit', month:'short', year:'numeric' }).format(new Date(y, m - 1, d));
 };
-const levels = {1:60,2:50,3:40,4:40,5:40,6:40};
 const notas = {
-  principal: 'Línea Principal: normalmente 3 cuotas sin interés. El porcentaje de inicial es editable y puede variar según nivel, comercio y promociones.',
+  principal: 'Línea Principal: referencia de 3 cuotas sin interés. La inicial elegida es ilustrativa; confirma las condiciones en Cashea.',
   cotidiana: 'Línea Cotidiana: una cuota sin interés a 14 días. Comprueba en la app tu línea disponible y los comercios participantes.',
-  mas: 'Modo Más Cuotas: 6 cuotas desde nivel 3, 9 desde nivel 5 y 12 desde nivel 6, en productos online seleccionados. Las páginas oficiales publican importes mínimos diferentes: verifica las condiciones actuales y tu elegibilidad en la app. No es combinable con otras reducciones de inicial.',
+  mas: 'Modo Más Cuotas: referencia de 6, 9 o 12 cuotas para productos elegibles. Comprueba tu oferta en Cashea; sus páginas publican importes mínimos distintos.',
   personalizada: 'Simulación libre: las cuotas elegidas son orientativas y no una oferta oficial.',
   comparar: 'Comparador de un préstamo hipotético: la tasa anual es editable y NO corresponde a Cashea. Los resultados no constituyen oferta financiera.'
 };
@@ -37,7 +37,6 @@ function cambiarModo(preservarCuotas = false) {
   const m = $('modalidad').value;
   $('comparar-extra').hidden = m !== 'comparar';
   $('atrasos').hidden = m === 'comparar' || m === 'personalizada';
-  $('nivel').disabled = m === 'comparar';
   $('dias').readOnly = !['personalizada','comparar'].includes(m);
   // La cantidad siempre se puede editar. Al editar un preset oficial pasa a "Personalizado".
   $('cuotas').readOnly = false;
@@ -67,17 +66,14 @@ function establecerCuotas(numero) {
   $('cuotas').value = ajustarCuotas(numero);
   cuotasIntroducidas();
 }
-function comprobarElegibilidad(m, monto, n, nivel) {
-  if (m === 'personalizada') return '';
+function comprobarElegibilidad(m, n) {
   if (m !== 'mas') return '';
   if (![6,9,12].includes(n)) return 'Modo Más Cuotas: selecciona 6, 9 o 12 cuotas.';
-  const minNivel = n === 6 ? 3 : n === 9 ? 5 : 6;
-  const aviso = 'Las dos páginas oficiales muestran montos mínimos diferentes. Verifica en la app si este producto permite el Modo Más Cuotas.';
-  return (nivel < minNivel ? 'Para estas cuotas se anuncia desde nivel ' + minNivel + '. ' : '') + aviso;
+  return 'Los importes mínimos de Más Cuotas publicados por Cashea no coinciden entre páginas. Esta simulación no confirma elegibilidad.';
 }
 function simular() {
   const m = $('modalidad').value, monto = Number($('monto').value),
-    cuotas = Number($('cuotas').value), nivel = Number($('nivel').value);
+    cuotas = Number($('cuotas').value);
   try {
     const requeridos = ['monto','inicial','cuotas','dias','fecha'];
     if (m === 'comparar') requeridos.push('tasa');
@@ -90,7 +86,7 @@ function simular() {
       cuotasAtrasadas: ['comparar','personalizada'].includes(m) ? 0 : Number($('cuotas-vencidas').value),
       fecha: $('fecha').value
     });
-    const elegible = comprobarElegibilidad(m, monto, cuotas, nivel);
+    const elegible = comprobarElegibilidad(m, cuotas);
     const primerPago = plan.filas[0];
     const costoAdicional = plan.interesesC + plan.recargosC;
     $('resultado').innerHTML = `
@@ -121,7 +117,6 @@ function simular() {
   }
 }
 $('modalidad').addEventListener('change', () => cambiarModo());
-$('nivel').addEventListener('change', () => { $('inicial').value = levels[$('nivel').value]; simular(); });
 $('cuotas').addEventListener('input', cuotasIntroducidas);
 $('cuotas-menos').addEventListener('click', () => establecerCuotas(Number($('cuotas').value) - 1));
 $('cuotas-mas').addEventListener('click', () => establecerCuotas(Number($('cuotas').value) + 1));
@@ -171,8 +166,42 @@ Promise.all([
 });
 ['q','ciudad','categoria'].forEach(id => $(id).addEventListener('input', pintarComercios));
 
+// La gráfica muestra observaciones del monitor; no extrapola el servicio Cashea.
+let periodoHistorial = 24;
+let ultimoEstado = null;
+function pintarGraficaEstado(data) {
+  const target = Array.isArray(data?.targets) ? data.targets.find(t => Array.isArray(t?.history)) : null;
+  const serie = construirHistorial(target?.history || [], periodoHistorial);
+  const actualizado = Date.parse(data?.updated);
+  const datosVencidos = !Number.isFinite(actualizado) ||
+    Date.now() - actualizado > 3_600_000 || actualizado > Date.now() + 300_000;
+  const total = serie.muestras;
+  const respuesta = serie.evaluables ? serie.porcentaje.toFixed(1) + ' %' : 'Sin datos evaluables';
+  $('grafica-resumen').textContent = total
+    ? respuesta + ' de respuestas satisfactorias evaluables · ' + total + ' verificaciones'
+    : 'Sin verificaciones en las últimas ' + periodoHistorial + ' horas';
+  $('estado-grafica').innerHTML = svgHistorial(serie);
+  $('estado-grafica').setAttribute('aria-label',
+    'Historial de ' + periodoHistorial + ' horas. ' + serie.cuentas.up +
+    ' respuestas satisfactorias, ' + serie.cuentas.down +
+    ' no satisfactorias, ' + serie.cuentas.restricted +
+    ' accesos restringidos, ' + serie.cuentas.unknown +
+    ' sin comprobar y ' + serie.vacios + ' intervalos sin muestras');
+  $('grafica-nota').textContent = (datosVencidos ? 'Datos desactualizados. ' : '') +
+    'Cada barra representa una hora; el color refleja las verificaciones registradas en ella. ' +
+    'HTTP 403 significa acceso restringido, no una caída confirmada. No mide la app ni los pagos.';
+}
+document.querySelectorAll('[data-periodo]').forEach(btn => btn.addEventListener('click', () => {
+  periodoHistorial = Number(btn.dataset.periodo);
+  document.querySelectorAll('[data-periodo]').forEach(b =>
+    b.setAttribute('aria-pressed', String(Number(b.dataset.periodo) === periodoHistorial)));
+  pintarGraficaEstado(ultimoEstado);
+}));
+
 // Chequeo remoto: mide sitio web observable, no transacciones ni la app.
 function pintarEstado(data) {
+  ultimoEstado = data;
+  pintarGraficaEstado(data);
   const targets = Array.isArray(data?.targets) ? data.targets : [];
   if (!targets.length) {
     $('estado-lista').innerHTML = '<div class="estado-espera"><strong>Monitoreo pendiente de primera ejecución</strong><p>La tarea automatizada aún no ha publicado resultados. Puedes revisar GitHub Actions para activarla.</p></div>';
@@ -213,6 +242,8 @@ async function actualizarEstado() {
     const data = await r.json();
     pintarEstado(data);
   } catch {
+    ultimoEstado = null;
+    pintarGraficaEstado(null);
     $('estado-lista').innerHTML = '<div class="estado-espera"><strong>Datos todavía no disponibles</strong><p>El chequeo automático debe ejecutarse por primera vez en GitHub Actions. Esto no indica que Cashea esté caído.</p></div>';
   } finally {
     b.disabled = false; b.textContent = 'Actualizar datos ↻';
