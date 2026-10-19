@@ -22,7 +22,7 @@ test('No dibujar dos veces el historial y mantener estados HTTP honestos',async(
   assert.doesNotMatch(js,/class="historial" aria-label="Últimos chequeos"/);
   assert.doesNotMatch(js,/const barras = ult24/);
   assert.match(js,/pintarGraficaEstado\(data\)/);
-  assert.match(js,/HTTP 403 significa acceso restringido/);
+  assert.match(js,/HTTP 403[^\n]*no (?:confirma|demuestra|implica|significa)[^\n]*caída/i, 'la interfaz debe advertir que un 403 no prueba una caída');
 });
 
 test('la gráfica sustituye la métrica duplicada de 24 horas',async()=>{
@@ -61,5 +61,5 @@ test('el texto legal no se repite en el encabezado y la gráfica',async()=>{
   assert.doesNotMatch(js,/No mide la app ni los pagos/);
   assert.doesNotMatch(js,/Solo observación HTTP; no verifica app o pagos/);
   assert.doesNotMatch(js,/Sin datos evaluables/);
-  assert.match(js,/HTTP 403 significa acceso restringido/);
+  assert.match(js,/HTTP 403[^\n]*no (?:confirma|demuestra|implica|significa)[^\n]*caída/i, 'la interfaz debe advertir que un 403 no prueba una caída');
 });
