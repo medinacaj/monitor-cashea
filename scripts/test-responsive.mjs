@@ -20,7 +20,7 @@ for (const profile of profiles) {
     await page.locator('.res-cuota-monto').waitFor({timeout:12000});
     const details=await page.evaluate(()=>{
       const rect=sel=>{const b=document.querySelector(sel).getBoundingClientRect();return {left:b.left,right:b.right,top:b.top,bottom:b.bottom,width:b.width};};
-      const selectors=['modalidad','ciudad','categoria'].map(id=>{
+      const selectors=['modalidad','categoria'].map(id=>{
         const el=document.getElementById(id),style=getComputedStyle(el);
         const parent=el.closest('.select-control');
         return {id,appearance:style.appearance,webkitAppearance:style.webkitAppearance,
@@ -50,10 +50,36 @@ for (const profile of profiles) {
         statusCardBorder:getComputedStyle(document.querySelector('.monitor-unificado .estado-card')).borderTopWidth,
         chartCardBorder:getComputedStyle(document.querySelector('.monitor-unificado .grafica-estado-card')).borderLeftWidth,
         selectors,
+        // Contraste WCAG AA de cada texto visible contra su fondo efectivo. En fondos con degradado
+        // se usa el color opaco menos favorable de sus paradas.
+        contrast:(()=>{
+          const parse=c=>{const m=c.match(/[\d.]+/g);return m?m.map(Number):[0,0,0,0];};
+          const lum=([r,g,b])=>{const f=v=>{v/=255;return v<=.03928?v/12.92:((v+.055)/1.055)**2.4;};return .2126*f(r)+.7152*f(g)+.0722*f(b);};
+          const ratio=(a,b)=>{const x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);};
+          const fondos=el=>{for(let e=el;e;e=e.parentElement){const st=getComputedStyle(e);const c=parse(st.backgroundColor);
+            if((c[3]??1)>=.9)return [c];
+            if(st.backgroundImage!=='none'){const stops=[...st.backgroundImage.matchAll(/rgba?\([^)]*\)/g)].map(m=>parse(m[0])).filter(x=>(x[3]??1)===1);if(stops.length)return stops;}}
+            return [[255,255,255]];};
+          const fallos=[];const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+          while(walker.nextNode()){const el=walker.currentNode.parentElement;if(!walker.currentNode.textContent.trim()||!el)continue;
+            const b=el.getBoundingClientRect(),st=getComputedStyle(el);
+            if(!b.width||st.visibility==='hidden'||el.closest('[aria-hidden="true"]:not(#grafica-eje)')||el.closest('.saltar'))continue;
+            const size=parseFloat(st.fontSize),minimo=(size>=24||(size>=18.66&&+st.fontWeight>=700))?3:4.5;
+            const peor=Math.min(...fondos(el).map(f=>ratio(parse(st.color),f)));
+            if(peor<minimo)fallos.push(walker.currentNode.textContent.trim().slice(0,30)+' '+peor.toFixed(2));}
+          return fallos;
+        })(),
+        minFont:Math.min(...[...document.querySelectorAll('body *')].filter(e=>e.childNodes.length&&[...e.childNodes].some(n=>n.nodeType===3&&n.textContent.trim())&&e.getBoundingClientRect().width).map(e=>parseFloat(getComputedStyle(e).fontSize))),
+        axisFont:parseFloat(getComputedStyle(document.querySelector('#grafica-eje span')||document.body).fontSize),
+        tableOverflow:(()=>{const t=document.querySelector('#calendario');return t.scrollWidth-t.clientWidth;})(),
       };
     });
     assert.equal(details.width,width,'viewport');
-    assert.deepEqual(details.sectionIds,['estado','simulador','directorio'],'orden de secciones');
+    assert.deepEqual(details.sectionIds,['simulador','estado','directorio'],'orden de secciones');
+    assert.deepEqual(details.contrast,[],'textos sin contraste AA');
+    assert.ok(details.minFont>=12,'texto menor de 12px: '+details.minFont);
+    assert.ok(details.axisFont>=12,'eje del gráfico ilegible');
+    if(width<=620) assert.ok(details.tableOverflow<=1,'el calendario requiere desplazamiento horizontal en móvil');
     assert.ok(details.hasStatusInsidePanel,'estado no integrado');
     assert.ok(details.hasChartInsidePanel,'gráfico no integrado');
     assert.ok(details.hasTitleInsidePanel&&details.hasIntroInsidePanel&&details.hasRefreshInsidePanel,
@@ -115,6 +141,26 @@ for (const profile of profiles) {
     await page.locator('#q').fill('Locatel');
     await page.waitForFunction(()=>document.querySelector('#contador')?.textContent?.includes('de 21'),null,{timeout:12000});
     assert.ok((await page.locator('#lista li').count())>=1,'filtro de comercios no funciona');
+    // Validación por campo: el error se asocia al control exacto.
+    await page.locator('#inicial').fill('150');
+    await page.locator('#inicial').dispatchEvent('input');
+    assert.equal(await page.locator('#inicial').getAttribute('aria-invalid'),'true');
+    assert.match(await page.locator('#inicial').getAttribute('aria-describedby'),/error-inicial/);
+    await page.locator('#inicial').fill('40');
+    await page.locator('#inicial').dispatchEvent('input');
+    assert.equal(await page.locator('#error-inicial').count(),0,'el error no desaparece al corregir');
+    // Filtro por ciudad mediante chips.
+    await page.locator('#q').fill('');
+    await page.locator('#ciudad-chips [data-ciudad="Maracaibo"]').click();
+    assert.equal(await page.locator('#ciudad-chips [data-ciudad="Maracaibo"]').getAttribute('aria-pressed'),'true');
+    assert.match(await page.locator('#contador').textContent(),/ de 21/);
+    // Cuota flotante: solo en móvil, con los controles a la vista y el resultado fuera de pantalla.
+    await page.evaluate(()=>window.scrollTo(0,document.querySelector('#monto').getBoundingClientRect().top+scrollY-120));
+    await page.locator('#cuotas-mas').click();
+    await page.waitForTimeout(250);
+    const resultadoVisible=await page.evaluate(()=>{const r=document.querySelector('#resultado').getBoundingClientRect();return r.top<innerHeight&&r.bottom>0;});
+    if(width<=760&&!resultadoVisible) assert.ok(await page.locator('#cuota-flotante').isVisible(),'cuota flotante ausente');
+    if(width>760) assert.ok(await page.locator('#cuota-flotante').isHidden(),'cuota flotante en escritorio');
     console.log('OK '+profile.name+' '+width+' px · selects y formularios');
    }catch(error){
     const entry=profile.name+' '+width+'px: '+error.message;

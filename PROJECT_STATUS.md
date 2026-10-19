@@ -1,6 +1,6 @@
 # Monitor Cashea — seguimiento del proyecto
 
-**Revisión:** 18 de octubre de 2026 · **Fase:** V2.2, calculadora interactiva · **Alcance:** sitio comunitario y no oficial.
+**Revisión:** 18 de octubre de 2026 · **Fase:** V2.11, interfaz y accesibilidad · **Alcance:** sitio comunitario y no oficial.
 
 | Área | Estado y límite |
 |---|---|
@@ -71,3 +71,7 @@ Eliminadas las dos métricas redundantes de respuestas satisfactorias y muestras
 ## V2.10 — Sección visual de monitoreo consolidada
 
 El título «Estado y estabilidad.» y la explicación del alcance pasan dentro de la misma tarjeta que el estado, histórico y botones. Se suprimen leyendas textuales duplicadas; la clasificación HTTP restringida sigue intacta. Pruebas fuente y de navegador validan encabezado, gráfico y acciones dentro de una única superficie responsive.
+
+## V2.11 — Interfaz, colores y accesibilidad
+
+Calculadora primero con franja de estado (ADR-005), validación por campo, calendario apilado en móvil y sin columnas vacías, cuota flotante móvil, chips de ciudad y fuentes plegadas en el directorio. Hoja de estilos reescrita con tokens; 0 textos por debajo de AA y tamaño mínimo de 12 px, comprobados en `scripts/test-responsive.mjs`. Paleta del gráfico ≥ 3:1 con trama y contorno para no depender solo del color. Tipografías alojadas en `fonts/` (OFL). Pendiente: revisión visual en iPhone físico y simulación de daltonismo con herramienta dedicada.
