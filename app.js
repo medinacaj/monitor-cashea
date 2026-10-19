@@ -1,5 +1,6 @@
 import { calcularPlan } from './finance.js';
 import { construirHistorial, svgHistorial, coberturaSuficiente, etiquetasEje } from './monitor-chart.js';
+import { calcularCobertura } from './monitor-health.js';
 import { CUOTAS_MIN, CUOTAS_MAX, modoTrasEditarCuotas, ajustarCuotas, validarSimulacion } from './calculator-options.js';
 
 const $ = id => document.getElementById(id);
@@ -263,7 +264,15 @@ function pintarGraficaEstado(data) {
   const target = Array.isArray(data?.targets) ? data.targets.find(t => Array.isArray(t?.history)) : null;
   const serie = construirHistorial(target?.history || [], periodoHistorial);
   const total = serie.muestras;
-  const suficiente = coberturaSuficiente(serie);
+  const salud = calcularCobertura(target?.history || [], periodoHistorial);
+  const suficiente = coberturaSuficiente(serie) && salud.suficiente;
+  const minutos = salud.edadMin === null ? 'sin fecha de comprobación' :
+    salud.edadMin < 60 ? 'hace ' + salud.edadMin + ' min' :
+    'hace ' + Math.floor(salud.edadMin / 60) + ' h';
+  $('monitor-salud').textContent = 'Cobertura del monitor: ' + salud.registradas +
+    ' de ' + salud.previsto + ' comprobaciones previstas (' + salud.cobertura + ' %)' +
+    ' · última muestra ' + minutos +
+    (salud.retrasado ? ' · monitor retrasado o sin datos recientes' : '');
   $('grafica-resumen').textContent = !total
     ? 'Sin verificaciones en las últimas ' + periodoHistorial + ' horas'
     : suficiente
@@ -279,7 +288,7 @@ function pintarGraficaEstado(data) {
     ' accesos restringidos, ' + serie.cuentas.unknown +
     ' sin comprobar y ' + serie.vacios + ' intervalos sin muestras');
   $('grafica-nota').textContent =
-    'Cada barra agrupa verificaciones por hora. HTTP 403 significa acceso restringido, no una caída confirmada.';
+    'Cada barra agrupa respuestas por hora. La cobertura indica observaciones registradas, no la disponibilidad de Cashea. HTTP 403 no confirma una caída.';
 }
 document.querySelectorAll('[data-periodo]').forEach(btn => btn.addEventListener('click', () => {
   periodoHistorial = Number(btn.dataset.periodo);

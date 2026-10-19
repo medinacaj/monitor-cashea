@@ -1,9 +1,11 @@
 // Comprueba exclusivamente si el sitio web público responde. NO certifica la app ni los pagos.
 import { readFile, writeFile } from 'node:fs/promises';
 import { clasificarHttp, corroborarSitio } from './status-core.mjs';
+import { obtenerObservacionExterna } from './secondary-observer.mjs';
 const TARGETS_FILE = process.env.TARGETS_FILE || 'targets.json';
 const STATUS_FILE = process.env.STATUS_FILE || 'status.json';
-const MAX_HISTORY = 288; // Aproximadamente 72 horas si se ejecuta cada 15 minutos
+const MAX_HISTORY = 288; // 72 h máximo a la cadencia nominal de 15 min
+const MAX_AGE_MS = 72*3_600_000;
 const TIMEOUT_MS = 10000;
 async function readJson(path, fallback) {
   try { return JSON.parse(await readFile(path, 'utf8')); } catch { return fallback; }
@@ -29,11 +31,22 @@ const result = {updated:new Date().toISOString(),targets:[]};
 for (const target of targets) {
   if (!target || typeof target.url !== 'string' || typeof target.name !== 'string') throw Error('Objetivo inválido');
   const old = (previous.targets || []).find(x => x.url === target.url);
-  const history = old && Array.isArray(old.history) ? old.history.slice(-MAX_HISTORY+1) : [];
   const current = await probe(target.url);
+  const ahora=Date.parse(current.t);
+  const history=(old && Array.isArray(old.history) ? old.history : []).filter(h=>{
+    const t=Date.parse(h?.t);
+    return Number.isFinite(t)&&t>=ahora-MAX_AGE_MS&&t<=ahora;
+  });
   history.push(current);
-  const corroboration = corroborarSitio([{provider:'github-actions', authorized:true, ...current}]);
-  result.targets.push({name:target.name,url:target.url,current,history,corroboration});
+  const trimmed=history.slice(-MAX_HISTORY);
+  const primary={provider:'github-actions',authorized:true,...current};
+  let secondary=null;
+  try {secondary=await obtenerObservacionExterna(target.url);}
+  catch(e){console.warn('Observador independiente no disponible: '+e.message);}
+  const signals=secondary?[primary,secondary]:[primary];
+  const corroboration=corroborarSitio(signals);
+  const observers=signals.map(x=>({provider:x.provider,t:x.t,state:x.state}));
+  result.targets.push({name:target.name,url:target.url,current,history:trimmed,corroboration,observers});
   console.log(`${target.url} -> ${current.state.toUpperCase()} (HTTP ${current.code}) ${current.ms}ms`);
 }
 await writeFile(STATUS_FILE, JSON.stringify(result,null,2) + '\n');

@@ -75,3 +75,10 @@ El título «Estado y estabilidad.» y la explicación del alcance pasan dentro 
 ## V2.11 — Interfaz, colores y accesibilidad
 
 Calculadora primero con franja de estado (ADR-005), validación por campo, calendario apilado en móvil y sin columnas vacías, cuota flotante móvil, chips de ciudad y fuentes plegadas en el directorio. Hoja de estilos reescrita con tokens; 0 textos por debajo de AA y tamaño mínimo de 12 px, comprobados en `scripts/test-responsive.mjs`. Paleta del gráfico ≥ 3:1 con trama y contorno para no depender solo del color. Tipografías alojadas en `fonts/` (OFL). Pendiente: revisión visual en iPhone físico y simulación de daltonismo con herramienta dedicada.
+
+## V2.12 — Cobertura instrumental y segundo observador preparado
+
+- Métrica verificable de ejecución de comprobaciones frente a las previstas; no confundir disponibilidad del monitor con disponibilidad del sitio.
+- Cron desplazado fuera del minuto cero; historial acotado por fecha a 72h.
+- Segundo observador autenticado y de red ajena: código y contrato documentados, **sin proveedor configurado ni segunda señal real hasta autorización y secreto**. Issue #6 permanece abierto.
+- Protección de main y publicación de datos fuera de main aún requieren migración de GitHub Pages/configuración de repositorio sin cortar disponibilidad, issue #7.

@@ -27,6 +27,8 @@ jobs:
           node --check calculator-options.js
           node --check finance.js
           node --check monitor-chart.js
+          node --check monitor-health.js
+          node --check scripts/secondary-observer.mjs
           node --check scripts/check.mjs
       - name: Validar directorio
         run: npm run validate:data

@@ -7,3 +7,8 @@ Sitio estático sin dependencias de producción ni backend. `index.html`, `style
 - Separar código de aplicación, datos, pruebas y automatización.
 - Los cambios en deploy/monitorización deben verificarse con especial cuidado.
 - Consultar `README.md` y el código actual como fuentes más recientes; este mapa es orientativo, no un inventario exhaustivo.
+
+
+## Salud del monitoreo y observador opcional
+
+`monitor-health.js` calcula observaciones/ventanas programadas y último dato, no disponibilidad de Cashea. `scripts/secondary-observer.mjs` acepta un feed externo autorizado y verificado; **no hay un segundo proveedor activo por defecto**. Revisar `docs/INDEPENDENT_MONITOR.md`. Las observaciones siguen almacenándose en `status.json` sobre `main` hasta migrar publicación y protección de rama conjuntamente para no interrumpir GitHub Pages.

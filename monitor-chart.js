@@ -39,7 +39,10 @@ export const COLORES = Object.freeze({up:'#1d8a5f',down:'#c0453d',restricted:'#b
 export const ETIQUETAS = Object.freeze({up:'Respondió',down:'Respuesta no satisfactoria',restricted:'Acceso restringido',unknown:'No comprobado'});
 // Cobertura mínima para hablar de tendencia: al menos la mitad de las horas con muestras.
 export function coberturaSuficiente(serie) {
-  return serie.horas > 0 && (serie.horas - serie.vacios) / serie.horas >= 0.5;
+  // Avoid claiming a meaningful trend from just one sample per observed hour.
+  const observadas=serie.horas-serie.vacios;
+  const previstas=serie.horas*4; // nominal 15-minute schedule
+  return serie.horas>0 && observadas/serie.horas>=0.5 && serie.muestras/previstas>=0.5;
 }
 // Etiquetas del eje en HTML para que mantengan un tamaño legible en móviles.
 export function etiquetasEje(horas) {
