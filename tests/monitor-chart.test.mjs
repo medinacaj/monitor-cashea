@@ -58,7 +58,7 @@ test('la paleta del gráfico cumple contraste no textual 3:1 y no depende solo d
 test('cobertura y etiquetas del eje',()=>{
  const pocas=construirHistorial([row(1,{code:403,state:'restricted'})],24,ahora);
  assert.equal(coberturaSuficiente(pocas),false);
- const filas=Array.from({length:24},(_,i)=>row(i+.5,{code:200,up:true}));
+ const filas=Array.from({length:96},(_,i)=>row((i+.5)/4,{code:200,up:true}));
  assert.equal(coberturaSuficiente(construirHistorial(filas,24,ahora)),true);
  assert.deepEqual(etiquetasEje(24),['−24 h','−18 h','−12 h','−6 h','Ahora']);
  assert.equal(etiquetasEje(72).length,5);

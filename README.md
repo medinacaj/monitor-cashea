@@ -114,3 +114,9 @@ Se retira «Respuestas satisfactorias en 24 h / Sin muestra» y «Muestras evalu
 - **Calculadora:** validación por campo con `aria-invalid`; distintivo «0 % interés» en lugar de «Intereses USD 0,00»; calendario unido a la calculadora, sin columnas de interés vacías y apilado en móvil; cuota flotante en móvil mientras el resultado queda fuera de pantalla.
 - **Directorio:** ciudades como chips, fuentes plegadas por comercio; el aviso «sin verificar por sucursal» se mantiene una vez en la introducción.
 - **Sistema visual:** hoja de estilos única con tokens de color, radio y tipografía; tamaño mínimo 12 px; contraste AA verificado en Chromium/WebKit. Tipografías DM Sans y Space Grotesk alojadas en `fonts/` bajo SIL Open Font License 1.1 (licencias incluidas); el sitio ya no contacta a Google Fonts.
+
+## V2.12 — Calidad del monitor y corroboración opcional
+
+La gráfica muestra **cobertura del propio monitor** en 24/72 horas: observaciones registradas frente a comprobaciones previstas (96/288 a 15 min), tiempo desde la última muestra y aviso de retraso. Esto **no es un porcentaje de disponibilidad de Cashea**. La tendencia requiere ahora al menos 50 % de observaciones previstas y cobertura de al menos la mitad de las horas; datos insuficientes no se interpretan como caídas.
+
+El cron se desplazó a los minutos 07, 22, 37 y 52 para evitar el minuto 00, aunque GitHub Actions puede retrasar o saltar ejecuciones. El historial conserva solo las últimas 72h por fecha y máximo 288 registros. Se añadió el contrato opcional de segundo observador **inactivo por defecto** en [docs/INDEPENDENT_MONITOR.md](docs/INDEPENDENT_MONITOR.md), con autorización explícita y sin introducir señales ficticias.

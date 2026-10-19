@@ -399,3 +399,8 @@ tbody tr:last-child td{border-bottom:0}
   html{scroll-behavior:auto}
   *{transition:none!important;animation:none!important}
 }
+
+/* V2.12 — health of the observer, not unsupported Cashea uptime claims. */
+.monitor-salud{color:var(--muted);font:600 var(--fs-sm)/1.65 var(--font-body);margin:0 0 11px;overflow-wrap:anywhere}
+#estado .monitor-unificado .grafica-resumen{margin-bottom:3px}
+@media(max-width:620px){.monitor-salud{font-size:var(--fs-xs);line-height:1.7;margin-bottom:12px}}

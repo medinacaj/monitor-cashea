@@ -47,6 +47,7 @@ for (const profile of profiles) {
         footer:rect('.monitor-unificado .estado-pie'),
         noOldPercentage:!document.querySelector('.monitor-unificado .estado-metricas'),
         lastCheckLabel:document.querySelector('.monitor-unificado .estado-ultima')?.textContent||'',
+        monitorCoverage:document.querySelector('#monitor-salud')?.textContent||'',
         statusCardBorder:getComputedStyle(document.querySelector('.monitor-unificado .estado-card')).borderTopWidth,
         chartCardBorder:getComputedStyle(document.querySelector('.monitor-unificado .grafica-estado-card')).borderLeftWidth,
         selectors,
@@ -88,6 +89,7 @@ for (const profile of profiles) {
     assert.ok(details.footer.top>=details.timeline.bottom-1,'botón fuera de la sección');
     assert.ok(details.noOldPercentage,'continúa el bloque de porcentajes redundantes');
     assert.match(details.lastCheckLabel,/Última comprobación/,'falta fecha de comprobación');
+    assert.match(details.monitorCoverage,/Cobertura del monitor:/,'no se muestra la cobertura');
     assert.equal(details.statusCardBorder,'0px','la tarjeta del estado tiene un borde duplicado');
     assert.equal(details.chartCardBorder,'0px','la gráfica tiene un borde duplicado');
     assert.ok(details.doc<=width+1,'scroll horizontal no deseado: '+JSON.stringify(details));

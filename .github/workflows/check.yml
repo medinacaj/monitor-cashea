@@ -2,7 +2,7 @@ name: Comprobar sitio público
 
 on:
   schedule:
-    - cron: '*/15 * * * *'
+    - cron: '7,22,37,52 * * * *'
   workflow_dispatch:
   push:
     branches: [main]
@@ -10,6 +10,7 @@ on:
       - '.github/workflows/check.yml'
       - 'scripts/check.mjs'
       - 'scripts/status-core.mjs'
+      - 'scripts/secondary-observer.mjs'
       - 'targets.json'
 
 permissions:
@@ -32,6 +33,11 @@ jobs:
         with:
           node-version: '22'
       - name: Consultar la web pública
+        env:
+          SECONDARY_OBSERVER_FEED_URL: ${{ secrets.SECONDARY_OBSERVER_FEED_URL }}
+          SECONDARY_OBSERVER_TOKEN: ${{ secrets.SECONDARY_OBSERVER_TOKEN }}
+          SECONDARY_OBSERVER_NETWORK_ID: ${{ vars.SECONDARY_OBSERVER_NETWORK_ID }}
+          SECONDARY_OBSERVER_AUTHORIZED: ${{ vars.SECONDARY_OBSERVER_AUTHORIZED }}
         run: node scripts/check.mjs
       - name: Publicar el registro
         run: |
