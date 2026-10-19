@@ -1,15 +1,15 @@
 {
-  "updated": "2026-10-19T04:28:13.830Z",
+  "updated": "2026-10-19T10:12:38.823Z",
   "targets": [
     {
       "name": "Sitio web público de Cashea",
       "url": "https://www.cashea.app",
       "current": {
-        "t": "2026-10-19T04:28:14.016Z",
+        "t": "2026-10-19T10:12:39.015Z",
         "state": "restricted",
         "up": false,
         "code": 403,
-        "ms": 186
+        "ms": 192
       },
       "history": [
         {
@@ -74,6 +74,13 @@
           "up": false,
           "code": 403,
           "ms": 186
+        },
+        {
+          "t": "2026-10-19T10:12:39.015Z",
+          "state": "restricted",
+          "up": false,
+          "code": 403,
+          "ms": 192
         }
       ],
       "corroboration": {
